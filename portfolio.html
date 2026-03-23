@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio — Naganath G S Art Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#e8571f;--accent-d:#c44518;--amber:#f5a623;
+  --dark:#100c06;--off:#f9f5ef;--cream:#fdf8f2;
+  --mid:#e0d5c7;--muted:#7a6a58;--soft:#b5a898;
+  --white:#fff;--text:#1e170e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+.pnav{
+  background:var(--dark);padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.pnav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:#fff}
+.pnav-logo span{color:var(--accent);letter-spacing:0;font-size:inherit;line-height:inherit}
+.pnav-logo small{font-family:'Caveat',cursive;font-size:.8rem;color:rgba(255,255,255,.3);margin-left:4px}
+.pnav-links{display:flex;align-items:center;gap:8px}
+.pnav-link{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;color:rgba(255,255,255,.6);transition:color .2s}
+.pnav-link:hover{color:#fff}
+.pnav-btn{
+  padding:7px 18px;background:var(--accent);color:#fff;
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:background .2s;
+}
+.pnav-btn:hover{background:var(--accent-d)}
+
+/* ── HERO ── */
+.hero{
+  background:var(--dark);padding:80px 48px 64px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(232,87,31,.12) 0%,transparent 70%);
+}
+.hero-tag{font-family:'Caveat',cursive;font-size:1.1rem;color:var(--amber);margin-bottom:10px;position:relative}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4.5rem);
+  font-weight:700;color:#fff;line-height:1.1;position:relative;margin-bottom:16px;
+}
+.hero-title em{color:var(--accent);font-style:italic}
+.hero-desc{font-size:.9rem;color:rgba(255,255,255,.45);max-width:520px;margin:0 auto;line-height:1.8;position:relative}
+
+/* ── FILTERS ── */
+.filters{
+  padding:28px 48px;background:var(--white);border-bottom:1px solid var(--mid);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  position:sticky;top:60px;z-index:90;
+}
+.filter-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-right:4px}
+.ftag{
+  padding:6px 14px;border:1.5px solid var(--mid);font-size:.7rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;background:transparent;
+}
+.ftag:hover{border-color:var(--accent);color:var(--accent)}
+.ftag.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ── GRID ── */
+.gallery-section{padding:48px;max-width:1400px;margin:0 auto}
+.gallery-grid{
+  columns:4;column-gap:16px;
+}
+.gallery-item{
+  break-inside:avoid;margin-bottom:16px;
+  position:relative;overflow:hidden;cursor:pointer;
+  background:var(--mid);
+  animation:fadeUp .5s ease both;
+}
+.gallery-item img{
+  width:100%;display:block;transition:transform .4s ease;
+  object-fit:cover;
+}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-overlay{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(to top,rgba(10,7,3,.97) 0%,rgba(10,7,3,.92) 60%,transparent 100%);
+  opacity:0;transition:opacity .35s ease,max-height .4s ease;
+  display:flex;align-items:flex-end;padding:14px 16px;
+  max-height:44px;overflow:hidden;
+}
+.gallery-item:hover .gallery-overlay{opacity:1;max-height:100%}
+.gallery-info{width:100%;transform:translateY(6px);transition:transform .35s ease}
+.gallery-item:hover .gallery-info{transform:translateY(0)}
+.gal-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:2px;line-height:1.2}
+.gal-cat{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.gal-desc{
+  font-size:.72rem;color:rgba(255,255,255,.8);line-height:1.6;margin-top:6px;
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .45s ease .05s,opacity .3s ease .1s;
+  word-break:break-word;
+}
+.gallery-item:hover .gal-desc{max-height:30em;opacity:1}
+.gal-zoom{
+  position:absolute;top:12px;right:12px;width:32px;height:32px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;font-size:.85rem;
+}
+.gallery-item:hover .gal-zoom{opacity:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── EMPTY ── */
+.empty-state{text-align:center;padding:80px 24px;color:var(--soft)}
+.empty-state h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--text);margin-bottom:8px}
+.empty-state p{font-size:.85rem;line-height:1.7}
+
+/* ── LIGHTBOX ── */
+.lightbox{
+  position:fixed;inset:0;background:rgba(16,12,6,.95);z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.on{opacity:1;pointer-events:all}
+.lb-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center}
+.lb-img{max-width:100%;max-height:75vh;object-fit:contain;display:block}
+.lb-caption{text-align:center;margin-top:16px;color:rgba(255,255,255,.7);font-size:.82rem}
+.lb-close{
+  position:fixed;top:20px;right:24px;width:40px;height:40px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.lb-close:hover{background:var(--accent)}
+.lb-prev,.lb-next{
+  position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.lb-prev{left:20px}.lb-next{right:20px}
+.lb-prev:hover,.lb-next:hover{background:var(--accent)}
+
+/* ── CTA STRIP ── */
+.cta-strip{
+  background:var(--dark);padding:60px 48px;text-align:center;
+}
+.cta-tag{font-family:'Caveat',cursive;font-size:1rem;color:var(--amber);margin-bottom:8px}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.5rem);font-weight:700;color:#fff;margin-bottom:12px}
+.cta-sub{font-size:.85rem;color:rgba(255,255,255,.45);margin-bottom:24px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn{
+  padding:13px 32px;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;border:none;
+}
+.cta-btn.filled{background:var(--accent);color:#fff}
+.cta-btn.filled:hover{background:var(--accent-d)}
+.cta-btn.outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8)}
+.cta-btn.outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── FOOTER ── */
+.pfooter{background:#0a0703;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.pf-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,.5)}
+.pf-logo span{color:var(--accent)}
+.pf-copy{font-size:.7rem;color:rgba(255,255,255,.2)}
+
+/* Scroll top */
+.scroll-top{
+  position:fixed;bottom:28px;right:28px;width:44px;height:44px;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  opacity:0;transform:translateY(10px);transition:all .3s;box-shadow:0 4px 16px rgba(232,87,31,.3);
+}
+.scroll-top.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:1100px){.gallery-grid{columns:3}}
+@media(max-width:768px){.gallery-grid{columns:2}.pnav{padding:0 20px}.hero{padding:60px 24px 48px}.gallery-section{padding:28px 20px}.filters{padding:16px 20px}}
+@media(max-width:480px){.gallery-grid{columns:1}.pnav-links{display:none}}
+</style>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+  function loadSiteDataFromFirestore(cb){
+    try{
+      /* Get Firebase config — localStorage first (admin), then hardcoded SITE_FB_CFG */
+      var cfg = window.SITE_FB_CFG || null;
+      try{
+        var _ls = localStorage.getItem('ng_fb');
+        if(_ls){ var _lp = JSON.parse(_ls); if(_lp && _lp.apiKey) cfg = _lp; }
+      }catch(e){}
+      if(!cfg || !cfg.apiKey){ if(cb) cb(); return; }
+
+      var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(cfg);
+      var db  = firebase.firestore();
+      var map = {
+        'store_images'    : 'ng_store_images',
+        'portfolio_images': 'ng_portfolio_images',
+        'images'          : 'ng_images',
+        'reviews'         : 'ng_reviews',
+        'sitedata'        : 'ng_sitedata',
+        'video'           : 'ng_video',
+        'socials'         : 'ng_socials',
+        'announcement'    : 'ng_announcement'
+      };
+      var docs = Object.keys(map), done = 0, total = docs.length, cbFired = false;
+      docs.forEach(function(doc){
+        db.collection('site_config').doc(doc).onSnapshot(function(snap){
+          if(snap.exists && snap.data() && snap.data().value !== undefined){
+            localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            var key = map[doc];
+            if(key === 'ng_store_images'){
+              if(typeof renderStoreFromFirestore === 'function') renderStoreFromFirestore();
+              else if(typeof loadProductsFromFirebase === 'function') loadProductsFromFirebase();
+              else if(typeof loadStorePreview === 'function') loadStorePreview();
+            }
+            if(key === 'ng_portfolio_images'){
+              if(typeof loadGallery === 'function') loadGallery(val);
+            }
+            if(key === 'ng_images'        && typeof loadImages       === 'function') loadImages();
+            if(key === 'ng_reviews'       && typeof loadTestimonials === 'function') loadTestimonials();
+            if(key === 'ng_sitedata'      && typeof loadSiteData     === 'function') loadSiteData();
+            if(key === 'ng_video'         && typeof loadVideo        === 'function') loadVideo();
+            if(key === 'ng_socials'       && typeof loadSocials      === 'function') loadSocials();
+            if(key === 'ng_announcement'  && typeof initAnnouncement === 'function') initAnnouncement();
+          }
+          if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+        }, function(){
+          /* Permission error fallback: one-time .get() */
+          db.collection('site_config').doc(doc).get()
+            .then(function(snap){
+              if(snap.exists && snap.data() && snap.data().value !== undefined)
+                localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            }).catch(function(){}).finally(function(){
+              if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+            });
+        });
+      });
+    }catch(e){ console.warn('Firestore error:', e); if(cb) cb(); }
+  }
+  </script>
+<script>
+/* Firebase config — hardcoded so every browser connects automatically */
+window.SITE_FB_CFG = {
+  apiKey:            "AIzaSyAGj0TwlqEvKzGSBo8RUqD4UKY-4aCH36s",
+  authDomain:        "naganathgs.firebaseapp.com",
+  projectId:         "naganathgs",
+  storageBucket:     "naganathgs.firebasestorage.app",
+  messagingSenderId: "775331975442",
+  appId:             "1:775331975442:web:878df8b7d8e249a2b0e3cb"
+};
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="pnav">
+  <a href="index.html" class="pnav-logo">Naga<span>N</span>ath G S <small>Portfolio</small></a>
+  <div class="pnav-links">
+    <a href="index.html" class="pnav-link">Home</a>
+    <a href="store.html" class="pnav-link">Store</a>
+    <a href="academy.html" class="pnav-link">Academy</a>
+    <a href="index.html#contact-section" class="pnav-link">Contact</a>
+    <a href="dashboard.html" class="pnav-btn">My Account</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Creative Works</div>
+  <h1 class="hero-title">The <em>Portfolio</em></h1>
+  <p class="hero-desc">Caricatures, watercolour portraits, cartoons and illustrations — every artwork is a story told with colour and craft.</p>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Filter:</span>
+  <div class="ftag on" data-cat="all" onclick="filterGallery('all',this)">All Work</div>
+  <div class="ftag" data-cat="caricature" onclick="filterGallery('caricature',this)">Caricature</div>
+  <div class="ftag" data-cat="watercolour" onclick="filterGallery('watercolour',this)">Watercolour</div>
+  <div class="ftag" data-cat="cartoon" onclick="filterGallery('cartoon',this)">Cartoon</div>
+  <div class="ftag" data-cat="portrait" onclick="filterGallery('portrait',this)">Portrait</div>
+  <div class="ftag" data-cat="book-cover" onclick="filterGallery('book-cover',this)">Book Cover Designs</div>
+  <div class="ftag" data-cat="hotel-interior" onclick="filterGallery('hotel-interior',this)">Hotel Interior Cartoons</div>
+  <div class="ftag" data-cat="other" onclick="filterGallery('other',this)">Other</div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="empty-state"><h3>Gallery Loading…</h3></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1);event.stopPropagation()">‹</button>
+  <button class="lb-next" onclick="lbNav(1);event.stopPropagation()">›</button>
+  <div class="lb-inner">
+    <img id="lbImg" src="" alt="" class="lb-img">
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="cta-tag">Interested?</div>
+  <div class="cta-title">Commission a Unique Artwork</div>
+  <div class="cta-sub">Have something special in mind? Let's create it together.</div>
+  <div class="cta-btns">
+    <a href="index.html#contact-section" class="cta-btn filled">Commission Artwork</a>
+    <a href="store.html" class="cta-btn outline">Shop Prints →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pfooter">
+  <div class="pf-logo">Naga<span>N</span>ath G S</div>
+  <div class="pf-copy">© 2025 Naganath G S Art Studio</div>
+</footer>
+
+<!-- Scroll top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Default placeholder portfolio items
+var DEFAULT_ITEMS=[
+  {id:'p1',title:'Corporate Caricature',category:'caricature',image:'https://via.placeholder.com/400x500/e8571f/fff?text=Caricature+1',desc:'Digital caricature for corporate event'},
+  {id:'p2',title:'Watercolour Portrait',category:'watercolour',image:'https://via.placeholder.com/400x600/f5a623/fff?text=Watercolour+1',desc:'A5 watercolour on Fabriano paper'},
+  {id:'p3',title:'Cartoon Character',category:'cartoon',image:'https://via.placeholder.com/400x400/100c06/e8571f?text=Cartoon+1',desc:'Vector cartoon illustration'},
+  {id:'p4',title:'Celebrity Caricature',category:'caricature',image:'https://via.placeholder.com/400x550/2a1a0a/f5a623?text=Caricature+2',desc:'Pen & ink caricature'},
+  {id:'p5',title:'Portrait Study',category:'portrait',image:'https://via.placeholder.com/400x480/e8571f/fff?text=Portrait+1',desc:'Watercolour portrait on handmade paper'},
+  {id:'p6',title:'Editorial Cartoon',category:'cartoon',image:'https://via.placeholder.com/400x450/f5a623/fff?text=Cartoon+2',desc:'Newspaper editorial illustration'},
+  {id:'p7',title:'Wedding Caricature',category:'caricature',image:'https://via.placeholder.com/400x520/100c06/f5a623?text=Wedding+Caricature',desc:'Couple caricature for wedding'},
+  {id:'p8',title:'Landscape Watercolour',category:'watercolour',image:'https://via.placeholder.com/400x300/e8571f/fff?text=Landscape',desc:'Watercolour landscape study'},
+  {id:'p9',title:'Comic Strip',category:'cartoon',image:'https://via.placeholder.com/400x600/2a1a0a/e8571f?text=Comic+Strip',desc:'4-panel comic strip'},
+  {id:'p10',title:'Portrait Commission',category:'portrait',image:'https://via.placeholder.com/400x540/f5a623/fff?text=Portrait+2',desc:'Charcoal portrait on cartridge'},
+];
+
+var allItems=[];
+var filteredItems=[];
+var lbIndex=0;
+
+function loadGallery(directData){
+  /* Accept data directly from onSnapshot — bypasses localStorage (Edge compatible) */
+  if(directData && Array.isArray(directData) && directData.length){
+    allItems = directData;
+  } else {
+    try{
+      var portfolioItems=JSON.parse(localStorage.getItem('ng_portfolio_images')||'null');
+      if(portfolioItems&&portfolioItems.length){ allItems=portfolioItems; }
+      else { allItems=DEFAULT_ITEMS.slice(); }
+    }catch(e){ allItems=DEFAULT_ITEMS.slice(); }
+  }
+  filterGallery('all');
+}
+
+function filterGallery(cat,el){
+  if(el){
+    document.querySelectorAll('.ftag').forEach(function(t){t.classList.remove('on');});
+    el.classList.add('on');
+  }
+  filteredItems=cat==='all'?allItems:allItems.filter(function(i){return i.category===cat;});
+  renderGallery();
+}
+
+function renderGallery(){
+  var grid=document.getElementById('galleryGrid');
+  if(!filteredItems.length){
+    grid.innerHTML='<div class="empty-state" style="column-span:all"><h3>No artworks in this category yet</h3><p>Check back soon — more work coming!</p></div>';
+    return;
+  }
+  grid.innerHTML=filteredItems.map(function(item,i){
+    return '<div class="gallery-item" onclick="openLightbox('+i+')" style="animation-delay:'+(i*.04)+'s">'
+      +'<img src="'+(item.image||'')+'" alt="'+(item.title||'')+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x400/e0d5c7/b5a898?text=Artwork\'">'
+      +'<div class="gallery-overlay"><div class="gallery-info"><div class="gal-cat">'+(item.category||'')+'</div><div class="gal-title">'+(item.title||'Artwork')+'</div>'+(item.desc?'<div class="gal-desc">'+(item.desc+'').replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div>':'')+'</div></div>'
+      +'<div class="gal-zoom">⤢</div>'
+      +'</div>';
+  }).join('');
+}
+
+function openLightbox(idx){
+  lbIndex=idx;
+  showLbItem();
+  document.getElementById('lightbox').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function showLbItem(){
+  var item=filteredItems[lbIndex];
+  if(!item)return;
+  document.getElementById('lbImg').src=item.image||'';
+  document.getElementById('lbCaption').innerHTML='<strong>'+(item.title||'')+'</strong>'+(item.desc?' — '+item.desc:'');
+}
+
+function lbNav(dir){
+  lbIndex=(lbIndex+dir+filteredItems.length)%filteredItems.length;
+  showLbItem();
+}
+
+function closeLightbox(e){
+  if(e&&e.target!==document.getElementById('lightbox')&&!e.target.classList.contains('lb-close'))return;
+  document.getElementById('lightbox').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+// Keyboard nav
+document.addEventListener('keydown',function(e){
+  var lb=document.getElementById('lightbox');
+  if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')closeLightbox({target:lb});
+  if(e.key==='ArrowLeft')lbNav(-1);
+  if(e.key==='ArrowRight')lbNav(1);
+});
+
+// Scroll top button
+window.addEventListener('scroll',function(){
+  var btn=document.getElementById('scrollTop');
+  if(window.scrollY>400)btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+loadSiteDataFromFirestore(function(){loadGallery();});
+</script>
+</body>
+</html>

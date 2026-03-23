@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Art Store — Naganath G S Art Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#e8571f;--accent-d:#c44518;--amber:#f5a623;
+  --dark:#100c06;--off:#f9f5ef;--cream:#fdf8f2;
+  --mid:#e0d5c7;--muted:#7a6a58;--soft:#b5a898;
+  --white:#fff;--text:#1e170e;--light:#f2ece2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+.snav{
+  background:var(--dark);padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.snav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:#fff;cursor:pointer;text-decoration:none}
+.snav-logo span{color:var(--accent);letter-spacing:0;font-size:inherit;line-height:inherit}
+.snav-logo small{font-family:'Caveat',cursive;font-size:.8rem;color:rgba(255,255,255,.3);margin-left:4px}
+.snav-right{display:flex;align-items:center;gap:8px}
+.snav-link{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;color:rgba(255,255,255,.6);transition:color .2s;cursor:pointer}
+.snav-link:hover{color:#fff}
+.cart-btn{
+  display:flex;align-items:center;gap:6px;padding:7px 16px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.8);font-size:.7rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.cart-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.cart-count{
+  background:var(--accent);color:#fff;font-size:.58rem;font-weight:700;
+  padding:1px 5px;border-radius:10px;min-width:16px;text-align:center;
+}
+.user-btn{
+  padding:7px 16px;background:var(--accent);color:#fff;
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:background .2s;
+}
+.user-btn:hover{background:var(--accent-d)}
+
+/* ── HERO BANNER ── */
+.store-hero{
+  background:var(--dark);padding:56px 48px 44px;position:relative;overflow:hidden;
+}
+.store-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 100% at 80% 50%,rgba(232,87,31,.1) 0%,transparent 70%);
+}
+.sh-tag{font-family:'Caveat',cursive;font-size:1rem;color:var(--amber);margin-bottom:6px;position:relative}
+.sh-title{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:700;color:#fff;line-height:1.1;position:relative;margin-bottom:12px;
+}
+.sh-title em{color:var(--accent);font-style:italic}
+.sh-desc{font-size:.85rem;color:rgba(255,255,255,.4);max-width:460px;line-height:1.8;position:relative}
+
+/* ── FILTERS ── */
+.store-filters{
+  background:var(--white);border-bottom:1px solid var(--mid);
+  padding:16px 48px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  position:sticky;top:60px;z-index:90;
+}
+.filter-label{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-right:4px}
+.ftag{
+  padding:5px 14px;border:1.5px solid var(--mid);font-size:.68rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;background:transparent;
+}
+.ftag:hover{border-color:var(--accent);color:var(--accent)}
+.ftag.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.sort-sel{
+  margin-left:auto;padding:6px 12px;border:1.5px solid var(--mid);background:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--muted);outline:none;cursor:pointer;
+}
+
+/* ── PRODUCTS ── */
+.store-body{padding:40px 48px;max-width:1400px;margin:0 auto}
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+
+/* Product card */
+.pcard{background:var(--white);border:1px solid var(--mid);overflow:hidden;transition:all .3s;position:relative}
+.pcard:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(16,12,6,.1)}
+.pcard-img{
+  aspect-ratio:1/1;overflow:hidden;background:var(--light);position:relative;
+}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.pcard:hover .pcard-img img{transform:scale(1.06)}
+.pcard-badge{
+  position:absolute;top:10px;left:10px;padding:3px 9px;
+  font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+.badge-new{background:var(--accent);color:#fff}
+.badge-hot{background:var(--amber);color:var(--dark)}
+.badge-sale{background:#22c55e;color:#fff}
+.badge-ltd{background:var(--dark);color:var(--amber)}
+.badge-best-seller{background:#f59e0b;color:#000}
+.badge-popular{background:#ef4444;color:#fff}
+.badge-hurryup{background:#7c3aed;color:#fff}
+.pcard-wish{
+  position:absolute;top:10px;right:10px;width:30px;height:30px;
+  background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;cursor:pointer;transition:all .2s;opacity:0;
+}
+.pcard:hover .pcard-wish{opacity:1}
+.pcard-wish:hover{background:var(--accent);color:#fff}
+.pcard-wish.wishlisted{background:var(--accent);color:#fff;opacity:1}
+
+.pcard-body{padding:16px}
+.pcard-cat{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+.pcard-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.3}
+.pcard-desc-wrap{margin-bottom:10px;position:relative}
+.pcard-desc{font-size:.74rem;color:var(--muted);line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;cursor:default}
+.pcard-desc-popup{
+  position:absolute;bottom:calc(100% + 8px);left:0;right:0;
+  background:var(--dark);color:rgba(255,255,255,.85);
+  font-size:.74rem;line-height:1.65;padding:12px 14px;
+  box-shadow:0 8px 28px rgba(16,12,6,.25);
+  opacity:0;transform:translateY(6px);pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease;
+  z-index:50;border-left:3px solid var(--accent);
+}
+.pcard-desc-wrap:hover .pcard-desc-popup{opacity:1;transform:translateY(0)}
+.pcard-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pcard-price{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--accent)}
+.pcard-orig{font-size:.72rem;color:var(--soft);text-decoration:line-through;margin-left:4px}
+.add-cart{
+  padding:8px 16px;background:var(--dark);color:#fff;border:none;cursor:pointer;
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .2s;white-space:nowrap;
+}
+.add-cart:hover{background:var(--accent)}
+.add-cart:disabled{opacity:.5;cursor:not-allowed}
+.out-badge{font-size:.62rem;color:#ef4444;font-weight:600}
+
+/* ── EMPTY STATE ── */
+.store-empty{text-align:center;padding:80px 24px;color:var(--soft)}
+.store-empty h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:8px}
+.store-empty p{font-size:.85rem;line-height:1.7}
+
+/* ── CART SIDEBAR ── */
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(16,12,6,.5);z-index:200;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.cart-overlay.on{opacity:1;pointer-events:all}
+.cart-panel{
+  position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);
+  background:var(--cream);z-index:201;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.cart-overlay.on .cart-panel{transform:translateX(0)}
+.cart-head{
+  padding:20px 24px;border-bottom:1px solid var(--mid);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--dark);color:#fff;
+}
+.cart-head-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700}
+.cart-close{background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;padding:4px;transition:color .2s}
+.cart-close:hover{color:var(--accent)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.ci{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--light)}
+.ci-img{width:64px;height:64px;object-fit:cover;background:var(--light);flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-weight:700;margin-bottom:3px;line-height:1.3}
+.ci-cat{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin-bottom:5px}
+.ci-bot{display:flex;align-items:center;justify-content:space-between}
+.ci-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--accent);font-weight:700}
+.ci-qty{display:flex;align-items:center;gap:6px}
+.qty-btn{width:24px;height:24px;background:var(--mid);border:none;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.qty-btn:hover{background:var(--accent);color:#fff}
+.ci-rm{color:#ef4444;cursor:pointer;font-size:.7rem;margin-left:6px;background:none;border:none}
+
+.cart-empty{text-align:center;padding:48px 20px;color:var(--soft)}
+.cart-empty p{margin-bottom:12px;font-size:.85rem}
+
+.cart-foot{
+  padding:20px 24px;border-top:1px solid var(--mid);
+  background:var(--white);
+}
+.cart-total-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cart-total-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cart-total{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--dark)}
+.checkout-btn{
+  width:100%;padding:14px;background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  transition:background .2s;
+}
+.checkout-btn:hover{background:var(--accent-d)}
+.checkout-btn:disabled{opacity:.5;cursor:not-allowed}
+.checkout-note{font-size:.65rem;color:var(--soft);text-align:center;margin-top:8px}
+
+/* ── LOGIN MODAL ── */
+.modal-ov{
+  position:fixed;inset:0;background:rgba(16,12,6,.6);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-ov.on{opacity:1;pointer-events:all}
+.modal-box{
+  background:var(--cream);padding:36px 32px;max-width:380px;width:90%;
+  text-align:center;transform:translateY(16px);transition:transform .25s;
+}
+.modal-ov.on .modal-box{transform:translateY(0)}
+.modal-icon{font-size:2rem;margin-bottom:10px}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.modal-desc{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.modal-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mbtn{
+  padding:10px 22px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all .2s;
+}
+.mbtn.fill{background:var(--accent);color:#fff}
+.mbtn.fill:hover{background:var(--accent-d)}
+.mbtn.ghost{background:transparent;border:1.5px solid var(--mid);color:var(--muted)}
+.mbtn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--dark);color:#fff;padding:11px 22px;font-size:.78rem;font-weight:500;
+  z-index:500;transition:transform .3s;pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Scroll top */
+.scroll-top{
+  position:fixed;bottom:28px;right:28px;width:44px;height:44px;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;z-index:200;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  opacity:0;transform:translateY(10px);transition:all .3s;box-shadow:0 4px 16px rgba(232,87,31,.3);
+}
+.scroll-top.show{opacity:1;transform:translateY(0)}
+
+/* ── FOOTER ── */
+.sfooter{background:#0a0703;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.sf-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,.5)}
+.sf-logo span{color:var(--accent)}
+.sf-copy{font-size:.7rem;color:rgba(255,255,255,.2)}
+
+@media(max-width:900px){.store-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+@media(max-width:640px){.snav{padding:0 20px}.store-hero{padding:40px 20px 32px}.store-body{padding:24px 20px}.store-filters{padding:12px 20px}.store-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(max-width:400px){.store-grid{grid-template-columns:1fr}}
+
+/* ── ADDRESS CONFIRMATION MODAL ── */
+.ac-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+.ac-overlay.open{display:flex}
+.ac-box{background:#fff;max-width:460px;width:100%;padding:28px 24px;border-top:3px solid #e8571f;max-height:90vh;overflow-y:auto;font-family:'DM Sans',sans-serif}
+.ac-title{font-size:1.1rem;font-weight:700;margin-bottom:8px;color:#1a1208}
+.ac-sub{font-size:.78rem;color:#8a7968;margin-bottom:14px;line-height:1.6}
+.ac-card{background:#f9f5ef;border-left:3px solid #e8571f;padding:12px 16px;margin-bottom:18px}
+.ac-card-name{font-weight:700;font-size:.92rem;color:#1a1208;margin-bottom:3px}
+.ac-card-detail{font-size:.8rem;color:#8a7968;line-height:1.6}
+.ac-field{margin-bottom:12px}
+.ac-field label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.ac-field input{width:100%;padding:9px 12px;border:1.5px solid #e0d8cd;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1a1208;outline:none;transition:border-color .2s;box-sizing:border-box}
+.ac-field input:focus{border-color:#e8571f}
+.ac-field input.ac-err{border-color:#ef4444}
+.ac-err-msg{color:#ef4444;font-size:.7rem;margin-top:3px;display:none}
+.ac-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ac-btn{width:100%;padding:11px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;margin-bottom:8px;transition:all .2s}
+.ac-btn-fill{background:#e8571f;color:#fff}.ac-btn-fill:hover{background:#c44318}
+.ac-btn-ghost{background:transparent;border:1.5px solid #e0d8cd;color:#8a7968}.ac-btn-ghost:hover{border-color:#e8571f;color:#e8571f}
+.ac-cancel{background:none;border:none;font-size:.72rem;color:#8a7968;cursor:pointer;text-decoration:underline;display:block;text-align:center;margin-top:4px}
+
+
+/* ── INVOICE MODAL ── */
+#billModal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+#billModal.on{display:flex}
+#billBox{background:#fff;width:100%;max-width:620px;font-family:'DM Sans',sans-serif;color:#1a1208;margin:auto;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bh{background:#1a1208;color:#fff;padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.bh-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.bh-studio{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.bh-studio span{color:#f5a623}
+.bh-oid{font-size:.88rem;font-weight:700;color:#f5a623;margin-top:2px;word-break:break-all}
+.bb{padding:24px 28px}
+.bm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:2px solid #f0ebe4}
+.bl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.bv{font-size:.88rem;font-weight:600;color:#1a1208;line-height:1.5}
+.bs{font-size:.78rem;color:#8a7968;line-height:1.6}
+.ba-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #f0ebe4}
+.bit-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:10px}
+.bit{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f9f5ef}
+.bit-img{width:54px;height:54px;object-fit:cover;flex-shrink:0;border-radius:2px;background:#f0ebe4}
+.bit-ph{width:54px;height:54px;flex-shrink:0;background:#f0ebe4;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.bit-info{flex:1;min-width:0}
+.bit-name{font-size:.9rem;font-weight:600;margin-bottom:2px}
+.bit-meta{font-size:.72rem;color:#8a7968}
+.bit-price{font-size:1rem;font-weight:700;color:#e8571f;white-space:nowrap}
+.bt-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:2px solid #1a1208}
+.bt-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bt-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#e8571f}
+.bst{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.bst.confirmed,.bst.completed{background:#dcfce7;color:#166534}
+.bst.shipped{background:#dbeafe;color:#1e40af}
+.bst.processing{background:#fef3c7;color:#92400e}
+.bst.pending{background:#fef9c3;color:#854d0e}
+.bst.cancelled{background:#fee2e2;color:#991b1b}
+.bf{background:#f9f5ef;padding:14px 28px;font-size:.7rem;color:#8a7968;text-align:center;line-height:1.9;border-top:1px solid #e0d8cd}
+.bac{display:flex;gap:8px;padding:14px 28px;border-top:1px solid #e0d8cd;background:#fff;flex-wrap:wrap}
+.bab{flex:1;min-width:70px;padding:10px 8px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.bab-print{background:#1a1208;color:#fff}.bab-print:hover{background:#2d2218}
+.bab-pdf{background:#e8571f;color:#fff}.bab-pdf:hover{background:#c44318}
+.bab-home{background:#f5a623;color:#1a1208}.bab-home:hover{background:#e8941a}
+.bab-close{background:transparent;border:1.5px solid #e0d8cd;color:#8a7968}.bab-close:hover{border-color:#e8571f;color:#e8571f}
+@media print{body>*{display:none!important}#billModal{display:block!important;position:static!important;background:none!important;padding:0!important;overflow:visible!important}#billBox{box-shadow:none!important;max-width:100%!important}.bac{display:none!important}}
+</style>
+  <script>
+/* Firebase config — FIRST script so it's available to everything below */
+window.SITE_FB_CFG = {
+  apiKey:            "AIzaSyAGj0TwlqEvKzGSBo8RUqD4UKY-4aCH36s",
+  authDomain:        "naganathgs.firebaseapp.com",
+  projectId:         "naganathgs",
+  storageBucket:     "naganathgs.firebasestorage.app",
+  messagingSenderId: "775331975442",
+  appId:             "1:775331975442:web:878df8b7d8e249a2b0e3cb"
+};
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script>
+  function loadSiteDataFromFirestore(cb){
+    try{
+      /* Get Firebase config — localStorage first (admin), then hardcoded SITE_FB_CFG */
+      var cfg = window.SITE_FB_CFG || null;
+      try{
+        var _ls = localStorage.getItem('ng_fb');
+        if(_ls){ var _lp = JSON.parse(_ls); if(_lp && _lp.apiKey) cfg = _lp; }
+      }catch(e){}
+      if(!cfg || !cfg.apiKey){ if(cb) cb(); return; }
+
+      var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(cfg);
+      var db  = firebase.firestore();
+      var map = {
+        'store_images'    : 'ng_store_images',
+        'portfolio_images': 'ng_portfolio_images',
+        'images'          : 'ng_images',
+        'reviews'         : 'ng_reviews',
+        'sitedata'        : 'ng_sitedata',
+        'video'           : 'ng_video',
+        'socials'         : 'ng_socials',
+        'announcement'    : 'ng_announcement',
+        'email_config'    : 'ng_email',
+        'payment_config'  : 'ng_payment'
+      };
+      var docs = Object.keys(map), done = 0, total = docs.length, cbFired = false;
+      docs.forEach(function(doc){
+        db.collection('site_config').doc(doc).onSnapshot(function(snap){
+          if(snap.exists && snap.data() && snap.data().value !== undefined){
+            var val = snap.data().value;
+            var key = map[doc];
+            /* Write to localStorage — safe to fail (Edge tracking prevention) */
+            try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
+            /* Render DIRECTLY from snapshot data — no localStorage dependency */
+            if(key === 'ng_store_images'){
+              /* Directly update allProducts and re-render — bypasses localStorage */
+              var items = Array.isArray(val) ? val.filter(function(x){ return x.status !== 'inactive'; }) : [];
+              if(items.length){ allProducts = items; filterProducts('all'); }
+            }
+            if(key === 'ng_email'){
+              window._emailCfg = val;
+              /* Init EmailJS immediately when config arrives */
+              if(val && val.publicKey && window.emailjs){ try{ emailjs.init(val.publicKey); window._ejsReady=true; }catch(e){} }
+            }
+            if(key === 'ng_payment'){ window._payCfg = val; }
+            if(key === 'ng_portfolio_images'){
+              if(typeof loadGallery === 'function') loadGallery();
+              else if(typeof loadPortfolioPreview === 'function') loadPortfolioPreview();
+            }
+            if(key === 'ng_images'        && typeof loadImages       === 'function') loadImages();
+            if(key === 'ng_reviews'       && typeof loadTestimonials === 'function') loadTestimonials();
+            if(key === 'ng_sitedata'      && typeof loadSiteData     === 'function') loadSiteData();
+            if(key === 'ng_video'         && typeof loadVideo        === 'function') loadVideo();
+            if(key === 'ng_socials'       && typeof loadSocials      === 'function') loadSocials();
+            if(key === 'ng_announcement'  && typeof initAnnouncement === 'function') initAnnouncement();
+          }
+          if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+        }, function(){
+          /* Permission error fallback: one-time .get() */
+          db.collection('site_config').doc(doc).get()
+            .then(function(snap){
+              if(snap.exists && snap.data() && snap.data().value !== undefined)
+                localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            }).catch(function(){}).finally(function(){
+              if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+            });
+        });
+      });
+    }catch(e){ console.warn('Firestore error:', e); if(cb) cb(); }
+  }
+  </script>
+  <!-- EmailJS loaded upfront so it's always ready -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="snav">
+  <a href="index.html" class="snav-logo">Naga<span>N</span>ath G S <small>Store</small></a>
+  <div class="snav-right">
+    <a href="index.html" class="snav-link">Home</a>
+    <a href="portfolio.html" class="snav-link">Portfolio</a>
+    <div class="cart-btn" onclick="toggleCart()">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </div>
+    <div id="navUser"></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="store-hero">
+  <div class="sh-tag">Original Artworks & Prints</div>
+  <h1 class="sh-title">The Art <em>Studio</em> Store</h1>
+  <p class="sh-desc">Caricatures, watercolour prints and custom illustrations — each piece handcrafted with passion.</p>
+</div>
+
+<!-- FILTERS -->
+<div class="store-filters">
+  <span class="filter-label">Filter:</span>
+  <div class="ftag on" data-cat="all" onclick="filterProducts('all',this)">All</div>
+  <div class="ftag" data-cat="caricature" onclick="filterProducts('caricature',this)">Caricature</div>
+  <div class="ftag" data-cat="watercolour" onclick="filterProducts('watercolour',this)">Watercolour</div>
+  <div class="ftag" data-cat="cartoon" onclick="filterProducts('cartoon',this)">Cartoon</div>
+  <div class="ftag" data-cat="print" onclick="filterProducts('print',this)">Prints</div>
+  <div class="ftag" data-cat="custom" onclick="filterProducts('custom',this)">Custom</div>
+  <select class="sort-sel" id="sortSel" onchange="sortProducts()">
+    <option value="default">Sort: Default</option>
+    <option value="price-asc">Price: Low to High</option>
+    <option value="price-desc">Price: High to Low</option>
+    <option value="name">Name A–Z</option>
+  </select>
+</div>
+
+<!-- PRODUCTS -->
+<div class="store-body">
+  <div class="store-grid" id="storeGrid">
+    <div class="store-empty"><h3>Loading products…</h3></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sfooter">
+  <div class="sf-logo">Naga<span>N</span>ath G S</div>
+  <div class="sf-copy">© 2025 Naganath G S Art Studio. All rights reserved.</div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleCartOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-head">
+      <div class="cart-head-title">Your Cart</div>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty"><p>Your cart is empty</p></div>
+    </div>
+    <div class="cart-foot">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total" id="cartTotal">₹0</span>
+      </div>
+      <button class="checkout-btn" onclick="startCheckout()">Proceed to Payment</button>
+      <div class="checkout-note">Secure payment via Razorpay · UPI · Cards · Netbanking</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN REQUIRED MODAL -->
+<div class="modal-ov" id="loginModal">
+  <div class="modal-box">
+    <div class="modal-icon">🔒</div>
+    <div class="modal-title">Sign In to Purchase</div>
+    <div class="modal-desc">You need to be logged in to add items to your cart and complete purchases.</div>
+    <div class="modal-btns">
+      <button class="mbtn fill" onclick="goLogin()">Sign In / Sign Up</button>
+      <button class="mbtn ghost" onclick="closeModal('loginModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- Scroll top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── CONFIG ──
+var FB_CFG = (function(){ try{ var s=localStorage.getItem('ng_fb'); if(s){ var p=JSON.parse(s); if(p&&p.apiKey) return p; } }catch(e){} return window.SITE_FB_CFG || null; })();
+var PAY_CFG = {}; /* Loaded from Firestore — see window._payCfg */
+var EMAIL_CFG = {}; /* Loaded from Firestore via onSnapshot — see window._emailCfg */
+// EmailJS init moved to DOMContentLoaded below
+
+// ── STATE ──
+var _auth=null,_db=null,_user=null;
+var allProducts=[],filteredProducts=[];
+var cart=[];
+var wishlist=[];
+
+// Default products fallback
+var DEFAULT_PRODUCTS=[
+  {id:'dp1',name:'Custom Caricature – Digital',category:'caricature',price:1500,image:'https://via.placeholder.com/400x300/e8571f/fff?text=Caricature',desc:'Full-colour digital caricature, delivered within 48 hrs',badge:'hot',status:'active'},
+  {id:'dp2',name:'Watercolour Portrait – A4',category:'watercolour',price:3500,image:'https://via.placeholder.com/400x300/f5a623/fff?text=Watercolour',desc:'Hand-painted watercolour on Fabriano paper',badge:'ltd',status:'active'},
+  {id:'dp3',name:'Cartoon Illustration',category:'cartoon',price:2000,image:'https://via.placeholder.com/400x300/100c06/e8571f?text=Cartoon',desc:'Vector cartoon character design',badge:'new',status:'active'},
+  {id:'dp4',name:'Corporate Caricature',category:'caricature',price:2500,image:'https://via.placeholder.com/400x300/2a1a0a/f5a623?text=Corporate',desc:'Group or individual caricature for events',badge:'',status:'active'},
+  {id:'dp5',name:'Fine Art Print – A3',category:'print',price:800,image:'https://via.placeholder.com/400x300/e8571f/fff?text=Print',desc:'Premium Giclée print on archival paper',badge:'sale',status:'active'},
+  {id:'dp6',name:'Custom Wedding Caricature',category:'custom',price:4500,image:'https://via.placeholder.com/400x300/f5a623/fff?text=Wedding',desc:'Couple caricature for wedding invitations & gifts',badge:'hot',status:'active'},
+  {id:'dp7',name:'Landscape Watercolour',category:'watercolour',price:5500,image:'https://via.placeholder.com/400x300/e0d5c7/7a6a58?text=Landscape',desc:'Original A3 watercolour landscape',badge:'',status:'active'},
+  {id:'dp8',name:'Editorial Cartoon',category:'cartoon',price:1800,image:'https://via.placeholder.com/400x300/100c06/f5a623?text=Editorial',desc:'Black & white editorial-style illustration',badge:'new',status:'active'},
+];
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded',function(){
+  var rawCart=JSON.parse(localStorage.getItem('ng_cart')||'[]');cart=[];rawCart.forEach(function(c){var ex=cart.find(function(x){return String(x.id)===String(c.id);});if(ex){ex.qty=(ex.qty||1)+(c.qty||1);}else{cart.push(c);}});
+  wishlist=JSON.parse(localStorage.getItem('ng_wishlist')||'[]');
+  updateCartUI();
+
+  if(FB_CFG){
+    loadSDKs(function(){
+      _auth.onAuthStateChanged(function(user){
+        _user=user;
+        updateNavUser();
+        loadProductsFromFirebase();
+      });
+    });
+  } else {
+    loadLocalProducts();
+    updateNavUser();
+  }
+});
+
+function loadSDKs(cb){
+  try{
+    if(!firebase.apps.length) firebase.initializeApp(FB_CFG);
+    _auth = firebase.auth();
+    _db   = firebase.firestore();
+    cb();
+  }catch(e){ console.error('Firebase init:', e); loadLocalProducts(); }
+}
+
+function loadProductsFromFirebase(){
+  /* Try localStorage (may be blocked by Edge — that is OK).
+     onSnapshot renders products directly from Firestore without needing localStorage. */
+  var items = [];
+  try{ items = JSON.parse(localStorage.getItem('ng_store_images') || '[]'); }catch(e){}
+  items = items.filter(function(x){ return x.status !== 'inactive'; });
+  if(items.length){
+    allProducts = items;
+    filterProducts('all');
+  } else if(!allProducts.length){
+    var grid = document.getElementById('storeGrid');
+    if(grid) grid.innerHTML = '<div class="store-empty"><h3>Loading products…</h3><p>Fetching from cloud, please wait.</p></div>';
+  }
+}
+
+function loadLocalProducts(){
+  loadSiteDataFromFirestore(function(){
+    allProducts=getLocalProducts();
+    filterProducts('all');
+  });
+}
+
+function getLocalProducts(){
+  try{
+    // First try ng_store_images (from Portfolio/Store Images manager)
+    var si=JSON.parse(localStorage.getItem('ng_store_images')||'[]');
+    if(si.length) return si.filter(function(x){return x.status!=='inactive';});
+    // Fallback to ng_products
+    var p=JSON.parse(localStorage.getItem('ng_products')||'[]');
+    return p.length?p.filter(function(x){return x.status!=='inactive';}):DEFAULT_PRODUCTS;
+  }catch(e){return DEFAULT_PRODUCTS;}
+}
+
+function updateNavUser(){
+  var el=document.getElementById('navUser');
+  if(_user){
+    var name=(_user.displayName||_user.email||'').split(' ')[0];
+    el.innerHTML='<a href="dashboard.html" class="user-btn">'+name+'\'s Account</a>';
+  } else {
+    el.innerHTML='<button class="user-btn" onclick="window.location.href=\'auth.html?redirect=store.html\'">Sign In</button>';
+  }
+}
+
+// ── PRODUCTS RENDER ──
+function filterProducts(cat,el){
+  if(el){document.querySelectorAll('.ftag').forEach(function(t){t.classList.remove('on');});el.classList.add('on');}
+  filteredProducts=cat==='all'?allProducts.slice():allProducts.filter(function(p){return p.category===cat;});
+  sortProducts();
+}
+
+function sortProducts(){
+  var v=document.getElementById('sortSel').value;
+  if(v==='price-asc')filteredProducts.sort(function(a,b){return(a.price||0)-(b.price||0);});
+  else if(v==='price-desc')filteredProducts.sort(function(a,b){return(b.price||0)-(a.price||0);});
+  else if(v==='name')filteredProducts.sort(function(a,b){return(a.name||'').localeCompare(b.name||'');});
+  renderProducts();
+}
+
+function renderProducts(){
+  var grid=document.getElementById('storeGrid');
+  if(!filteredProducts.length){
+    grid.innerHTML='<div class="store-empty"><h3>No products in this category</h3><p>Check back soon!</p></div>';
+    return;
+  }
+  grid.innerHTML=filteredProducts.map(function(p){
+    var inCart=cart.some(function(c){return String(c.id)===String(p.id);});
+    var isWished=wishlist.some(function(x){return String(x)===String(p.id);});
+    var badge=p.badge?'<span class="pcard-badge badge-'+p.badge+'">'+p.badge+'</span>':'';
+    var outOfStock=p.status==='out-of-stock';
+    var wishCls=isWished?'pcard-wish wishlisted':'pcard-wish';
+    var descTxt=(p.desc||p.description||'').replace(/</g,'&lt;');
+    return '<div class="pcard">'
+      +'<div class="pcard-img">'
+      +'<img src="'+(p.image||'')+'" alt="'+(p.name||'')+'" loading="lazy" onerror="this.src=\'https://via.placeholder.com/400x300/e0d5c7/b5a898?text=Artwork\'">'
+      +badge
+      +'<div class="'+wishCls+'" data-pid="'+p.id+'" onclick="toggleWish(this.dataset.pid)" title="Wishlist">'+(isWished?'\u2665':'\u2661')+'</div>'
+      +'</div>'
+      +'<div class="pcard-body">'
+      +'<div class="pcard-cat">'+(p.category||'Artwork')+'</div>'
+      +'<div class="pcard-name">'+(p.name||'Artwork')+'</div>'
+      
+      +(descTxt?'<div class="pcard-desc-wrap"><div class="pcard-desc">'+descTxt+'</div><div class="pcard-desc-popup">'+descTxt+'</div></div>':'')
+      +'<div class="pcard-footer">'
+      +'<div><span class="pcard-price">₹'+((p.price||0).toLocaleString('en-IN'))+'</span>'+(p.originalPrice?'<span class="pcard-orig">₹'+p.originalPrice.toLocaleString('en-IN')+'</span>':'')+'</div>'
+      +(outOfStock?'<span class="out-badge">Out of Stock</span>':'<button class="add-cart" data-pid="'+p.id+'" onclick="addToCart(this.dataset.pid,event)">'+(inCart?'✓ Added':'Add to Cart')+'</button>')
+      +'</div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── CART ──
+function addToCart(productId,e){
+  if(e)e.stopPropagation();
+  var pid=String(productId);
+  var product=allProducts.find(function(p){return String(p.id)===pid;});
+  if(!product)return;
+  var existing=cart.find(function(c){return String(c.id)===pid;});
+  if(existing){existing.qty=(existing.qty||1)+1;}
+  else{cart.push({id:pid,name:product.name,price:product.price,image:product.image||'',category:product.category||'',qty:1});}
+  saveCart();
+  updateCartUI();
+  renderProducts();
+  showToast('✓ Added to cart: '+product.name);
+}
+
+function removeFromCart(productId){
+  cart=cart.filter(function(c){return c.id!==productId;});
+  saveCart();
+  updateCartUI();
+  renderProducts();
+  renderCartItems();
+}
+
+function changeQty(productId,delta){
+  var item=cart.find(function(c){return c.id===productId;});
+  if(!item)return;
+  item.qty=Math.max(1,(item.qty||1)+delta);
+  saveCart();
+  updateCartUI();
+  renderCartItems();
+}
+
+function saveCart(){localStorage.setItem('ng_cart',JSON.stringify(cart));}
+
+function updateCartUI(){
+  var total=cart.reduce(function(s,c){return s+(c.price||0)*(c.qty||1);},0);
+  var count=cart.reduce(function(s,c){return s+(c.qty||1);},0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartTotal').textContent='₹'+total.toLocaleString('en-IN');
+  renderCartItems();
+}
+
+function renderCartItems(){
+  var el=document.getElementById('cartItems');
+  if(!cart.length){el.innerHTML='<div class="cart-empty"><p>Your cart is empty</p></div>';return;}
+  el.innerHTML=cart.map(function(c){
+    return '<div class="ci">'
+      +'<img class="ci-img" src="'+(c.image||'')+'" onerror="this.style.background=\'var(--light)\'">'
+      +'<div class="ci-info">'
+      +'<div class="ci-name">'+(c.name||'Artwork')+'</div>'
+      +'<div class="ci-cat">'+(c.category||'')+'</div>'
+      +'<div class="ci-bot">'
+      +'<span class="ci-price">₹'+((c.price||0)*(c.qty||1)).toLocaleString('en-IN')+'</span>'
+      +'<div class="ci-qty">'
+      +'<button class="qty-btn" onclick="changeQty(\''+c.id+'\',-1)">−</button>'
+      +'<span style="font-size:.8rem;min-width:18px;text-align:center">'+(c.qty||1)+'</span>'
+      +'<button class="qty-btn" onclick="changeQty(\''+c.id+'\',1)">+</button>'
+      +'<button class="ci-rm" onclick="removeFromCart(\''+c.id+'\')">✕</button>'
+      +'</div></div></div></div>';
+  }).join('');
+}
+
+function toggleCart(){
+  document.getElementById('cartOverlay').classList.toggle('on');
+  document.body.style.overflow=document.getElementById('cartOverlay').classList.contains('on')?'hidden':'';
+}
+
+function handleCartOverlayClick(e){
+  if(e.target===document.getElementById('cartOverlay'))toggleCart();
+}
+
+// ── WISHLIST ──
+function toggleWish(productId){
+  productId = String(productId);
+  var idx = wishlist.findIndex(function(x){ return String(x)===productId; });
+  if(idx===-1) wishlist.push(productId);
+  else wishlist.splice(idx,1);
+  localStorage.setItem('ng_wishlist', JSON.stringify(wishlist));
+  renderProducts();
+  showToast(idx===-1 ? '♥ Added to wishlist' : 'Removed from wishlist');
+}
+
+// ── CHECKOUT ──
+function startCheckout(){
+  if(!_user&&FB_CFG){toggleCart();showModal('loginModal');return;}
+  if(!cart.length){showToast('Your cart is empty!');return;}
+  /* Use Firestore config (window._payCfg) — works in all browsers */
+  var payCfg = window._payCfg || PAY_CFG;
+  try{ if(!payCfg.keyId){ var _ps=localStorage.getItem('ng_payment'); if(_ps) payCfg=JSON.parse(_ps); } }catch(e){}
+  if(!payCfg.keyId||payCfg.keyId===''||payCfg.keyId==='rzp_test_XXXXXX'){
+    showToast('Payment gateway not configured. Please contact the admin.');
+    return;
+  }
+  toggleCart();
+  acOpen(function(){ launchRazorpay(); });
+}
+function launchRazorpay(){
+  var total=cart.reduce(function(s,c){return s+(c.price||0)*(c.qty||1);},0);
+  var del={}; try{del=JSON.parse(localStorage.getItem('ng_pending_address')||'{}');}catch(e){}
+  // Load Razorpay
+  var s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';
+  s.onload=function(){
+    var options={
+      key:PAY_CFG.keyId,
+      amount:total*100, // paise
+      currency:PAY_CFG.currency||'INR',
+      name:PAY_CFG.businessName||'Naganath G S Art Studio',
+      description:'Art Purchase — '+cart.length+' item(s)',
+      image:'',
+      prefill:{
+        name:_user?(_user.displayName||''):'',
+        email:_user?(_user.email||''):'',
+      },
+      theme:{color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#e8571f'},
+      modal:{ondismiss:function(){showToast('Payment cancelled.')}},
+      handler:function(response){
+        handlePaymentSuccess(response,total);
+      }
+    };
+    var rzp=new window.Razorpay(options);rzp.open();
+  };
+  s.onerror=function(){showToast('Failed to load payment gateway. Please try again.');};
+  document.head.appendChild(s);
+}
+
+function handlePaymentSuccess(response,total){
+  var orderId='NG-'+Date.now();
+  var orderDate=new Date().toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  var itemsList=cart.map(function(c){return c.name+' x'+c.qty+' — ₹'+(c.price*c.qty).toLocaleString('en-IN');}).join('\n');
+  var currency=PAY_CFG.currency||'INR';
+  var paymentId=response.razorpay_payment_id||'';
+
+  // Save order to Firebase
+  var _del={}; try{_del=JSON.parse(localStorage.getItem('ng_pending_address')||'{}');}catch(e){}
+  var orderData={
+    orderId:orderId,
+    deliveryAddress:_del,
+    customerPhone:_del.phone||'',
+    customerId:_user?_user.uid:null,
+    customerEmail:_user?_user.email:null,
+    customerName:_user?(_user.displayName||_user.email):'Guest',
+    items:cart.map(function(c){
+      // Try to find fresh image from allProducts in case cart image is stale
+      var prod=allProducts.find(function(p){return String(p.id)===String(c.id);});
+      var img=c.image||(prod?prod.image:'')||'';
+      return{id:c.id,name:c.name,price:c.price,qty:c.qty,image:img,category:c.category||''};
+    }),
+    amount:total,
+    currency:currency,
+    paymentId:paymentId,
+    status:'confirmed',
+    createdAt:new Date().toISOString()
+  };
+  if(_db&&_user){
+    _db.collection('orders').add(Object.assign({},orderData,{createdAt:firebase.firestore.FieldValue.serverTimestamp()}))
+      .then(function(){}).catch(function(){});
+  }
+
+  // Send confirmation email via EmailJS
+  // Build items list with image URLs for email
+  var itemsHtml = '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">'
+    + cart.map(function(c){
+      var prod = allProducts.find(function(p){return String(p.id)===String(c.id);});
+      var img  = c.image||(prod?prod.image:'')||'';
+      var imgCell = img
+        ? '<td style="padding:0 14px 0 0;vertical-align:top;width:68px"><img src="'+img+'" width="68" height="68" style="width:68px;height:68px;display:block;border:1px solid #e0d8cd" alt="'+c.name+'"></td>'
+        : '<td style="padding:0 14px 0 0;vertical-align:top;width:68px"><table width="68" height="68" cellpadding="0" cellspacing="0" border="0" style="background:#f5efe3"><tr><td align="center" valign="middle" style="font-size:24px">&#127912;</td></tr></table></td>';
+      return '<tr><td style="padding:10px 0;border-bottom:1px solid #f0ebe4">'
+        +'<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
+        +imgCell
+        +'<td style="vertical-align:top">'
+        +'<p style="margin:0 0 2px;font-size:15px;font-weight:700;color:#1a1208">'+c.name+'</p>'
+        +(c.category?'<p style="margin:0 0 2px;font-size:12px;color:#8a7968">'+c.category+'</p>':'')
+        +'<p style="margin:0;font-size:12px;color:#8a7968">Qty: '+c.qty+' &times; &#8377;'+Number(c.price||0).toLocaleString('en-IN')+' each</p>'
+        +'</td>'
+        +'<td align="right" style="vertical-align:top;white-space:nowrap">'
+        +'<p style="margin:0;font-size:15px;font-weight:700;color:#e8571f">&#8377;'+(c.price*c.qty).toLocaleString('en-IN')+'</p>'
+        +'</td>'
+        +'</tr></table></td></tr>';
+    }).join('')
+    + '</table>';
+
+  var _del={};try{_del=JSON.parse(localStorage.getItem('ng_pending_address')||'{}');}catch(e){}
+  sendPaymentConfirmationEmail({
+    customer_name:     _del.name||(_user?(_user.displayName||_user.email.split('@')[0]):'Customer'),
+    customer_email:    _user?_user.email:'',
+    customer_phone:    _del.phone||'',
+    delivery_street:   _del.street||'',
+    delivery_city_state:[_del.city,_del.state].filter(Boolean).join(', ')+(_del.pin?' — '+_del.pin:''),
+    order_id:          orderId,
+    payment_id:        paymentId,
+    items_list:        itemsList,
+    items_html:        itemsHtml,
+    total_amount:      '₹'+total.toLocaleString('en-IN'),
+    currency:          currency,
+    order_date:        orderDate
+  });
+
+  // Save to localStorage (for dashboard + admin)
+  try{
+    var allOrders=JSON.parse(localStorage.getItem('ng_orders')||'[]');
+    // Ensure orderId is always stored correctly
+    var saveData=Object.assign({},orderData,{orderId:orderId,createdAt:new Date().toISOString()});
+    allOrders.unshift(saveData);
+    localStorage.setItem('ng_orders',JSON.stringify(allOrders.slice(0,50)));
+  }catch(e){}
+  // Clear cart
+  cart=[];saveCart();updateCartUI();toggleCart();
+  try{localStorage.removeItem('ng_pending_address');}catch(e){}
+  renderProducts();
+  showBill(saveData, true);
+}
+
+function sendPaymentConfirmationEmail(params){
+  /* Use config from Firestore (window._emailCfg) — works in all browsers */
+  var cfg = window._emailCfg || {};
+  if(!cfg.publicKey) { try{ cfg=JSON.parse(localStorage.getItem('ng_email')||'{}'); }catch(e){} }
+  if(!cfg.publicKey||!cfg.serviceId||!cfg.payTemplateId){
+    console.warn('EmailJS not configured. Configure in Admin → Email Config.');
+    return;
+  }
+  if(!params.customer_email){
+    console.warn('No customer email — skipping confirmation.');
+    return;
+  }
+  function doSend(){
+    try{
+      // Send ORDER CONFIRMATION to CUSTOMER
+      emailjs.send(cfg.serviceId, cfg.payTemplateId, {
+        customer_name:       params.customer_name,
+        customer_email:      params.customer_email,
+        customer_phone:      params.customer_phone||'',
+        delivery_street:     params.delivery_street||'',
+        delivery_city_state: params.delivery_city_state||'',
+        order_id:            params.order_id,
+        payment_id:          params.payment_id,
+        items_list:          params.items_list,
+        items_html:          params.items_html||'',
+        total_amount:        params.total_amount,
+        currency:            params.currency,
+        order_date:          params.order_date,
+        to_email:            params.customer_email
+      }).then(function(){
+        console.log('✅ Order confirmation sent to customer: '+params.customer_email);
+      }).catch(function(err){
+        console.error('❌ Customer email error:', err);
+      });
+
+      // Send ORDER NOTIFICATION to ARTIST using same templateId
+      if(cfg.templateId && cfg.toEmail){
+        emailjs.send(cfg.serviceId, cfg.templateId, {
+          from_name:           params.customer_name,
+          from_email:          params.customer_email,
+          phone:               params.customer_phone||'Not provided',
+          customer_name:       params.customer_name,
+          customer_email:      params.customer_email,
+          customer_phone:      params.customer_phone||'',
+          service:             'New Art Purchase — Order #'+params.order_id+' — '+params.total_amount,
+          message:             params.items_list,
+          delivery_street:     params.delivery_street||'',
+          delivery_city_state: params.delivery_city_state||'',
+          order_id:            params.order_id,
+          payment_id:          params.payment_id,
+          items_html:          params.items_html||'',
+          total_amount:        params.total_amount,
+          order_date:          params.order_date,
+          to_email:            cfg.toEmail,
+          reply_to:            params.customer_email
+        }).then(function(){
+          console.log('✅ Order notification sent to artist.');
+        }).catch(function(err){
+          console.error('❌ Artist notification error:', err);
+        });
+      }
+
+    }catch(e){console.error('EmailJS send error:',e);}
+  }
+  if(window.emailjs && window._ejsReady){
+    doSend();
+  } else {
+    // Fallback: load and init dynamically
+    var ejsScript=document.createElement('script');
+    ejsScript.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    ejsScript.onload=function(){
+      var k=cfg.publicKey;
+      if(k) emailjs.init(k);
+      window._ejsReady=true;
+      doSend();
+    };
+    document.head.appendChild(ejsScript);
+  }
+}
+
+// ── MODALS ──
+function showModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+function goLogin(){closeModal('loginModal');window.location.href='auth.html?redirect=store.html';}
+
+// ── TOAST ──
+function showToast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');},3000);
+}
+
+// ── SCROLL TOP ──
+window.addEventListener('scroll',function(){
+  var btn=document.getElementById('scrollTop');
+  if(window.scrollY>400)btn.classList.add('show');else btn.classList.remove('show');
+});
+
+// Click outside modal to close
+document.querySelectorAll('.modal-ov').forEach(function(ov){
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('on');});
+});
+</script>
+<script>
+/* ═══ ADDRESS CONFIRMATION ═══ */
+var _acProfile = {};
+var _acLaunchFn = null;
+
+function acOpen(launchFn) {
+  _acLaunchFn = launchFn;
+  var user = (typeof _user !== 'undefined' ? _user : null);
+
+  /* Show modal immediately with loading state */
+  document.getElementById('acConfirmView').style.display = 'none';
+  document.getElementById('acFormView').style.display    = 'none';
+  document.getElementById('acModal').classList.add('open');
+
+  function renderAcModal(p) {
+    /* Supplement name from Firebase Auth if profile has none */
+    if (user && user.displayName && !p.firstName && !p.name) {
+      var parts = (user.displayName || '').split(' ');
+      p.firstName = parts[0] || '';
+      p.lastName  = parts.slice(1).join(' ') || '';
+    }
+    var fullName = ((p.firstName||'') + ' ' + (p.lastName||'')).trim() || p.name || '';
+    var phone    = p.phone || p.phoneNumber || '';
+    var address  = p.address || p.deliveryAddress || '';
+    var hasName  = fullName.length >= 2;
+    var hasPhone = phone.replace(/[^0-9]/g, '').length >= 10;
+    var hasAddr  = address.trim().length > 4;
+    _acProfile   = p;
+    if (hasName && hasPhone && hasAddr) {
+      document.getElementById('acCName').textContent  = fullName;
+      document.getElementById('acCPhone').textContent = phone;
+      document.getElementById('acCAddr').textContent  = address;
+      document.getElementById('acConfirmView').style.display = 'block';
+      document.getElementById('acFormView').style.display    = 'none';
+    } else {
+      acFillForm(fullName, phone);
+      document.getElementById('acConfirmView').style.display = 'none';
+      document.getElementById('acFormView').style.display    = 'block';
+    }
+  }
+
+  /* 1. Try Firestore first (works in all browsers — no localStorage needed) */
+  if (_db && user) {
+    _db.collection('customers').doc(user.uid).get()
+      .then(function(snap) {
+        var p = (snap.exists && snap.data()) ? snap.data() : {};
+        /* Also save to localStorage as cache for next time */
+        try { localStorage.setItem('ng_profile', JSON.stringify(p)); } catch(e) {}
+        renderAcModal(p);
+      })
+      .catch(function() {
+        /* Firestore failed — fall back to localStorage */
+        var p = {};
+        try { p = JSON.parse(localStorage.getItem('ng_profile') || '{}'); } catch(e) {}
+        renderAcModal(p);
+      });
+  } else {
+    /* No Firestore — try localStorage */
+    var p = {};
+    try { p = JSON.parse(localStorage.getItem('ng_profile') || '{}'); } catch(e) {}
+    renderAcModal(p);
+  }
+}
+
+function acClose() { document.getElementById('acModal').classList.remove('open'); }
+
+function acFillForm(name, phone) {
+  document.getElementById('acName').value  = name  || '';
+  document.getElementById('acPhone').value = phone || '';
+  ['acStreet','acCity','acState','acPin','acLandmark'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+}
+
+function acShowForm() {
+  var p = _acProfile;
+  var fullName = ((p.firstName||'') + ' ' + (p.lastName||'')).trim() || p.name || '';
+  acFillForm(fullName, p.phone || '');
+  document.getElementById('acConfirmView').style.display = 'none';
+  document.getElementById('acFormView').style.display    = 'block';
+}
+
+function acUseProfile() {
+  var p = _acProfile;
+  var fullName = ((p.firstName||'') + ' ' + (p.lastName||'')).trim() || p.name || '';
+  var addr = { name: fullName, phone: p.phone||'', street: p.address||p.deliveryAddress||'', city: '', state: '', pin: '', landmark: '' };
+  localStorage.setItem('ng_pending_address', JSON.stringify(addr));
+  acClose();
+  if (_acLaunchFn) _acLaunchFn();
+}
+
+function acConfirm() {
+  var ok = true;
+  function chk(id, eid, fn) {
+    var el = document.getElementById(id); var er = document.getElementById(eid);
+    if (!el) return;
+    if (!fn(el.value.trim())) { el.classList.add('ac-err'); if(er) er.style.display='block'; ok=false; }
+    else { el.classList.remove('ac-err'); if(er) er.style.display='none'; }
+  }
+  chk('acName',   'acEName',   function(v){ return v.length >= 2; });
+  chk('acPhone',  'acEPhone',  function(v){ return v.replace(/[^0-9]/g,'').length >= 10; });
+  chk('acStreet', 'acEStreet', function(v){ return v.length >= 5; });
+  chk('acCity',   'acECity',   function(v){ return v.length >= 2; });
+  chk('acPin',    'acEPin',    function(v){ return /^[0-9]{6}$/.test(v); });
+  if (!ok) return;
+  var addr = {
+    name:     document.getElementById('acName').value.trim(),
+    phone:    document.getElementById('acPhone').value.trim(),
+    street:   document.getElementById('acStreet').value.trim(),
+    city:     document.getElementById('acCity').value.trim(),
+    state:    document.getElementById('acState').value.trim(),
+    pin:      document.getElementById('acPin').value.trim(),
+    landmark: document.getElementById('acLandmark').value.trim()
+  };
+  localStorage.setItem('ng_pending_address', JSON.stringify(addr));
+  acClose();
+  if (_acLaunchFn) _acLaunchFn();
+}
+</script>
+<!-- ── DELIVERY ADDRESS MODAL ── -->
+<div class="ac-overlay" id="acModal">
+  <div class="ac-box">
+    <div class="ac-title">&#128230; Delivery Details</div>
+    <!-- VIEW 1: Confirm profile address -->
+    <div id="acConfirmView" style="display:none">
+      <div class="ac-sub">We found your saved profile. Deliver to this address?</div>
+      <div class="ac-card">
+        <div class="ac-card-name" id="acCName"></div>
+        <div class="ac-card-detail" id="acCPhone"></div>
+        <div class="ac-card-detail" id="acCAddr"></div>
+      </div>
+      <button class="ac-btn ac-btn-fill" onclick="acUseProfile()">&#10003; Yes, Deliver Here</button>
+      <button class="ac-btn ac-btn-ghost" onclick="acShowForm()">&#9998; Use Different Address</button>
+      <button class="ac-cancel" onclick="acClose()">Cancel</button>
+    </div>
+    <!-- VIEW 2: New address form -->
+    <div id="acFormView" style="display:none">
+      <div class="ac-sub">Enter your delivery address. * fields are required.</div>
+      <div class="ac-row">
+        <div class="ac-field"><label>Full Name *</label><input type="text" id="acName" placeholder="Your full name"><div class="ac-err-msg" id="acEName">Name required</div></div>
+        <div class="ac-field"><label>Phone Number *</label><input type="tel" id="acPhone" placeholder="+91 98765 43210"><div class="ac-err-msg" id="acEPhone">Min 10 digits</div></div>
+      </div>
+      <div class="ac-field"><label>Street Address *</label><input type="text" id="acStreet" placeholder="Flat no., Street, Area"><div class="ac-err-msg" id="acEStreet">Street address required</div></div>
+      <div class="ac-row">
+        <div class="ac-field"><label>City *</label><input type="text" id="acCity" placeholder="City"><div class="ac-err-msg" id="acECity">City required</div></div>
+        <div class="ac-field"><label>State</label><input type="text" id="acState" placeholder="State"></div>
+      </div>
+      <div class="ac-row">
+        <div class="ac-field"><label>PIN Code *</label><input type="text" id="acPin" placeholder="560001" maxlength="6"><div class="ac-err-msg" id="acEPin">6-digit PIN required</div></div>
+        <div class="ac-field"><label>Landmark (optional)</label><input type="text" id="acLandmark" placeholder="Near temple..."></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="ac-btn ac-btn-fill" style="flex:1;margin:0" onclick="acConfirm()">Continue to Payment &#8594;</button>
+        <button class="ac-btn ac-btn-ghost" style="width:auto;margin:0;padding:11px 18px" onclick="acClose()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+/* ═══ INVOICE ═══ */
+function showBill(order, showHomeBtn){
+  var o = order || {};
+  var si = []; try{ si = JSON.parse(localStorage.getItem('ng_store_images')||'[]'); }catch(e){}
+  var da = o.deliveryAddress || {};
+  document.getElementById('bOid').textContent   = o.orderId || o.id || '—';
+  var stat = o.status || 'confirmed';
+  var sp = document.getElementById('bStat');
+  sp.textContent = stat.charAt(0).toUpperCase() + stat.slice(1);
+  sp.className = 'bst ' + stat;
+  document.getElementById('bName').textContent  = da.name  || o.customerName  || '—';
+  document.getElementById('bPhone').textContent = da.phone || o.customerPhone || '';
+  document.getElementById('bEmail').textContent = o.customerEmail || '';
+  var dt = o.createdAt ? new Date(o.createdAt).toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+  document.getElementById('bDate').textContent = dt;
+  document.getElementById('bTxn').textContent  = o.paymentId ? 'Txn: ' + o.paymentId : '';
+  var ab = document.getElementById('bAddrBlock');
+  if(da.street || da.city){
+    var ln = [da.street, [da.city, da.state].filter(Boolean).join(', ') + (da.pin ? ' — ' + da.pin : ''), da.landmark].filter(Boolean);
+    document.getElementById('bAddr').innerHTML = ln.join('<br>');
+    ab.style.display = 'block';
+  } else { ab.style.display = 'none'; }
+  var items = o.items || []; var merged = [];
+  items.forEach(function(it){
+    var k = (it.name||'').toLowerCase() + '||' + (it.image||'');
+    var ex = merged.find(function(m){ return (m.name||'').toLowerCase()+'||'+(m.image||'') === k; });
+    if(ex) ex.qty = (ex.qty||1) + (it.qty||1);
+    else merged.push(Object.assign({}, it, {qty: it.qty||1}));
+  });
+  document.getElementById('bItems').innerHTML = merged.map(function(it){
+    var img = it.image || '';
+    if(!img){ var f = si.find(function(s){ return String(s.id)===String(it.id) || s.name===it.name; }); if(f) img = f.image||''; }
+    var ih = img ? '<img class="bit-img" src="'+img+'" alt="">' : '<div class="bit-ph">&#127912;</div>';
+    return '<div class="bit">'+ih+'<div class="bit-info"><div class="bit-name">'+it.name+'</div>'+(it.category?'<div class="bit-meta">'+it.category+'</div>':'')+'<div class="bit-meta">Qty: '+(it.qty||1)+' × ₹'+Number(it.price||0).toLocaleString('en-IN')+' each</div></div><div class="bit-price">₹'+Number((it.price||0)*(it.qty||1)).toLocaleString('en-IN')+'</div></div>';
+  }).join('');
+  document.getElementById('bTotal').textContent = '₹' + Number(o.amount||0).toLocaleString('en-IN');
+  var hb = document.getElementById('bHomeBtn'); if(hb) hb.style.display = showHomeBtn ? 'inline-block' : 'none';
+  var m = document.getElementById('billModal'); m.classList.add('on'); m.scrollTop = 0;
+}
+function closeBill(){ document.getElementById('billModal').classList.remove('on'); }
+function doBillPrint(){ window.print(); }
+function doBillPDF(){
+  var bar = document.querySelector('#billModal .bac'); if(bar) bar.style.display = 'none';
+  setTimeout(function(){ window.print(); setTimeout(function(){ if(bar) bar.style.display='flex'; }, 600); }, 150);
+}</script>
+<!-- INVOICE MODAL -->
+<div id="billModal">
+  <div id="billBox">
+    <div class="bh">
+      <div><div class="bh-tag">Invoice / Bill</div><div class="bh-studio">Naga<span>N</span>ath G S Art Studio</div></div>
+      <div style="text-align:right"><div class="bh-tag">Order ID</div><div class="bh-oid" id="bOid"></div><div style="margin-top:6px"><span class="bst" id="bStat"></span></div></div>
+    </div>
+    <div class="bb">
+      <div class="bm">
+        <div><div class="bl">Bill To</div><div class="bv" id="bName"></div><div class="bs" id="bPhone"></div><div class="bs" id="bEmail"></div></div>
+        <div><div class="bl">Invoice Details</div><div class="bs" id="bDate"></div><div class="bs" id="bTxn"></div></div>
+      </div>
+      <div class="ba-block" id="bAddrBlock" style="display:none"><div class="bl">Delivery Address</div><div class="bs" id="bAddr" style="margin-top:5px"></div></div>
+      <div class="bit-label">Order Items</div>
+      <div id="bItems"></div>
+      <div class="bt-row"><span class="bt-label">Total Amount Paid</span><span class="bt-val" id="bTotal"></span></div>
+    </div>
+    <div class="bf">Thank you for your purchase! &#10084; &nbsp;&middot;&nbsp; Naganath G S Art Studio &nbsp;&middot;&nbsp; Karnataka, India</div>
+    <div class="bac">
+      <button class="bab bab-print" onclick="doBillPrint()">&#128424; Print</button>
+      <button class="bab bab-pdf"   onclick="doBillPDF()">&#11015; Save PDF</button>
+      <button class="bab bab-home"  id="bHomeBtn" style="display:none" onclick="window.location.href='index.html'">&#127968; Home</button>
+      <button class="bab bab-close" onclick="closeBill()">&#10005; Close</button>
+    </div>
+  </div>
+</div>
+<script>
+// Init EmailJS after DOM ready — guaranteed to run after script is parsed
+document.addEventListener('DOMContentLoaded', function(){
+  try{
+    /* Try window._emailCfg first (set by Firestore onSnapshot), then localStorage */
+    var _ejsCfg = window._emailCfg || {};
+    if(!_ejsCfg.publicKey){ try{ _ejsCfg=JSON.parse(localStorage.getItem('ng_email')||'{}'); }catch(e){} }
+    if(_ejsCfg.publicKey && window.emailjs){
+      emailjs.init(_ejsCfg.publicKey);
+      window._ejsReady=true;
+      window._emailCfg = _ejsCfg;
+      console.log('EmailJS initialized.');
+    }
+  }catch(e){ console.error('EmailJS init error:',e); }
+});
+</script>
+</body>
+</html>

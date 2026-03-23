@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>My Account — Naganath G S Art Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#e8571f;--accent-d:#c44518;--amber:#f5a623;
+  --dark:#100c06;--off:#f9f5ef;--cream:#fdf8f2;
+  --mid:#e0d5c7;--muted:#7a6a58;--soft:#b5a898;
+  --white:#fff;--text:#1e170e;--light:#f2ece2;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.dnav{
+  background:var(--dark);padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:20;
+}
+.dnav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:#fff;
+  text-decoration:none;
+}
+.dnav-logo span{color:var(--accent);letter-spacing:0;font-size:inherit;line-height:inherit}
+.dnav-logo .tag{font-family:'Caveat',cursive;font-size:.8rem;color:rgba(255,255,255,.35);margin-left:8px}
+.dnav-right{display:flex;align-items:center;gap:10px}
+.nav-pill{
+  font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 16px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);
+  cursor:pointer;transition:all .2s;background:transparent;
+}
+.nav-pill:hover{border-color:var(--accent);color:var(--accent)}
+.nav-pill.filled{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav-pill.filled:hover{background:var(--accent-d)}
+.nav-user{font-size:.78rem;color:rgba(255,255,255,.45)}
+
+/* ── LOADING ── */
+#loadState{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 60px);gap:12px;color:var(--muted);
+}
+.spin{width:30px;height:30px;border:2.5px solid var(--mid);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── NOT CONFIGURED ── */
+#notCfg{display:none;text-align:center;padding:80px 24px}
+#notCfg h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:10px}
+#notCfg p{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+
+/* ── MAIN LAYOUT ── */
+#dashMain{display:none}
+.dash-wrap{max-width:1100px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+
+/* ── SIDEBAR ── */
+.dsidebar{background:var(--white);border:1px solid var(--mid);overflow:hidden}
+.dside-hero{
+  background:linear-gradient(135deg,var(--dark) 0%,#2a1a0a 100%);
+  padding:24px 20px;position:relative;overflow:hidden;
+}
+.dside-hero::before{
+  content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;
+  background:radial-gradient(circle,rgba(232,87,31,.3) 0%,transparent 70%);
+}
+.dside-avatar{
+  width:52px;height:52px;background:var(--accent);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.dside-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;position:relative;z-index:1}
+.dside-email{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:2px;word-break:break-all;position:relative;z-index:1}
+.dside-nav{padding:8px 0}
+.dside-item{
+  display:flex;align-items:center;gap:10px;padding:11px 20px;font-size:.78rem;
+  font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;border-left:3px solid transparent;
+}
+.dside-item:hover{color:var(--text);background:var(--off)}
+.dside-item.on{color:var(--accent);background:rgba(232,87,31,.04);border-left-color:var(--accent)}
+.dside-item .ic{font-size:1rem;width:20px;text-align:center}
+.dside-logout{
+  padding:12px 20px;border-top:1px solid var(--light);font-size:.72rem;
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  cursor:pointer;transition:color .2s;
+}
+.dside-logout:hover{color:#ef4444}
+
+/* ── CONTENT ── */
+.dcontent{background:var(--white);border:1px solid var(--mid)}
+.dch{
+  padding:20px 28px;border-bottom:1px solid var(--light);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.dch-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.dch-sub{font-size:.74rem;color:var(--soft)}
+.dcb{padding:26px 28px}
+
+/* Panels */
+.panel{display:none}
+.panel.on{display:block}
+
+/* Alert */
+.dalert{padding:10px 14px;font-size:.78rem;font-weight:500;margin-bottom:16px;display:none;border-left:3px solid}
+.dalert.on{display:block}
+.dalert.ok{background:#f0fdf4;border-color:#22c55e;color:#15803d}
+.dalert.err{background:#fef2f2;border-color:#ef4444;color:#b91c1c}
+
+/* Stat boxes */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.sbox{background:var(--off);border:1px solid var(--light);padding:18px;text-align:center}
+.sbox-n{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--accent);line-height:1}
+.sbox-l{display:block;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:4px}
+
+/* Orders */
+.ocard{border:1px solid var(--mid);padding:18px 20px;margin-bottom:12px;transition:border-color .2s}
+.ocard:hover{border-color:var(--accent)}
+.ocard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.oid{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.ostatus{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px}
+.ostatus.pending{background:#fffbeb;color:#d97706}
+.ostatus.confirmed{background:#eff6ff;color:#1d4ed8}
+.ostatus.completed{background:#f0fdf4;color:#15803d}
+.ostatus.shipped{background:#f5f3ff;color:#7c3aed}
+.ostatus.cancelled{background:#fef2f2;color:#b91c1c}
+.oprod{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.odetails{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.oprice{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);font-weight:700}
+.odate{font-size:.72rem;color:var(--soft)}
+.oqty{font-size:.72rem;color:var(--muted)}
+
+/* Profile form */
+.pfgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:0}
+.fg label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.fg input{width:100%;padding:10px 13px;background:var(--off);border:1.5px solid var(--mid);font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--dark);outline:none;transition:border-color .2s}
+.fg input:focus{border-color:var(--accent);background:#fff}
+.fg input:disabled{opacity:.5;cursor:not-allowed}
+.fg.full{grid-column:1/-1}
+.save-btn{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 28px;background:var(--accent);color:#fff;border:none;cursor:pointer;
+  transition:background .2s;margin-top:18px;
+}
+.save-btn:hover{background:var(--accent-d)}
+
+/* Wishlist */
+.wish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.wish-card{border:1px solid var(--mid);overflow:hidden;transition:all .2s}
+.wish-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.wish-img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--light)}
+.wish-info{padding:10px}
+.wish-name{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:700;margin-bottom:3px}
+.wish-price{font-size:.82rem;color:var(--accent);font-weight:600}
+.wish-rm{font-size:.65rem;color:#ef4444;cursor:pointer;margin-top:4px;display:inline-block}
+
+/* Commissions */
+.comm-card{border:1px solid var(--mid);padding:18px;margin-bottom:12px}
+.comm-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.comm-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700}
+.comm-status{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;background:#eff6ff;color:#1d4ed8}
+.comm-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* Empty state */
+.empty{text-align:center;padding:40px 20px;color:var(--soft)}
+.empty-icon{font-size:2.5rem;margin-bottom:10px}
+.empty p{font-size:.85rem;line-height:1.7;margin-bottom:14px}
+.empty a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
+.empty a:hover{border-color:var(--accent)}
+.empty .cta{
+  display:inline-block;padding:10px 24px;background:var(--accent);color:#fff;
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;transition:background .2s;
+}
+.empty .cta:hover{background:var(--accent-d)}
+
+/* Commission request form */
+.comm-form{background:var(--off);border:1px solid var(--light);padding:20px;margin-top:20px}
+.comm-form h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;margin-bottom:14px}
+.comm-form textarea{width:100%;padding:10px 13px;background:var(--white);border:1.5px solid var(--mid);font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--dark);outline:none;resize:vertical;min-height:90px;transition:border-color .2s}
+.comm-form textarea:focus{border-color:var(--accent)}
+.comm-form select{width:100%;padding:10px 13px;background:var(--white);border:1.5px solid var(--mid);font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--dark);outline:none;margin-bottom:12px}
+
+@media(max-width:900px){.dash-wrap{grid-template-columns:1fr}}
+@media(max-width:600px){.pfgrid{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr}.dnav{padding:0 20px}}
+</style>
+<style>
+/* ── INVOICE ── */
+#billModal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+#billModal.on{display:flex}
+#billBox{background:#fff;width:100%;max-width:620px;font-family:'DM Sans',sans-serif;color:#1a1208;margin:auto;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bh{background:#1a1208;color:#fff;padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.bh-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.bh-studio{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.bh-studio span{color:#f5a623}
+.bh-oid{font-size:.88rem;font-weight:700;color:#f5a623;margin-top:2px;word-break:break-all}
+.bb{padding:24px 28px}
+.bm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:2px solid #f0ebe4}
+.bl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.bv{font-size:.88rem;font-weight:600;color:#1a1208;line-height:1.5}
+.bs{font-size:.78rem;color:#8a7968;line-height:1.6}
+.ba-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #f0ebe4}
+.bit-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:10px}
+.bit{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f9f5ef}
+.bit-img{width:54px;height:54px;object-fit:cover;flex-shrink:0;border-radius:2px;background:#f0ebe4}
+.bit-ph{width:54px;height:54px;flex-shrink:0;background:#f0ebe4;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.bit-info{flex:1;min-width:0}
+.bit-name{font-size:.9rem;font-weight:600;margin-bottom:2px}
+.bit-meta{font-size:.72rem;color:#8a7968}
+.bit-price{font-size:1rem;font-weight:700;color:#e8571f;white-space:nowrap}
+.bt-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:2px solid #1a1208}
+.bt-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bt-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#e8571f}
+.bst{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.bst.confirmed,.bst.completed{background:#dcfce7;color:#166534}
+.bst.shipped{background:#dbeafe;color:#1e40af}
+.bst.processing{background:#fef3c7;color:#92400e}
+.bst.pending{background:#fef9c3;color:#854d0e}
+.bst.cancelled{background:#fee2e2;color:#991b1b}
+.bf{background:#f9f5ef;padding:14px 28px;font-size:.7rem;color:#8a7968;text-align:center;line-height:1.9;border-top:1px solid #e0d8cd}
+.bac{display:flex;gap:8px;padding:14px 28px;border-top:1px solid #e0d8cd;background:#fff;flex-wrap:wrap}
+.bab{flex:1;min-width:70px;padding:10px 8px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.bab-print{background:#1a1208;color:#fff}.bab-print:hover{background:#2d2218}
+.bab-pdf{background:#e8571f;color:#fff}.bab-pdf:hover{background:#c44318}
+.bab-home{background:#f5a623;color:#1a1208}.bab-home:hover{background:#e8941a}
+.bab-close{background:transparent;border:1.5px solid #e0d8cd;color:#8a7968}.bab-close:hover{border-color:#e8571f;color:#e8571f}
+@media print{body>*{display:none!important}#billModal{display:block!important;position:static!important;background:none!important;padding:0!important;overflow:visible!important}#billBox{box-shadow:none!important;max-width:100%!important}.bac{display:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="dnav">
+  <a href="index.html" class="dnav-logo">Naga<span>N</span>ath G S <span class="tag">Art Studio</span></a>
+  <div class="dnav-right">
+    <span class="nav-user" id="navEmail"></span>
+    <a href="store.html" class="nav-pill">Shop Art</a>
+    <button class="nav-pill filled" onclick="doLogout()">Sign Out</button>
+  </div>
+</nav>
+
+<!-- Loading -->
+<div id="loadState">
+  <div class="spin"></div>
+  <div style="font-size:.82rem">Loading your account…</div>
+</div>
+
+<!-- Not configured -->
+<div id="notCfg">
+  <div style="font-size:3rem;margin-bottom:16px">🔧</div>
+  <h2>Firebase Not Configured</h2>
+  <p>The admin needs to set up Firebase to enable accounts.<br>Visit the <a href="admin.html" style="color:var(--accent)">Admin Panel</a> to configure it.</p>
+  <a href="auth.html" style="display:inline-block;padding:10px 24px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase">← Back to Login</a>
+</div>
+
+<!-- Dashboard -->
+<div id="dashMain">
+  <div class="dash-wrap">
+    <!-- Sidebar -->
+    <div class="dsidebar">
+      <div class="dside-hero">
+        <div class="dside-avatar" id="sideAvatar">N</div>
+        <div class="dside-name" id="sideName">Hello!</div>
+        <div class="dside-email" id="sideEmail"></div>
+      </div>
+      <div class="dside-nav">
+        <div class="dside-item on" onclick="goPanel('orders',this)"><span class="ic">📦</span>My Orders</div>
+        <div class="dside-item" onclick="goPanel('profile',this)"><span class="ic">👤</span>My Profile</div>
+        <div class="dside-item" onclick="goPanel('wishlist',this)"><span class="ic">♥</span>Wishlist</div>
+        <div class="dside-item" onclick="goPanel('commissions',this)"><span class="ic">🎨</span>Commissions</div>
+      </div>
+      <div class="dside-logout" onclick="doLogout()">⏻ Sign Out</div>
+    </div>
+
+    <!-- Content -->
+    <div class="dcontent">
+      <div class="dch">
+        <div>
+          <div class="dch-title" id="panelTitle">My Orders</div>
+          <div class="dch-sub" id="panelSub">Track your purchases</div>
+        </div>
+      </div>
+      <div class="dcb">
+        <div class="dalert" id="dalert"></div>
+
+        <!-- ORDERS PANEL -->
+        <div class="panel on" id="panel-orders">
+          <div class="stat-grid">
+            <div class="sbox"><span class="sbox-n" id="sTotal">0</span><span class="sbox-l">Total Orders</span></div>
+            <div class="sbox"><span class="sbox-n" id="sPending">0</span><span class="sbox-l">Pending</span></div>
+            <div class="sbox"><span class="sbox-n" id="sCompleted">0</span><span class="sbox-l">Completed</span></div>
+          </div>
+          <div id="ordersContent">
+            <div class="empty"><div class="empty-icon">📦</div><p>No orders yet.</p><a href="store.html" class="cta">Shop the Studio →</a></div>
+          </div>
+        </div>
+
+        <!-- PROFILE PANEL -->
+        <div class="panel" id="panel-profile">
+          <div class="pfgrid">
+            <div class="fg"><label>First Name</label><input type="text" id="pfFirst" placeholder="Rajesh"></div>
+            <div class="fg"><label>Last Name</label><input type="text" id="pfLast" placeholder="Kumar"></div>
+            <div class="fg"><label>Email (read only)</label><input type="email" id="pfEmail" disabled></div>
+            <div class="fg"><label>Phone</label><input type="tel" id="pfPhone" placeholder="+91 98765 43210"></div>
+            <div class="fg full"><label>Delivery Address</label><input type="text" id="pfAddr" placeholder="Street, City, State – PIN Code"></div>
+          </div>
+          <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+        </div>
+
+        <!-- WISHLIST PANEL -->
+        <div class="panel" id="panel-wishlist">
+          <div id="wishContent">
+            <div class="empty"><div class="empty-icon">♥</div><p>Your wishlist is empty.<br>Save artworks you love!</p><a href="store.html" class="cta">Browse Art →</a></div>
+          </div>
+        </div>
+
+        <!-- COMMISSIONS PANEL -->
+        <div class="panel" id="panel-commissions">
+          <div id="commContent">
+            <div class="empty"><div class="empty-icon">🎨</div><p>No active commissions yet.</p><a href="index.html#contact-section" class="cta">Commission Artwork →</a></div>
+          </div>
+          <div class="comm-form">
+            <h4>Request a Commission</h4>
+            <div class="fg" style="margin-bottom:12px"><label>Artwork Type</label>
+              <select id="commType">
+                <option value="">Select type…</option>
+                <option>Caricature – Digital</option>
+                <option>Caricature – Hand-drawn</option>
+                <option>Watercolour Portrait</option>
+                <option>Cartoon Illustration</option>
+                <option>Custom Wall Art</option>
+                <option>Corporate Caricature</option>
+              </select>
+            </div>
+            <div class="fg" style="margin-bottom:12px"><label>Description / Requirements</label>
+              <textarea id="commDesc" placeholder="Describe what you have in mind — reference images, sizes, deadline…"></textarea>
+            </div>
+            <button class="save-btn" onclick="requestCommission()">Send Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Firebase config — hardcoded so ALL browsers connect automatically */
+window.SITE_FB_CFG = {
+  apiKey:            "AIzaSyAGj0TwlqEvKzGSBo8RUqD4UKY-4aCH36s",
+  authDomain:        "naganathgs.firebaseapp.com",
+  projectId:         "naganathgs",
+  storageBucket:     "naganathgs.firebasestorage.app",
+  messagingSenderId: "775331975442",
+  appId:             "1:775331975442:web:878df8b7d8e249a2b0e3cb"
+};
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+var FB_CFG=(function(){try{var s=localStorage.getItem('ng_fb');if(s){var p=JSON.parse(s);if(p&&p.apiKey&&p.apiKey!=='YOUR_API_KEY')return p;}}catch(e){}return window.SITE_FB_CFG||null;})();
+var _auth=null,_db=null,_user=null;
+
+window.addEventListener('DOMContentLoaded',function(){
+  if(!FB_CFG){
+    document.getElementById('loadState').style.display='none';
+    document.getElementById('notCfg').style.display='block';
+    return;
+  }
+  loadSDKs(function(){
+    _auth.onAuthStateChanged(function(user){
+      document.getElementById('loadState').style.display='none';
+      if(!user){window.location.href='auth.html';return;}
+      _user=user;
+      document.getElementById('navEmail').textContent=user.email;
+      document.getElementById('dashMain').style.display='block';
+      initUser();
+      loadOrders();
+      loadWishlist();
+    });
+  });
+});
+
+function loadSDKs(cb){
+  try{
+    if(!firebase.apps.length) firebase.initializeApp(FB_CFG);
+    _auth = firebase.auth();
+    _db   = firebase.firestore();
+    cb();
+  }catch(e){ console.error('Firebase error:',e); }
+}
+
+function initUser(){
+  var name=(_user.displayName||'Customer').split(' ')[0];
+  var initial=name.charAt(0).toUpperCase();
+  document.getElementById('sideAvatar').textContent=initial;
+  document.getElementById('sideName').textContent='Hello, '+name+'!';
+  document.getElementById('sideEmail').textContent=_user.email;
+  // Load profile
+  if(_db) _db.collection('customers').doc(_user.uid).get().then(function(doc){
+    var d=doc.exists?doc.data():{};
+    document.getElementById('pfFirst').value=d.firstName||name||'';
+    document.getElementById('pfLast').value=d.lastName||'';
+    document.getElementById('pfEmail').value=_user.email;
+    document.getElementById('pfPhone').value=d.phone||'';
+    document.getElementById('pfAddr').value=d.address||'';
+  }).catch(function(){});
+}
+
+var _dashOrders=[];
+function renderOrders(orders){
+  document.getElementById('sTotal').textContent=orders.length;
+  document.getElementById('sPending').textContent=orders.filter(function(o){return o.status==='pending'||o.status==='confirmed'||o.status==='processing';}).length;
+  document.getElementById('sCompleted').textContent=orders.filter(function(o){return o.status==='completed';}).length;
+  var el=document.getElementById('ordersContent');
+  if(!orders.length){el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>No orders yet.</p><a href="store.html" class="cta">Shop the Studio →</a></div>';return;}
+  // Get store images for thumbnail lookup
+  var storeImgs=[];try{storeImgs=JSON.parse(localStorage.getItem('ng_store_images')||'[]');}catch(e){}
+  el.innerHTML=orders.map(function(o,idx){
+    var d=o.createdAt&&o.createdAt.toDate?o.createdAt.toDate().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}):o.createdAt?new Date(o.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}):'';
+    var status=o.status||'confirmed';
+    var statusLabel=status.charAt(0).toUpperCase()+status.slice(1);
+    // Build items with thumbnails
+    var itemsHTML='';
+    if(o.items&&o.items.length){
+      var mergedItems=[];o.items.forEach(function(it){var key=(it.name||"").trim().toLowerCase()+"||"+(it.image||"").trim();var ex=mergedItems.find(function(m){return (m.name||"").trim().toLowerCase()+"||"+(m.image||"").trim()===key;});if(ex){ex.qty=(ex.qty||1)+(it.qty||1);}else{mergedItems.push(Object.assign({},it,{qty:it.qty||1}));}});
+      itemsHTML=mergedItems.map(function(it){
+        var imgSrc=it.image||'';
+        if(!imgSrc){var found=storeImgs.find(function(s){return String(s.id)===String(it.id)||s.name===it.name;});if(found)imgSrc=found.image||'';}
+        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.06)">'
+          +(imgSrc?'<img src="'+imgSrc+'" style="width:44px;height:44px;object-fit:cover;flex-shrink:0;border-radius:2px;background:#eee">'
+          :'<div style="width:44px;height:44px;background:#f0ebe4;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border-radius:2px">&#127912;</div>')
+          +'<div><div style="font-size:.82rem;font-weight:600;color:#333">'+it.name+'</div>'
+          +'<div style="font-size:.7rem;color:#999">Qty: '+it.qty+' &nbsp;·&nbsp; &#8377;'+Number(it.price||0).toLocaleString('en-IN')+'</div></div></div>';
+      }).join('');
+    } else {
+      itemsHTML='<div style="font-size:.82rem;font-weight:600;color:#333">'+(o.productName||'Artwork Order')+'</div>';
+    }
+    // Tracking info
+    var trackHTML=o.trackingNo?'<div style="font-size:.72rem;color:#888;margin-top:6px;padding:6px 10px;background:#f8f4ee;border-left:3px solid #e8571f">&#128666; Tracking: <strong>'+o.trackingNo+'</strong></div>':'';
+    return '<div class="ocard">'
+      +'<div class="ocard-top"><span class="oid">Order #'+(o.orderId||o.id||'').toString().substr(-8).toUpperCase()+'</span><span class="ostatus '+status+'">'+statusLabel+'</span></div>'
+      +'<div style="margin:10px 0">'+itemsHTML+'</div>'
+      +'<div class="odetails"><span class="oprice">&#8377;'+((o.amount||0).toLocaleString('en-IN'))+'</span><span class="odate">'+d+'</span></div>'
+      +trackHTML
+      +'<div style="margin-top:10px"><button class="dbill" data-idx="'+idx+'" style="font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;background:#1a1208;color:#fff;border:none;cursor:pointer">&#128424; Download / Print Bill</button></div>'
+      +'</div>';
+  }).join('');
+  _dashOrders=orders;
+  el.querySelectorAll('.dbill').forEach(function(b){b.addEventListener('click',function(){var i=parseInt(this.getAttribute('data-idx'));if(_dashOrders[i])showBill(_dashOrders[i],false);});});
+}
+
+function loadOrders(){
+  // First load from localStorage (always available)
+  var localOrders=[];
+  try{
+    var allOrders=JSON.parse(localStorage.getItem('ng_orders')||'[]');
+    if(_user) localOrders=allOrders.filter(function(o){return o.customerEmail===_user.email;});
+    else localOrders=allOrders;
+  }catch(e){}
+
+  // Show local orders immediately
+  if(localOrders.length) renderOrders(localOrders);
+
+  // Then try Firebase for more complete data
+  if(!_db||!_user){
+    if(!localOrders.length) renderOrders([]);
+    return;
+  }
+  _db.collection('orders').where('customerId','==',_user.uid).orderBy('createdAt','desc').get()
+    .then(function(snap){
+      var orders=[];
+      snap.forEach(function(doc){orders.push(Object.assign({id:doc.id},doc.data()));});
+      // Merge with local orders — Firebase takes priority
+      if(orders.length) renderOrders(orders);
+      else if(!localOrders.length) renderOrders([]);
+    }).catch(function(){
+      if(!localOrders.length) renderOrders([]);
+    });
+}
+
+function loadWishlist(){
+  try{
+    var wl=JSON.parse(localStorage.getItem('ng_wishlist')||'[]');
+    var el=document.getElementById('wishContent');
+    if(!wl.length){el.innerHTML='<div class="empty"><div class="empty-icon">\u2665</div><p>Your wishlist is empty.<br>Save artworks you love!</p><a href="store.html" class="cta">Browse Art \u2192</a></div>';return;}
+    var storeImgs=JSON.parse(localStorage.getItem('ng_store_images')||'[]');
+    var legacyProds=JSON.parse(localStorage.getItem('ng_products')||'[]');
+    var allProds=storeImgs.length?storeImgs:legacyProds;
+    var html='<div class="wish-grid">';
+    var found=0;
+    wl.forEach(function(pid){
+      var p=allProds.find(function(x){return String(x.id)===String(pid);});
+      if(!p)return;
+      found++;
+      html+='<div class="wish-card">'
+        +'<img src="'+(p.image||'')+'" class="wish-img" onerror="this.style.background=&quot;var(--light)&quot;">'
+        +'<div class="wish-info">'
+        +'<div class="wish-name">'+(p.name||'Artwork')+'</div>'
+        +(p.originalPrice&&p.originalPrice>p.price?'<div style="font-size:.7rem;color:#aaa;text-decoration:line-through">\u20b9'+Number(p.originalPrice).toLocaleString('en-IN')+'</div>':'')
+        +'<div class="wish-price">\u20b9'+(Number(p.price)||0).toLocaleString('en-IN')+'</div>'
+        +'<div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">'
+        +'<a href="store.html" class="cta" style="padding:5px 12px;font-size:.65rem">Buy Now</a>'
+        +'<span class="wish-rm" data-pid="'+pid+'" onclick="removeWish(this.dataset.pid)">\u2715 Remove</span>'
+        +'</div>'
+        +'</div></div>';
+    });
+    if(!found){el.innerHTML='<div class="empty"><div class="empty-icon">\u2665</div><p>Wishlisted items not found.<br>They may have been removed.</p><a href="store.html" class="cta">Browse Art \u2192</a></div>';return;}
+    html+='</div>';
+    el.innerHTML=html;
+  }catch(e){console.error('Wishlist error:',e);}
+}
+
+function removeWish(pid){
+  var wl=JSON.parse(localStorage.getItem('ng_wishlist')||'[]');
+  localStorage.setItem('ng_wishlist',JSON.stringify(wl.filter(function(x){return x!==pid;})));
+  loadWishlist();
+}
+
+function saveProfile(){
+  if(!_db||!_user){showAlert('Database not available.','err');return;}
+  var data={
+    firstName:document.getElementById('pfFirst').value.trim(),
+    lastName:document.getElementById('pfLast').value.trim(),
+    phone:document.getElementById('pfPhone').value.trim(),
+    address:document.getElementById('pfAddr').value.trim(),
+    updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+  };
+  _db.collection('customers').doc(_user.uid).set(data,{merge:true})
+    .then(function(){showAlert('✅ Profile saved!','ok');})
+    .catch(function(e){showAlert('❌ '+e.message,'err');});
+}
+
+function requestCommission(){
+  var type=document.getElementById('commType').value;
+  var desc=document.getElementById('commDesc').value.trim();
+  if(!type){showAlert('Please select an artwork type.','err');return;}
+  if(!desc){showAlert('Please describe your commission.','err');return;}
+  var data={customerId:_user.uid,customerEmail:_user.email,type:type,description:desc,status:'pending',createdAt:new Date().toISOString()};
+  if(_db){
+    _db.collection('commissions').add(data)
+      .then(function(){
+        showAlert('✅ Commission request sent! Naganath will be in touch soon.','ok');
+        document.getElementById('commType').value='';
+        document.getElementById('commDesc').value='';
+      }).catch(function(e){showAlert('❌ '+e.message,'err');});
+  } else {
+    showAlert('✅ Commission request recorded! (Firebase needed for persistence)','ok');
+  }
+}
+
+function goPanel(id,el){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.dside-item').forEach(function(l){l.classList.remove('on');});
+  document.getElementById('panel-'+id).classList.add('on');
+  if(el)el.classList.add('on');
+  var cfg={orders:['My Orders','Track your purchases'],profile:['My Profile','Manage your details'],wishlist:['Wishlist','Saved artworks'],commissions:['Commissions','Custom artwork requests']};
+  var c=cfg[id]||[id,''];
+  document.getElementById('panelTitle').textContent=c[0];
+  document.getElementById('panelSub').textContent=c[1];
+}
+
+function doLogout(){
+  if(_auth)_auth.signOut().then(function(){window.location.href='auth.html';});
+  else window.location.href='auth.html';
+}
+
+function showAlert(msg,type){
+  var el=document.getElementById('dalert');
+  el.textContent=msg;el.className='dalert on '+type;
+  if(type==='ok')setTimeout(function(){el.className='dalert';},4000);
+}
+</script>
+<script>
+/* ═══ INVOICE ═══ */
+function showBill(order,showHomeBtn){
+  var o=order||{};
+  var si=[];try{si=JSON.parse(localStorage.getItem('ng_store_images')||'[]');}catch(e){}
+  var da=o.deliveryAddress||{};
+  document.getElementById('bOid').textContent=o.orderId||o.id||'—';
+  var stat=o.status||'confirmed';
+  var sp=document.getElementById('bStat');sp.textContent=stat.charAt(0).toUpperCase()+stat.slice(1);sp.className='bst '+stat;
+  document.getElementById('bName').textContent=da.name||o.customerName||'—';
+  document.getElementById('bPhone').textContent=da.phone||o.customerPhone||'';
+  document.getElementById('bEmail').textContent=o.customerEmail||'';
+  var dt=o.createdAt?new Date(o.createdAt).toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  document.getElementById('bDate').textContent=dt;
+  document.getElementById('bTxn').textContent=o.paymentId?'Txn: '+o.paymentId:'';
+  var ab=document.getElementById('bAddrBlock');
+  if(da.street||da.city){var ln=[da.street,[da.city,da.state].filter(Boolean).join(', ')+(da.pin?' — '+da.pin:''),da.landmark].filter(Boolean);document.getElementById('bAddr').innerHTML=ln.join('<br>');ab.style.display='block';}else{ab.style.display='none';}
+  var items=o.items||[];var merged=[];
+  items.forEach(function(it){var k=(it.name||'').toLowerCase()+'||'+(it.image||'');var ex=merged.find(function(m){return(m.name||'').toLowerCase()+'||'+(m.image||'')===k;});if(ex)ex.qty=(ex.qty||1)+(it.qty||1);else merged.push(Object.assign({},it,{qty:it.qty||1}));});
+  document.getElementById('bItems').innerHTML=merged.map(function(it){
+    var img=it.image||'';if(!img){var f=si.find(function(s){return String(s.id)===String(it.id)||s.name===it.name;});if(f)img=f.image||'';}
+    var ih=img?('<img class="bit-img" src="'+img+'" alt="'+it.name+'">'):('<div class="bit-ph">&#127912;</div>');
+    return '<div class="bit">'+ih+'<div class="bit-info"><div class="bit-name">'+it.name+'</div>'+(it.category?'<div class="bit-meta">'+it.category+'</div>':'')+'<div class="bit-meta">Qty: '+(it.qty||1)+' × ₹'+Number(it.price||0).toLocaleString('en-IN')+' each</div></div><div class="bit-price">₹'+Number((it.price||0)*(it.qty||1)).toLocaleString('en-IN')+'</div></div>';
+  }).join('');
+  document.getElementById('bTotal').textContent='₹'+Number(o.amount||0).toLocaleString('en-IN');
+  var hb=document.getElementById('bHomeBtn');if(hb)hb.style.display=showHomeBtn?'inline-block':'none';
+  var m=document.getElementById('billModal');m.classList.add('on');m.scrollTop=0;
+}
+function closeBill(){document.getElementById('billModal').classList.remove('on');}
+function doBillPrint(){window.print();}
+function doBillPDF(){var bar=document.querySelector('#billModal .bac');if(bar)bar.style.display='none';setTimeout(function(){window.print();setTimeout(function(){if(bar)bar.style.display='flex';},600);},150);}
+function showBillFromOrder(json){try{showBill(JSON.parse(json),false);}catch(e){console.error(e);}}
+</script>
+<!-- INVOICE MODAL -->
+<div id="billModal">
+  <div id="billBox">
+    <div class="bh">
+      <div><div class="bh-tag">Invoice / Bill</div><div class="bh-studio">Naga<span>N</span>ath G S Art Studio</div></div>
+      <div style="text-align:right"><div class="bh-tag">Order ID</div><div class="bh-oid" id="bOid"></div><div style="margin-top:6px"><span class="bst" id="bStat"></span></div></div>
+    </div>
+    <div class="bb">
+      <div class="bm">
+        <div><div class="bl">Bill To</div><div class="bv" id="bName"></div><div class="bs" id="bPhone"></div><div class="bs" id="bEmail"></div></div>
+        <div><div class="bl">Invoice Details</div><div class="bs" id="bDate"></div><div class="bs" id="bTxn"></div></div>
+      </div>
+      <div class="ba-block" id="bAddrBlock" style="display:none"><div class="bl">Delivery Address</div><div class="bs" id="bAddr" style="margin-top:5px"></div></div>
+      <div class="bit-label">Order Items</div>
+      <div id="bItems"></div>
+      <div class="bt-row"><span class="bt-label">Total Amount Paid</span><span class="bt-val" id="bTotal"></span></div>
+    </div>
+    <div class="bf">Thank you for your purchase! &#10084; &nbsp;&middot;&nbsp; Naganath G S Art Studio &nbsp;&middot;&nbsp; Karnataka, India</div>
+    <div class="bac">
+      <button class="bab bab-print" onclick="doBillPrint()">&#128424; Print</button>
+      <button class="bab bab-pdf" onclick="doBillPDF()">&#11015; Save PDF</button>
+      <button class="bab bab-home" id="bHomeBtn" style="display:none" onclick="window.location.href='index.html'">&#127968; Home</button>
+      <button class="bab bab-close" onclick="closeBill()">&#10005; Close</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Naganath G S — Caricaturist · Watercolour Painter · Cartoonist · Bengaluru</title>
+<meta name="description" content="Naganath G S — Caricaturist, Watercolour Painter, Cartoonist & Web Designer from Karnataka, India. Commission art, shop originals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══ RESET & ROOT ═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#fff;--off:#f9f5ef;--light:#f2ebe0;--mid:#ddd4c5;--text:#18120a;--muted:#4a3f30;--soft:#8a7968;
+  --accent:#e8571f;--accent-dark:#c44318;--amber:#f5a623;--jade:#2b9d5c;--navy:#1d3557;
+  --dark:#100c06;--dark2:#1e1507;--dark3:#2a1e0f;
+  --topbar-h:42px;--nav-h:72px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 48px}
+body{padding-top:calc(var(--topbar-h) + var(--nav-h))}
+
+/* ═══ SCROLL PROGRESS ═══ */
+#scroll-prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--amber));width:0;z-index:9999;pointer-events:none;transition:width .1s linear}
+
+/* ═══ TOP BAR ═══ */
+.topbar{background:var(--dark);height:var(--topbar-h);display:flex;align-items:center;position:fixed;top:0;left:0;right:0;z-index:900;border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.topbar-left{display:flex;align-items:center;gap:24px}
+.tbitem{display:flex;align-items:center;gap:7px;font-size:.7rem;font-weight:500;letter-spacing:.03em;color:rgba(255,255,255,.5);transition:color .2s}
+.tbitem:hover{color:var(--amber)}
+.tbitem svg{width:12px;height:12px;flex-shrink:0}
+.topbar-right{display:flex;align-items:center;gap:7px}
+.tsoc{width:28px;height:28px;border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(255,255,255,.4);transition:all .2s;text-decoration:none}
+.tsoc:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.tsoc svg{width:13px;height:13px}
+
+/* ═══ MAIN NAV ═══ */
+.mainnav{position:fixed;top:var(--topbar-h);left:0;right:0;z-index:800;background:var(--white);height:var(--nav-h);border-bottom:1px solid var(--mid);transition:box-shadow .3s,background .3s}
+.mainnav.scrolled{box-shadow:0 4px 28px rgba(16,12,6,.1)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 48px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:var(--text);letter-spacing:.02em;cursor:pointer}
+.nav-logo span{color:var(--accent);letter-spacing:0;font-size:inherit;line-height:inherit}
+.nav-links{display:flex;list-style:none;align-items:center;gap:0}
+.nav-links>li{position:relative}
+.nav-links>li>a,.nav-links>li>.nlnk{display:flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:0 14px;height:var(--nav-h);border-bottom:3px solid transparent;transition:all .2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
+.nav-links>li>a:hover,.nav-links>li>.nlnk:hover,.nav-links>li>a.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-arr{font-size:.45rem;transition:transform .2s}
+.has-drop:hover .nav-arr{transform:rotate(180deg)}
+.nav-drop{position:absolute;top:100%;left:0;min-width:210px;background:var(--white);border-top:3px solid var(--accent);box-shadow:0 14px 48px rgba(16,12,6,.13);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .22s;z-index:100}
+.has-drop:hover .nav-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-drop a{display:block;font-size:.72rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:11px 18px;border-bottom:1px solid var(--light);transition:all .18s}
+.nav-drop a:last-child{border-bottom:none}
+.nav-drop a:hover{background:var(--off);color:var(--accent);padding-left:24px}
+.nav-auth{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-login{display:flex;align-items:center;gap:6px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 16px;border:1.5px solid var(--mid);background:var(--white);transition:all .22s;cursor:pointer}
+.nav-login:hover{background:var(--text);color:var(--white);border-color:var(--text)}
+.nav-login.logged-in{background:rgba(43,157,92,.08);color:var(--jade);border-color:rgba(43,157,92,.3)}
+.nav-cta{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--accent);padding:10px 22px;border:2px solid var(--accent);transition:all .2s;white-space:nowrap;display:inline-block}
+.nav-cta:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-burger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:calc(var(--topbar-h)+var(--nav-h));left:0;right:0;bottom:0;background:var(--white);overflow-y:auto;z-index:700;border-top:3px solid var(--accent)}
+.mob-menu.open{display:flex}
+.mob-menu a,.mob-menu button{font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:14px 28px;border-bottom:1px solid var(--light);transition:background .18s;background:none;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;display:block;border-top:none;border-left:none;border-right:none}
+.mob-menu a:hover,.mob-menu button:hover{background:var(--off);color:var(--accent)}
+.mob-sep{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:9px 28px 5px;background:var(--light);border-bottom:1px solid var(--mid)}
+
+/* ═══ SCROLL UP BUTTON ═══ */
+.scroll-top{position:fixed;bottom:90px;right:28px;z-index:500;width:44px;height:44px;background:var(--dark);color:var(--amber);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(10px);transition:all .3s;border:1.5px solid rgba(245,166,35,.3);font-size:.9rem}
+.scroll-top.show{opacity:1;transform:translateY(0)}
+.scroll-top:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ═══ CART FAB ═══ */
+.cart-fab{position:fixed;bottom:28px;right:28px;z-index:500;width:52px;height:52px;background:var(--accent);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 20px rgba(232,87,31,.4);transition:all .22s;cursor:pointer;border:none}
+.cart-fab:hover{background:var(--accent-dark);transform:translateY(-3px);box-shadow:0 8px 32px rgba(232,87,31,.5)}
+.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--dark);color:var(--amber);width:20px;height:20px;border-radius:50%;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--accent)}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:92px;right:80px;z-index:1100;background:var(--dark);color:var(--amber);padding:11px 18px;font-size:.8rem;font-weight:600;border-left:3px solid var(--accent);box-shadow:0 6px 24px rgba(16,12,6,.35);transform:translateX(300px);opacity:0;transition:all .3s;max-width:240px;pointer-events:none}
+.toast.show{transform:translateX(0);opacity:1}
+
+/* ═══ MODAL ═══ */
+.modal-bg{position:fixed;inset:0;z-index:1000;background:rgba(16,12,6,.8);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal-box{background:var(--white);padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;border-top:3px solid var(--accent);box-shadow:0 24px 80px rgba(16,12,6,.3)}
+.modal-close{position:absolute;top:13px;right:15px;background:none;border:none;font-size:1.15rem;cursor:pointer;color:var(--soft);transition:color .2s}
+.modal-close:hover{color:var(--accent)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;margin-bottom:20px}
+.ci-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--light)}
+.ci-name{font-size:.86rem;font-weight:500}
+.ci-qty{font-size:.74rem;color:var(--soft);margin-top:2px}
+.ci-qty button{border:1px solid var(--mid);background:none;padding:1px 7px;cursor:pointer;margin:0 3px;font-size:.8rem;transition:background .2s}
+.ci-qty button:hover{background:var(--light)}
+.ci-price{font-size:.96rem;font-weight:700;color:var(--accent)}
+.c-total{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:2px solid var(--text);margin-bottom:14px;font-weight:700}
+.c-tp{font-family:'Cormorant Garamond',serif;font-size:1.65rem;color:var(--accent)}
+.chkbtn{width:100%;padding:13px;background:var(--text);color:var(--white);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--text);cursor:pointer;transition:all .2s}
+.chkbtn:hover{background:var(--accent);border-color:var(--accent)}
+.pay-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.pm{flex:1;min-width:60px;padding:8px 4px;border:1px solid var(--mid);background:var(--off);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;font-size:.62rem;font-weight:600;transition:all .2s}
+.pm.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.pm-ic{font-size:1.1rem}
+.sec-note{display:flex;justify-content:center;gap:14px;margin-top:9px;font-size:.64rem;font-weight:600;color:var(--soft)}
+.suc-wrap{text-align:center;padding:14px 0}
+.suc-icon{font-size:2.8rem;display:block;margin-bottom:8px}
+.suc-wrap h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;margin-bottom:8px}
+.suc-wrap p{color:var(--muted);font-size:.9rem;line-height:1.7}
+.suc-id{font-size:1rem;font-weight:700;color:var(--accent);margin:10px 0}
+.fgm{margin-bottom:13px}
+.fgm label{display:block;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+.fgm input,.fgm select,.fgm textarea{width:100%;padding:10px 12px;background:var(--off);border:1px solid var(--mid);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;resize:none;color:var(--text)}
+.fgm input:focus,.fgm select:focus,.fgm textarea:focus{border-color:var(--accent)}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ═══ SCROLL REVEAL ═══ */
+.sr{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.sr.in{opacity:1;transform:none}
+.sr-left{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}
+.sr-left.in{opacity:1;transform:none}
+.sr-right{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}
+.sr-right.in{opacity:1;transform:none}
+
+/* ═══ SECTION HELPERS ═══ */
+.section-pad{padding:96px 0}
+.sec-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.12;color:var(--text);margin-bottom:16px}
+.sec-title em{font-style:italic;color:var(--accent)}
+.sec-intro{font-size:.96rem;line-height:1.88;font-weight:300;color:var(--soft);max-width:580px}
+.btn-primary{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 30px;background:var(--accent);color:var(--white);border:2px solid var(--accent);transition:all .22s}
+.btn-primary:hover{background:var(--accent-dark);border-color:var(--accent-dark);transform:translateY(-2px)}
+.btn-outline{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 30px;background:transparent;color:var(--text);border:2px solid var(--mid);transition:all .22s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.btn-outline-white{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 30px;background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.3);transition:all .22s}
+.btn-outline-white:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
+
+/* ═══ IMAGE SLOT (admin-controlled) ═══ */
+.img-slot{position:relative;overflow:hidden;background:var(--light);display:flex;align-items:center;justify-content:center}
+.img-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:none;transition:transform .5s ease}
+.img-slot.has img{display:block}
+.img-slot.has .islot-hint{display:none}
+.img-slot:hover img{transform:scale(1.04)}
+.islot-hint{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--soft);pointer-events:none;text-align:center;padding:16px}
+.islot-hint svg{width:32px;height:32px;opacity:.3}
+.islot-hint span{font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════════ */
+#hero{min-height:92vh;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-pattern{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(245,166,35,.018) 40px,rgba(245,166,35,.018) 80px);pointer-events:none}
+.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(232,87,31,.15) 0%,transparent 65%);top:-200px;right:-150px;pointer-events:none;animation:glowPulse 6s ease-in-out infinite}
+.hero-glow2{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(245,166,35,.07) 0%,transparent 60%);bottom:-300px;left:-100px;pointer-events:none}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:80px 48px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;opacity:0;animation:fadeInUp .8s .2s ease forwards}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--accent)}
+.hero-tag{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;opacity:0;animation:fadeInUp .8s .35s ease forwards}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.8vw,5.6rem);font-weight:700;line-height:1.04;color:var(--white);margin-bottom:28px;letter-spacing:-.01em;opacity:0;animation:fadeInUp .8s .5s ease forwards}
+.hero-h1 em{font-style:italic;color:var(--amber)}
+.hero-h1 .acc{color:var(--accent)}
+.hero-sub{font-size:1rem;line-height:1.85;font-weight:300;color:rgba(255,255,255,.48);margin-bottom:40px;max-width:480px;opacity:0;animation:fadeInUp .8s .65s ease forwards}
+.hero-sub strong{color:rgba(255,255,255,.75);font-weight:500}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeInUp .8s .8s ease forwards}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3;opacity:0;animation:fadeIn 1s 1.4s ease forwards}
+.hero-scroll span{font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,.28),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Hero right – artist card */
+.hero-right{display:flex;justify-content:center;align-items:center;opacity:0;animation:fadeInRight .9s .6s ease forwards}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.artist-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:34px 28px;text-align:center;position:relative;max-width:330px;width:100%}
+.artist-card::before{content:'';position:absolute;top:-3px;left:-3px;width:56px;height:56px;border-top:3px solid var(--accent);border-left:3px solid var(--accent)}
+.artist-card::after{content:'';position:absolute;bottom:-3px;right:-3px;width:56px;height:56px;border-bottom:3px solid var(--amber);border-right:3px solid var(--amber)}
+.artist-photo{width:180px;height:180px;border-radius:50%;border:3px solid rgba(245,166,35,.45);margin:0 auto 20px;position:relative;overflow:hidden;background:rgba(245,166,35,.06)}
+.artist-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:none}
+.artist-photo.has img{display:block}
+.artist-photo.has .aph-hint{display:none}
+.aph-hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:rgba(245,166,35,.45);pointer-events:none}
+.aph-hint svg{width:30px;height:30px}
+.aph-hint span{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.artist-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.artist-title{font-family:'Caveat',cursive;font-size:1.25rem;font-weight:600;letter-spacing:.03em;text-transform:none;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.7;min-height:2.8rem}
+.tw-cursor{display:inline-block;color:#e8571f;font-weight:300;animation:twBlink .7s step-end infinite}
+@keyframes twBlink{0%,100%{opacity:1}50%{opacity:0}}
+.artist-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.atag{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.22);padding:3px 9px}
+
+/* ═══════════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════════ */
+#stats-bar{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);padding:0}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);background:linear-gradient(135deg,var(--accent),var(--accent-dark))}
+.stat-item{padding:36px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.18);position:relative;overflow:hidden}
+.stat-item::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .3s}
+.stat-item:hover::before{background:rgba(255,255,255,.06)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;display:block;line-height:1;margin-bottom:6px}
+.stat-label{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+@keyframes statBounce{0%{transform:scale(1)}50%{transform:scale(1.07)}100%{transform:scale(1)}}
+.stat-num.done{animation:statBounce .4s ease-out}
+
+/* ═══════════════════════════════════════════
+   SERVICES SECTION
+═══════════════════════════════════════════ */
+#services-section{background:linear-gradient(180deg,#fff 0%,#faf6f0 100%)}
+.svc-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;gap:32px}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--mid);border:1px solid var(--mid)}
+.svc-card{background:var(--white);position:relative;overflow:hidden;transition:box-shadow .28s,z-index 0s}
+.svc-card:hover{box-shadow:0 12px 48px rgba(16,12,6,.12);z-index:2}
+.svc-img-area{aspect-ratio:1;background:var(--light);position:relative;overflow:hidden;border-bottom:1px solid var(--mid);transition:transform .4s ease}
+.svc-card:hover .svc-img-area{transform:scale(1.03)}
+.svc-img-area img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none}
+.svc-img-area.has img{display:block}
+.svc-img-area.has .svc-ph{display:none}
+.svc-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--soft);pointer-events:none}
+.svc-ph svg{width:30px;height:30px;opacity:.28}
+.svc-ph span{font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.svc-body{padding:18px 20px 22px;background:var(--white)}
+.svc-cat{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.svc-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:7px;line-height:1.22}
+.svc-desc{font-size:.8rem;line-height:1.72;color:var(--soft);margin-bottom:14px}
+.svc-foot{border-top:1px solid var(--light);padding-top:12px}
+.svc-link{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;transition:gap .18s}
+.svc-link:hover{gap:8px}
+
+/* ═══════════════════════════════════════════
+   ABOUT SECTION
+═══════════════════════════════════════════ */
+#about-section{background:linear-gradient(180deg,#f9f4ec 0%,#f2ebe0 100%)}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative}
+.about-img-frame{position:relative;border:1px solid var(--mid);overflow:visible;aspect-ratio:4/5;background:var(--light);cursor:default}
+.about-img-frame::before{content:'';position:absolute;top:16px;left:16px;right:-16px;bottom:-16px;border:2px solid var(--mid);z-index:-1}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none}
+.about-img-frame.has img{display:block}
+.about-img-frame.has .ai-hint{display:none}
+.ai-hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--soft)}
+.ai-hint svg{width:36px;height:36px;opacity:.3}
+.ai-hint span{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.about-accent{position:absolute;top:-16px;right:-16px;width:90px;height:90px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:#fff;font-style:italic;text-align:center;line-height:1.3;padding:8px;box-shadow:0 4px 18px rgba(232,87,31,.4);z-index:10}
+.about-text p{font-size:.95rem;line-height:1.9;font-weight:300;color:var(--muted);margin-bottom:16px}
+.about-text p strong{color:var(--text);font-weight:600}
+.feature-list{margin:24px 0;display:flex;flex-direction:column;gap:12px}
+.feat-item{display:flex;align-items:flex-start;gap:12px;font-size:.88rem;line-height:1.65;color:var(--muted)}
+.feat-dot{width:20px;height:20px;flex-shrink:0;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:2px}
+
+/* ═══════════════════════════════════════════
+   VIDEO SECTION
+═══════════════════════════════════════════ */
+#video-section{background:var(--dark);padding:96px 0;position:relative;overflow:hidden}
+#video-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(232,87,31,.1) 0%,transparent 65%)}
+.video-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.video-text .sec-label{color:var(--amber)}
+.video-text .sec-title{color:var(--white)}
+.video-text p{font-size:.95rem;line-height:1.88;font-weight:300;color:rgba(255,255,255,.48);margin-bottom:24px}
+.video-frame{position:relative;aspect-ratio:16/9;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.video-frame iframe{width:100%;height:100%;position:absolute;inset:0;border:none}
+.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer}
+.video-placeholder.hidden{display:none}
+.yt-play-btn{width:72px;height:72px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 6px 28px rgba(232,87,31,.5);transition:all .3s}
+.video-placeholder:hover .yt-play-btn{transform:scale(1.12);box-shadow:0 10px 40px rgba(232,87,31,.6)}
+.video-placeholder span{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.yt-embed{width:100%;height:100%;position:absolute;inset:0;border:none;display:none}
+.yt-embed.active{display:block}
+/* Admin configurable URL banner */
+.video-config-note{font-size:.7rem;color:rgba(255,255,255,.3);margin-top:10px;text-align:center;font-style:italic}
+
+/* ═══════════════════════════════════════════
+   PORTFOLIO PREVIEW
+═══════════════════════════════════════════ */
+#portfolio-preview{background:var(--white)}
+.portfolio-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:280px;gap:3px;margin-bottom:48px}
+.port-item{background:var(--light);position:relative;overflow:hidden;cursor:pointer}
+.port-item:first-child{grid-column:span 2;grid-row:span 2}
+.port-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none;transition:transform .55s ease}
+.port-item.has img{display:block}
+.port-item.has .port-hint{display:none}
+.port-item:hover img{transform:scale(1.07)}
+.port-hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--soft)}
+.port-hint svg{width:28px;height:28px;opacity:.3}
+.port-hint span{font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.port-overlay{position:absolute;inset:0;z-index:3;background:rgba(16,12,6,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;text-align:center;padding:20px;pointer-events:none}
+.port-item:hover .port-overlay{opacity:1}
+.port-overlay-cat{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.port-overlay-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.port-cta{text-align:center}
+
+/* ═══════════════════════════════════════════
+   STORE PREVIEW
+═══════════════════════════════════════════ */
+#store-preview{background:var(--off)}
+.store-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px}
+.store-preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--mid);border:1px solid var(--mid);margin-bottom:40px}
+.spc{background:var(--white);position:relative;overflow:hidden;transition:box-shadow .28s}
+.spc:hover{box-shadow:0 10px 40px rgba(16,12,6,.1);z-index:2}
+.spc-img{aspect-ratio:1;background:var(--light);position:relative;overflow:hidden;border-bottom:1px solid var(--mid)}
+.spc-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none;transition:transform .5s ease}
+.spc-img.has img{display:block}
+.spc-img.has .spc-ph{display:none}
+.spc:hover .spc-img img{transform:scale(1.06)}
+.spc-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--soft);pointer-events:none}
+.spc-ph svg{width:28px;height:28px;opacity:.28}
+.spc-ph span{font-size:.57rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.spc-body{padding:16px 18px 18px}
+.spc-cat{font-size:.57rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.spc-desc-wrap{margin-bottom:8px;position:relative}
+.spc-desc{font-size:.7rem;color:var(--muted);line-height:1.55;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;cursor:default}
+.spc-desc-popup{
+  position:absolute;bottom:calc(100% + 8px);left:0;right:0;
+  background:var(--dark);color:rgba(255,255,255,.85);
+  font-size:.72rem;line-height:1.65;padding:11px 13px;
+  box-shadow:0 8px 28px rgba(16,12,6,.25);
+  opacity:0;transform:translateY(6px);pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease;
+  z-index:50;border-left:3px solid var(--accent);
+}
+.spc-desc-wrap:hover .spc-desc-popup{opacity:1;transform:translateY(0)}
+.spc-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.2}
+.spc-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--light);padding-top:10px;margin-top:10px}
+.spc-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--accent)}
+.spc-orig{font-size:.75rem;color:var(--soft);text-decoration:line-through;margin-left:5px;vertical-align:middle}
+.spc-badge{position:absolute;top:8px;left:8px;font-size:.55rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;z-index:2}
+.spc-badge.best-seller{background:#f59e0b;color:#000}
+.spc-badge.popular{background:#ef4444;color:#fff}
+.spc-badge.hurryup{background:#7c3aed;color:#fff}
+.spc-badge.new{background:var(--accent);color:#fff}
+.spc-badge.sale{background:#22c55e;color:#fff}
+.spc-badge.ltd{background:var(--dark);color:var(--amber)}
+.spc-btn{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;background:var(--text);color:var(--white);border:none;cursor:pointer;transition:all .2s}
+.spc-btn:hover{background:var(--accent)}
+.store-cta{text-align:center}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+#testimonials-section{background:linear-gradient(180deg,#fdf8f2 0%,#f5efe3 100%)}
+.testi-header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:52px}
+.testi-track-wrap{overflow:hidden}
+.testi-track{display:flex;gap:22px;width:max-content;animation:slideLeft 38s linear infinite}
+.testi-track:hover{animation-play-state:paused}
+@keyframes slideLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tcard{width:360px;flex-shrink:0;background:var(--white);border:1px solid var(--mid);padding:28px;position:relative;transition:all .25s}
+.tcard:hover{box-shadow:0 8px 32px rgba(16,12,6,.08);transform:translateY(-3px)}
+.tcard-q{font-family:'Cormorant Garamond',serif;font-size:3.8rem;color:rgba(232,87,31,.12);line-height:.7;display:block;margin-bottom:12px}
+.tcard-text{font-size:.88rem;line-height:1.78;font-style:italic;color:var(--muted);margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-weight:400}
+.tcard-author{display:flex;align-items:center;gap:11px}
+.tcard-av{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;flex-shrink:0}
+.tcard-name{font-size:.84rem;font-weight:600;color:var(--text)}
+.tcard-role{font-size:.7rem;color:var(--soft);margin-top:1px}
+.tcard-stars{color:var(--accent);font-size:.72rem;margin-top:3px}
+
+/* ═══════════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════════ */
+#process{background:linear-gradient(135deg,var(--dark) 0%,var(--dark3) 60%,var(--dark) 100%);padding:96px 0;position:relative;overflow:hidden}
+#process::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(232,87,31,.1) 0%,transparent 55%)}
+.process-header{text-align:center;margin-bottom:72px}
+.process-eyebrow{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--amber);display:block;margin-bottom:8px}
+.process-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:700;color:var(--white);line-height:1}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;position:relative}
+.process-steps::before{content:'';position:absolute;top:27px;left:14%;right:14%;height:2px;background:linear-gradient(90deg,var(--accent),var(--amber),var(--accent));opacity:.4;z-index:0}
+.pstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 18px;position:relative;z-index:1}
+.pstep-circle{width:54px;height:54px;border-radius:50%;border:2px solid rgba(245,166,35,.5);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .35s;box-shadow:0 0 0 4px rgba(245,166,35,.06)}
+.pstep:hover .pstep-circle{transform:scale(1.15);background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 8px rgba(232,87,31,.12)}
+.pstep-icon{font-size:1.4rem}
+.pstep-num{font-family:'Caveat',cursive;font-size:1.1rem;color:var(--amber);margin-bottom:8px;display:block}
+.pstep-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.pstep-desc{font-size:.8rem;line-height:1.72;color:rgba(255,255,255,.38);max-width:200px}
+
+/* ═══════════════════════════════════════════
+   COLLABORATE
+═══════════════════════════════════════════ */
+#careers-section{background:var(--white)}
+.jobs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.job-card{border:1px solid var(--mid);padding:28px 24px;position:relative;overflow:hidden;transition:all .25s}
+.job-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background .25s}
+.job-card:hover{box-shadow:0 8px 32px rgba(16,12,6,.08);transform:translateY(-3px)}
+.job-card:hover::before{background:var(--accent)}
+.job-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:rgba(232,87,31,.08);padding:3px 9px;display:inline-block;margin-bottom:14px}
+.job-title{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:700;color:var(--text);margin-bottom:12px}
+.job-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.job-list li{font-size:.8rem;line-height:1.55;color:var(--muted);display:flex;align-items:flex-start;gap:7px}
+.job-list li::before{content:'·';color:var(--accent);font-size:1.1rem;line-height:1;flex-shrink:0}
+.job-link{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:5px;transition:gap .2s}
+.job-link:hover{gap:9px}
+.job-link::after{content:'→'}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact-section{background:linear-gradient(180deg,#f9f4ec 0%,#f2ebe0 100%)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info .sec-title{margin-bottom:14px}
+.contact-info>p{font-size:.94rem;line-height:1.88;font-weight:300;color:var(--muted);margin-bottom:28px}
+.c-items{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.c-item{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--white);border:1px solid var(--mid);text-decoration:none;color:var(--text);transition:all .22s}
+.c-item:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateX(4px)}
+.c-item:hover .c-item-label{color:rgba(255,255,255,.6)}
+.c-item-icon{font-size:1rem;flex-shrink:0}
+.c-item-label{font-size:.56rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.c-item-val{font-size:.85rem;font-weight:500}
+.c-socials{display:flex;gap:8px;margin-top:4px}
+.csoc{width:38px;height:38px;border:1px solid var(--mid);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;text-decoration:none;font-size:.72rem}
+.csoc:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.csoc svg{width:16px;height:16px}
+.contact-form-box{background:var(--white);border:1px solid var(--mid);padding:40px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 13px;background:var(--off);border:1px solid var(--mid);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;resize:none;appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);background:var(--white)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--soft)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.form-submit{width:100%;padding:14px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:.73rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--accent);cursor:pointer;transition:all .22s;margin-top:6px}
+.form-submit:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.form-msg{font-size:.78rem;margin-top:10px;padding:9px 12px;display:none}
+.form-msg.ok{background:#f0fdf4;border-left:3px solid #22c55e;color:#15803d}
+.form-msg.err{background:#fef2f2;border-left:3px solid #ef4444;color:#b91c1c}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:var(--dark);padding:70px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:50px}
+.f-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:var(--white);display:block;margin-bottom:12px}
+.f-brand-name span{color:var(--amber);font-style:italic}
+.f-brand-desc{font-size:.82rem;line-height:1.78;font-weight:300;color:rgba(255,255,255,.32);margin-bottom:20px}
+.f-socials{display:flex;gap:7px;flex-wrap:wrap}
+.f-soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);transition:all .2s;text-decoration:none;flex-shrink:0}
+.f-soc:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.f-soc svg{width:15px;height:15px}
+.f-col-title{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07)}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-col ul a,.f-col ul button{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.3);transition:color .2s;display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;padding:0}
+.f-col ul a::before,.f-col ul button::before{content:'—';font-size:.58rem;color:var(--accent);opacity:.55}
+.f-col ul a:hover,.f-col ul button:hover{color:var(--amber)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding:22px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.74rem;font-weight:300;color:rgba(255,255,255,.2)}
+.footer-bottom a{color:var(--amber)}
+.footer-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(255,255,255,.16)}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1100px){
+  .topbar{display:none}
+  body{padding-top:var(--nav-h)}
+  .mainnav{top:0}
+  .hero-inner{grid-template-columns:1fr;gap:32px;padding:60px 28px}
+  .hero-right{display:flex}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .about-wrap,.video-inner,.contact-wrap,.testi-header{grid-template-columns:1fr;gap:44px}
+  .store-preview-grid{grid-template-columns:repeat(2,1fr)}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .portfolio-grid .port-item:first-child{grid-column:span 2;grid-row:span 1}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .jobs-grid{grid-template-columns:1fr 1fr}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .process-steps{grid-template-columns:1fr 1fr;gap:44px}
+  .process-steps::before{display:none}
+  .svc-header{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:768px){
+  .container{padding:0 20px}
+  .nav-inner{padding:0 20px}
+  .nav-links{display:none}
+  .nav-auth{display:none}
+  .nav-burger{display:flex}
+  .section-pad{padding:64px 0}
+  .services-grid{grid-template-columns:1fr}
+  .store-preview-grid{grid-template-columns:1fr 1fr}
+  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-grid .port-item:first-child{grid-column:span 1}
+  .footer-grid{grid-template-columns:1fr}
+  .jobs-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  .portfolio-header,.store-header{flex-direction:column;align-items:flex-start}
+  .process-steps{grid-template-columns:1fr 1fr}
+  /* Hero image above text on mobile */
+  .hero-inner{display:flex;flex-direction:column}
+  .hero-right{order:-1;margin-bottom:8px}
+  .hero-left{order:1}
+  .artist-card{padding:24px 20px}
+  .artist-photo{width:120px;height:120px}
+}
+@media(max-width:480px){
+  .store-preview-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr}
+  .artist-photo{width:100px;height:100px}
+  .artist-card{padding:20px 16px}
+  .artist-name{font-size:.95rem}
+}
+
+/* ── ANNOUNCEMENT POPUP ── */
+#annPopupOverlay{
+  position:fixed;inset:0;background:rgba(10,7,3,.88);z-index:9999;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;animation:annFadeIn .5s .3s ease forwards;
+}
+@keyframes annFadeIn{to{opacity:1}}
+#annPopupBox{
+  position:relative;max-width:540px;width:100%;
+  animation:annSlideUp .5s .3s ease both;
+}
+@keyframes annSlideUp{from{transform:translateY(32px);opacity:0}to{transform:translateY(0);opacity:1}}
+#annPopupBox img{width:100%;max-height:70vh;object-fit:contain;display:block;border:3px solid rgba(232,87,31,.4)}
+#annPopupBox video{width:100%;max-height:70vh;display:block;border:3px solid rgba(232,87,31,.4)}
+#annPopupTitle{
+  background:linear-gradient(135deg,var(--dark) 0%,#2a1a0a 100%);
+  color:rgba(255,255,255,.85);font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;padding:12px 18px;border-top:2px solid var(--accent);
+  text-align:center;display:none;
+}
+#annPopupClose{
+  position:absolute;top:-14px;right:-14px;width:34px;height:34px;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:1rem;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;box-shadow:0 4px 12px rgba(232,87,31,.5);
+  transition:background .2s;z-index:1;
+}
+#annPopupClose:hover{background:var(--accent-dark)}
+</style>
+<style>
+/* ── INVOICE ── */
+#billModal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+#billModal.on{display:flex}
+#billBox{background:#fff;width:100%;max-width:620px;font-family:'DM Sans',sans-serif;color:#1a1208;margin:auto;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bh{background:#1a1208;color:#fff;padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.bh-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.bh-studio{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.bh-studio span{color:#f5a623}
+.bh-oid{font-size:.88rem;font-weight:700;color:#f5a623;margin-top:2px;word-break:break-all}
+.bb{padding:24px 28px}
+.bm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:2px solid #f0ebe4}
+.bl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.bv{font-size:.88rem;font-weight:600;color:#1a1208;line-height:1.5}
+.bs{font-size:.78rem;color:#8a7968;line-height:1.6}
+.ba-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #f0ebe4}
+.bit-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:10px}
+.bit{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f9f5ef}
+.bit-img{width:54px;height:54px;object-fit:cover;flex-shrink:0;border-radius:2px;background:#f0ebe4}
+.bit-ph{width:54px;height:54px;flex-shrink:0;background:#f0ebe4;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.bit-info{flex:1;min-width:0}
+.bit-name{font-size:.9rem;font-weight:600;margin-bottom:2px}
+.bit-meta{font-size:.72rem;color:#8a7968}
+.bit-price{font-size:1rem;font-weight:700;color:#e8571f;white-space:nowrap}
+.bt-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:2px solid #1a1208}
+.bt-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bt-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#e8571f}
+.bst{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.bst.confirmed,.bst.completed{background:#dcfce7;color:#166534}
+.bst.shipped{background:#dbeafe;color:#1e40af}
+.bst.processing{background:#fef3c7;color:#92400e}
+.bst.pending{background:#fef9c3;color:#854d0e}
+.bst.cancelled{background:#fee2e2;color:#991b1b}
+.bf{background:#f9f5ef;padding:14px 28px;font-size:.7rem;color:#8a7968;text-align:center;line-height:1.9;border-top:1px solid #e0d8cd}
+.bac{display:flex;gap:8px;padding:14px 28px;border-top:1px solid #e0d8cd;background:#fff;flex-wrap:wrap}
+.bab{flex:1;min-width:70px;padding:10px 8px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.bab-print{background:#1a1208;color:#fff}.bab-print:hover{background:#2d2218}
+.bab-pdf{background:#e8571f;color:#fff}.bab-pdf:hover{background:#c44318}
+.bab-home{background:#f5a623;color:#1a1208}.bab-home:hover{background:#e8941a}
+.bab-close{background:transparent;border:1.5px solid #e0d8cd;color:#8a7968}.bab-close:hover{border-color:#e8571f;color:#e8571f}
+@media print{body>*{display:none!important}#billModal{display:block!important;position:static!important;background:none!important;padding:0!important;overflow:visible!important}#billBox{box-shadow:none!important;max-width:100%!important}.bac{display:none!important}}
+
+#ixAddrModal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+#ixAddrModal.show{display:flex}
+.ix-box{background:#fff;max-width:460px;width:100%;padding:28px 24px;border-top:3px solid #e8571f;max-height:90vh;overflow-y:auto}
+.ix-title{font-size:1.1rem;font-weight:700;color:#1a1208;margin-bottom:8px}
+.ix-sub{font-size:.78rem;color:#8a7968;line-height:1.6;margin-bottom:14px}
+.ix-profile-card{background:#f9f5ef;border-left:3px solid #e8571f;padding:12px 16px;margin-bottom:18px}
+.ix-profile-card .pn{font-weight:700;font-size:.92rem;color:#1a1208;margin-bottom:3px}
+.ix-profile-card .pd{font-size:.8rem;color:#8a7968}
+.ix-field{margin-bottom:11px}
+.ix-field label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.ix-field input{width:100%;padding:9px 12px;border:1.5px solid #e0d8cd;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1a1208;outline:none;box-sizing:border-box;transition:border-color .2s}
+.ix-field input:focus{border-color:#e8571f}
+.ix-field input.ix-err{border-color:#ef4444}
+.ix-err-txt{color:#ef4444;font-size:.7rem;margin-top:3px;display:none}
+.ix-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ix-btn-primary{width:100%;padding:11px;background:#e8571f;color:#fff;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;margin-bottom:8px}
+.ix-btn-primary:hover{background:#c44318}
+.ix-btn-outline{width:100%;padding:11px;background:transparent;color:#8a7968;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid #e0d8cd;cursor:pointer;margin-bottom:8px}
+.ix-btn-outline:hover{border-color:#e8571f;color:#e8571f}
+.ix-cancel{display:block;text-align:center;font-size:.72rem;color:#8a7968;cursor:pointer;text-decoration:underline;background:none;border:none;margin-top:4px}
+</style>
+<script>
+/* Firebase config — declared FIRST so all scripts below can access it */
+window.SITE_FB_CFG = {
+  apiKey:            "AIzaSyAGj0TwlqEvKzGSBo8RUqD4UKY-4aCH36s",
+  authDomain:        "naganathgs.firebaseapp.com",
+  projectId:         "naganathgs",
+  storageBucket:     "naganathgs.firebasestorage.app",
+  messagingSenderId: "775331975442",
+  appId:             "1:775331975442:web:878df8b7d8e249a2b0e3cb"
+};
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script>
+  function loadSiteDataFromFirestore(cb){
+    try{
+      /* Get Firebase config — localStorage first (admin), then hardcoded SITE_FB_CFG */
+      var cfg = window.SITE_FB_CFG || null;
+      try{
+        var _ls = localStorage.getItem('ng_fb');
+        if(_ls){ var _lp = JSON.parse(_ls); if(_lp && _lp.apiKey) cfg = _lp; }
+      }catch(e){}
+      if(!cfg || !cfg.apiKey){ if(cb) cb(); return; }
+
+      var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(cfg);
+      var db  = firebase.firestore();
+      var map = {
+        'store_images'    : 'ng_store_images',
+        'portfolio_images': 'ng_portfolio_images',
+        'images'          : 'ng_images',
+        'reviews'         : 'ng_reviews',
+        'sitedata'        : 'ng_sitedata',
+        'video'           : 'ng_video',
+        'socials'         : 'ng_socials',
+        'announcement'    : 'ng_announcement',
+        'email_config'    : 'ng_email',
+        'payment_config'  : 'ng_payment'
+      };
+      var docs = Object.keys(map), done = 0, total = docs.length, cbFired = false;
+      docs.forEach(function(doc){
+        db.collection('site_config').doc(doc).onSnapshot(function(snap){
+          if(snap.exists && snap.data() && snap.data().value !== undefined){
+            try{ localStorage.setItem(map[doc], JSON.stringify(snap.data().value)); }catch(e){}
+            var val = snap.data().value;
+            var key = map[doc];
+            /* Store in window globals — always accessible, no localStorage needed */
+            if(key==='ng_sitedata')         window._siteData    = val;
+            if(key==='ng_images')           window._imagesData  = val;
+            if(key==='ng_reviews')          window._reviewsData = val;
+            if(key==='ng_socials')          window._socialsData = val;
+            if(key==='ng_video')            window._videoData   = val;
+            if(key==='ng_announcement')     window._annData     = val;
+            if(key==='ng_store_images')     window._storeData   = val;
+            if(key==='ng_portfolio_images') window._portData    = val;
+            if(key==='ng_email')            window._emailCfg    = val;
+            if(key==='ng_payment')          window._payCfg      = val;
+            if(key === 'ng_store_images'){
+              /* Pass data directly to bypass localStorage (Edge tracking prevention) */
+              if(typeof loadStorePreview === 'function') loadStorePreview(val);
+            }
+            if(key === 'ng_portfolio_images'){
+              if(typeof loadPortfolioPreview === 'function') loadPortfolioPreview(val);
+            }
+            if(key === 'ng_images'        && typeof loadImages       === 'function') loadImages(val);
+            if(key === 'ng_email'){ window._emailCfg=val; if(val&&val.publicKey&&window.emailjs){try{emailjs.init(val.publicKey);window._ejsReady=true;}catch(e){}} }
+            if(key === 'ng_payment'){ window._payCfg=val; }
+            if(key === 'ng_reviews'       && typeof loadTestimonials === 'function') loadTestimonials(val);
+            if(key === 'ng_sitedata'      && typeof loadSiteData     === 'function') loadSiteData(val);
+            if(key === 'ng_video'         && typeof loadVideo        === 'function') loadVideo(val);
+            if(key === 'ng_socials'       && typeof loadSocials      === 'function') loadSocials(val);
+            if(key === 'ng_announcement'  && typeof initAnnouncement === 'function') initAnnouncement(val);
+          }
+          if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+        }, function(){
+          /* Permission error fallback: one-time .get() */
+          db.collection('site_config').doc(doc).get()
+            .then(function(snap){
+              if(snap.exists && snap.data() && snap.data().value !== undefined)
+                localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            }).catch(function(){}).finally(function(){
+              if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
+            });
+        });
+      });
+    }catch(e){ console.warn('Firestore error:', e); if(cb) cb(); }
+  }
+  </script>
+</head>
+<body>
+
+<div id="scroll-prog"></div>
+<div class="toast" id="toast"></div>
+
+<!-- SCROLL UP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Scroll to top">↑</button>
+
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="openCart()">
+  🛒<span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<!-- CART MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCart()">✕</button>
+    <div id="vCart">
+      <div class="modal-title">Your Cart</div>
+      <div id="cartItemsEl"><p style="text-align:center;padding:22px 0;color:var(--soft);font-size:.9rem">Your cart is empty</p></div>
+      <div id="cartTotalRow" style="display:none">
+        <div class="c-total"><span>Total</span><span class="c-tp" id="cartTotalEl">₹0</span></div>
+        <button class="chkbtn" onclick="checkLoginForCheckout()">Proceed to Payment →</button>
+      </div>
+    </div>
+    <div id="vCheck" style="display:none">
+      <div class="modal-title">Checkout</div>
+      <div class="frow2"><div class="fgm"><label>Full Name</label><input type="text" id="ck-name" placeholder="Your Name"></div><div class="fgm"><label>Email</label><input type="email" id="ck-email" placeholder="you@email.com"></div></div>
+      <div class="fgm"><label>Phone</label><input type="tel" id="ck-phone" placeholder="+91 98765 43210"></div>
+      <div class="fgm"><label>Delivery Address</label><textarea rows="2" id="ck-addr" placeholder="Street, City, PIN"></textarea></div>
+      <div class="fgm"><label>Payment Method</label>
+        <div class="pay-row">
+          <button class="pm sel" onclick="selP(this,'upi')"><span class="pm-ic">📱</span>UPI</button>
+          <button class="pm" onclick="selP(this,'card')"><span class="pm-ic">💳</span>Card</button>
+          <button class="pm" onclick="selP(this,'nb')"><span class="pm-ic">🏦</span>NetBank</button>
+          <button class="pm" onclick="selP(this,'wallet')"><span class="pm-ic">👛</span>Wallet</button>
+        </div>
+      </div>
+      <div id="upiF" class="fgm"><label>UPI ID</label><input type="text" placeholder="you@upi"></div>
+      <div id="sumEl" style="padding:11px;background:var(--off);border:1px solid var(--mid);margin-bottom:12px"></div>
+      <button class="chkbtn" onclick="doPay()" id="payBtn">Pay Now 🔒</button>
+      <div class="sec-note"><span>🔒 SSL Secured</span><span>✓ 100% Safe</span></div>
+    </div>
+    <div id="vSuccess" style="display:none">
+      <div class="suc-wrap">
+        <span class="suc-icon">🎉</span>
+        <h3>Order Confirmed!</h3>
+        <p>Naganath will craft your artwork with care and ship it to you across India.</p>
+        <div class="suc-id" id="orderId">Order #NG-00000</div>
+        <button class="chkbtn" style="margin-top:18px" onclick="closeCart()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN PROMPT MODAL -->
+<div class="modal-bg" id="loginPromptModal">
+  <div class="modal-box" style="max-width:400px;text-align:center">
+    <button class="modal-close" onclick="document.getElementById('loginPromptModal').classList.remove('open')">✕</button>
+    <div style="font-size:2.5rem;margin-bottom:12px">🔑</div>
+    <div class="modal-title" style="margin-bottom:12px">Sign In Required</div>
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:24px;line-height:1.7">Please sign in to proceed with your purchase. Your cart items will be saved.</p>
+    <a href="auth.html" class="btn-primary" style="display:block;text-align:center;text-decoration:none">Sign In / Create Account →</a>
+    <button onclick="document.getElementById('loginPromptModal').classList.remove('open')" style="width:100%;margin-top:10px;padding:10px;background:none;border:1.5px solid var(--mid);cursor:pointer;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:all .2s">Continue Browsing</button>
+  </div>
+</div>
+
+<!-- ════════════════════ TOP BAR ════════════════════ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="tel:" class="tbitem" id="topPhone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span id="topPhoneText">+91 98765 43210</span>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#2b" class="tbitem" id="topEmail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span id="topEmailText"><span class="__cf_email__" data-cfemail="6a040b0d0b040b1e022a0b181e44090507">[email&#160;protected]</span></span>
+      </a>
+    </div>
+    <div class="topbar-right">
+      <!-- Social icons set from admin -->
+      <a id="social-youtube" href="#" target="_blank" class="tsoc" title="YouTube" style="display:none">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a id="social-instagram" href="#" target="_blank" class="tsoc" title="Instagram" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a id="social-facebook" href="#" target="_blank" class="tsoc" title="Facebook" style="display:none">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+      </a>
+      <a id="social-linkedin" href="#" target="_blank" class="tsoc" title="LinkedIn" style="display:none">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ MAIN NAV ════════════════════ -->
+<nav class="mainnav" id="mainNav">
+  <div class="nav-inner">
+    <span class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">Naga<span>N</span>ath G S</span>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="#about-section" onclick="navScroll(event,'about-section')">About</a></li>
+      <li><a href="#services-section" onclick="navScroll(event,'services-section')">Services</a></li>
+      <li><a href="#portfolio-preview" onclick="navScroll(event,'portfolio-preview')">Portfolio</a></li>
+      <li><a href="#store-preview" onclick="navScroll(event,'store-preview')">Store</a></li>
+      <li><a href="academy.html">Academy</a></li>
+      <li><a href="#contact-section" onclick="navScroll(event,'contact-section')">Contact</a></li>
+    </ul>
+    <div class="nav-auth">
+      <a href="auth.html" id="navAuthBtn" class="nav-login">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+        Login
+      </a>
+      <a href="#contact-section" class="nav-cta" onclick="navScroll(event,'contact-section')">Get In Touch</a>
+    </div>
+    <div class="nav-burger" id="navBurger" onclick="toggleMob()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="#about-section" onclick="mobScroll('about-section')">About</a>
+  <a href="#services-section" onclick="mobScroll('services-section')">Services</a>
+  <div class="mob-sep">Explore</div>
+  <a href="#portfolio-preview" onclick="mobScroll('portfolio-preview')">Portfolio</a>
+  <a href="#store-preview" onclick="mobScroll('store-preview')">Art Store</a>
+  <a href="academy.html" onclick="closeMob()">Academy</a>
+  <a href="#contact-section" onclick="mobScroll('contact-section')">Contact</a>
+  <div class="mob-sep">Account</div>
+  <a href="auth.html" onclick="closeMob()" id="mobAuthBtn">🔑 Sign In / Sign Up</a>
+  <a href="admin.html" onclick="closeMob()" style="color:rgba(232,87,31,.8)">🛠 Admin Panel</a>
+</div>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Based in Karnataka, India</div>
+      <p class="hero-tag" id="heroTag"><span id="typewriterHero"></span><span class="tw-cursor" id="twCursorHero">|</span></p>
+      <h1 class="hero-h1">
+        A Full-Service<br>
+        <em>Creative Artist</em><br>
+        &amp; <span class="acc">Designer</span>
+      </h1>
+      <p class="hero-sub">
+        From live caricatures to watercolour portraits, comic strips to complete websites — as individual creative services or a holistic creative plan. <strong>All art, under one roof.</strong>
+      </p>
+      <div class="hero-btns">
+        <a href="#about-section" class="btn-primary" onclick="navScroll(event,'about-section')">Explore My Work</a>
+        <a href="#store-preview" class="btn-outline-white" onclick="navScroll(event,'store-preview')">Shop Art</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="artist-card">
+        <div class="artist-photo" id="heroArtistPhoto">
+          <img id="heroArtistImg" src="" alt="Naganath G S">
+          <div class="aph-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+            <span>Add Photo</span>
+          </div>
+        </div>
+        <div class="artist-name">Naganath G S</div>
+        <div class="artist-title"><span id="typewriter"></span><span class="tw-cursor">|</span></div>
+        <div class="artist-tags">
+          <span class="atag">Live Art</span>
+          <span class="atag">Portraits</span>
+          <span class="atag">Comics</span>
+          <span class="atag">Web Dev</span>
+          <span class="atag">Karnataka</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ════════════════════ STATS BAR ════════════════════ -->
+<section id="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item sr">
+      <span class="stat-num" data-target="500" id="stat0">0</span>
+      <span class="stat-label">Happy Clients</span>
+    </div>
+    <div class="stat-item sr" style="transition-delay:.1s">
+      <span class="stat-num" data-target="1200" id="stat1">0</span>
+      <span class="stat-label">Artworks Created</span>
+    </div>
+    <div class="stat-item sr" style="transition-delay:.2s">
+      <span class="stat-num" data-target="12" id="stat2">0</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-item sr" style="transition-delay:.3s">
+      <span class="stat-num" data-target="50" id="stat3">0</span>
+      <span class="stat-label">Events Covered</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<section id="services-section" class="section-pad">
+  <div class="container">
+    <div class="svc-header">
+      <div>
+        <span class="sec-label sr">What I Do</span>
+        <h2 class="sec-title sr">Place Your <em>Art</em> in<br>Expert Hands</h2>
+        <p class="sec-intro sr">From a single illustration to a full brand identity — every service crafted with care.</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <!-- Service cards — images managed from admin -->
+      <div class="svc-card sr">
+        <div class="svc-img-area" id="svc-area-0"><img id="svc-img-0" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#e8571f">Art Service</div><div class="svc-title">Live Caricatures</div><p class="svc-desc">Weddings, birthdays, corporate events, team outings, college fests — live on-the-spot drawing.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#e8571f">Book Now →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.08s">
+        <div class="svc-img-area" id="svc-area-1"><img id="svc-img-1" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#1d7ec2">Digital Art</div><div class="svc-title">Digital Illustration</div><p class="svc-desc">HD digital caricatures, custom portraits, brand mascots, profile pictures, gift art.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#1d7ec2">Order Now →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.16s">
+        <div class="svc-img-area" id="svc-area-2"><img id="svc-img-2" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#2b9d5c">Watercolour</div><div class="svc-title">Watercolour Portraits</div><p class="svc-desc">Handcrafted watercolour paintings — family portraits, pets, landscapes, custom gifts.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#2b9d5c">Commission →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.24s">
+        <div class="svc-img-area" id="svc-area-3"><img id="svc-img-3" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#d62839">Wedding Art</div><div class="svc-title">Wedding Caricatures</div><p class="svc-desc">Make your special day unforgettable — live caricature booth for wedding guests.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#d62839">Plan Now →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.1s">
+        <div class="svc-img-area" id="svc-area-4"><img id="svc-img-4" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#9b59b6">Comics</div><div class="svc-title">Comic Strips</div><p class="svc-desc">Original comic strips, storyboards, illustrated narratives for print or digital.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#9b59b6">Enquire →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.18s">
+        <div class="svc-img-area" id="svc-area-5"><img id="svc-img-5" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#f5a623">Brand Mascots</div><div class="svc-title">Brand Mascots & Logos</div><p class="svc-desc">Custom brand characters, mascots, illustrated logos that make your brand memorable.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#f5a623">Get Quote →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.26s">
+        <div class="svc-img-area" id="svc-area-6"><img id="svc-img-6" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#1d3557">Web Design</div><div class="svc-title">Web Design</div><p class="svc-desc">Beautiful, responsive websites that combine art with functionality for artists and businesses.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#1d3557">Discuss →</a></div></div>
+      </div>
+      <div class="svc-card sr" style="transition-delay:.34s">
+        <div class="svc-img-area" id="svc-area-7"><img id="svc-img-7" src="" alt=""><div class="svc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Via Admin</span></div></div>
+        <div class="svc-body"><div class="svc-cat" style="color:#e8571f">Event Coverage</div><div class="svc-title">Event Art Coverage</div><p class="svc-desc">On-site live sketching at corporate events, product launches, exhibitions, fests.</p><div class="svc-foot"><a href="#contact-section" onclick="navScroll(event,'contact-section')" class="svc-link" style="color:#e8571f">Book Event →</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<section id="about-section" class="section-pad">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-visual sr-left">
+        <div class="about-img-frame" id="aboutImgFrame">
+          <img id="aboutImg" src="" alt="Naganath G S - Artist">
+          <div class="ai-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Set from Admin Panel</span>
+          </div>
+        </div>
+        <div class="about-accent">Since<br>2012</div>
+      </div>
+      <div class="about-text sr-right">
+        <span class="sec-label">About the Artist</span>
+        <h2 class="sec-title">The Creative Mind<br>Behind the <em>Brush</em></h2>
+        <p>Hi, I'm <strong>Naganath G S</strong> — a caricaturist, watercolour painter, cartoonist and web designer based in Karnataka, India. With over a decade of experience, I've dedicated my life to the craft of visual storytelling.</p>
+        <p>My work spans live event caricatures, detailed watercolour portraits, editorial cartoons, brand identities, comic strips and modern web design. <strong>Every project is treated as a unique creative challenge.</strong></p>
+        <div class="feature-list">
+          <div class="feat-item"><div class="feat-dot">✓</div>Live caricaturist for weddings, events &amp; corporate</div>
+          <div class="feat-item"><div class="feat-dot">✓</div>Handcrafted watercolour portraits — pets, people, places</div>
+          <div class="feat-item"><div class="feat-dot">✓</div>Original comic strips, storyboards &amp; editorial cartoons</div>
+          <div class="feat-item"><div class="feat-dot">✓</div>Full-stack web design with artistic sensibility</div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px">
+          <a href="#contact-section" class="btn-primary" onclick="navScroll(event,'contact-section')">Commission Artwork</a>
+          <a href="portfolio.html" class="btn-outline">View Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ VIDEO SECTION ════════════════════ -->
+<section id="video-section" class="section-pad">
+  <div class="container">
+    <div class="video-inner">
+      <div class="video-text sr-left">
+        <span class="sec-label">Watch the Craft</span>
+        <h2 class="sec-title" style="color:var(--white)">See Naganath's<br><em>Workmanship</em></h2>
+        <p>Watch how raw pencil lines transform into expressive caricatures, and blank paper becomes vibrant watercolour art. Naganath's process is as captivating as the finished artwork.</p>
+        <a href="#contact-section" class="btn-primary" onclick="navScroll(event,'contact-section')">Commission Your Art →</a>
+        <div class="video-config-note" id="videoConfigNote">Configure YouTube URL in Admin Panel</div>
+      </div>
+      <div class="sr-right">
+        <div class="video-frame" id="videoFrame">
+          <div class="video-placeholder" id="videoPlaceholder" onclick="playYouTube()">
+            <div class="yt-play-btn">▶</div>
+            <span>Watch the Artist at Work</span>
+          </div>
+          <iframe id="ytEmbed" class="yt-embed" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PORTFOLIO PREVIEW ════════════════════ -->
+<section id="portfolio-preview" class="section-pad">
+  <div class="container">
+    <div class="portfolio-header">
+      <div>
+        <span class="sec-label sr">Selected Works</span>
+        <h2 class="sec-title sr">The Art That<br>Speaks for <em>Itself</em></h2>
+      </div>
+      <a href="portfolio.html" class="btn-outline sr">View All Works →</a>
+    </div>
+    <div class="portfolio-grid">
+      <!-- Portfolio images managed from admin -->
+      <div class="port-item" id="port-0"><img id="port-img-0" src="" alt=""><div class="port-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Featured Work</span></div><div class="port-overlay"><div class="port-overlay-cat">Caricature</div><div class="port-overlay-title">Featured Artwork</div></div></div>
+      <div class="port-item" id="port-1"><img id="port-img-1" src="" alt=""><div class="port-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Portfolio</span></div><div class="port-overlay"><div class="port-overlay-cat">Watercolour</div><div class="port-overlay-title">Portrait Series</div></div></div>
+      <div class="port-item" id="port-2"><img id="port-img-2" src="" alt=""><div class="port-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Portfolio</span></div><div class="port-overlay"><div class="port-overlay-cat">Comics</div><div class="port-overlay-title">Comic Strip</div></div></div>
+      <div class="port-item" id="port-3"><img id="port-img-3" src="" alt=""><div class="port-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Portfolio</span></div><div class="port-overlay"><div class="port-overlay-cat">Live Art</div><div class="port-overlay-title">Event Caricature</div></div></div>
+      <div class="port-item" id="port-4"><img id="port-img-4" src="" alt=""><div class="port-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Portfolio</span></div><div class="port-overlay"><div class="port-overlay-cat">Illustration</div><div class="port-overlay-title">Custom Work</div></div></div>
+    </div>
+    <div class="port-cta sr">
+      <a href="portfolio.html" class="btn-primary">Explore Full Portfolio →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ STORE PREVIEW ════════════════════ -->
+<section id="store-preview" class="section-pad">
+  <div class="container">
+    <div class="store-header">
+      <div>
+        <span class="sec-label sr">Art Store</span>
+        <h2 class="sec-title sr">Own a Piece of<br><em>Original Art</em></h2>
+        <p class="sec-intro sr">Watercolours, art prints, sticker packs and custom commissions — ready to ship across India.</p>
+      </div>
+      <a href="store.html" class="btn-outline sr">Visit Full Store →</a>
+    </div>
+    <div class="store-preview-grid" id="storePreviewGrid"></div>
+    <div class="store-cta sr">
+      <a href="store.html" class="btn-primary">Shop All Artworks →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TESTIMONIALS ════════════════════ -->
+<section id="testimonials-section" class="section-pad">
+  <div class="container">
+    <div class="testi-header">
+      <div class="sr-left">
+        <span class="sec-label">Client Reviews</span>
+        <h2 class="sec-title">What Clients<br>Are <em>Saying</em></h2>
+      </div>
+      <div class="sr-right">
+        <p class="sec-intro">Real words from real people — the best measure of creative quality.</p>
+      </div>
+    </div>
+  </div>
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testiTrack">
+      <!-- Testimonials populated from admin/localStorage -->
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROCESS ════════════════════ -->
+<section id="process">
+  <div class="container">
+    <div class="process-header">
+      <span class="process-eyebrow">The Creative Journey</span>
+      <h2 class="process-title">How I <em style="color:var(--amber)">Work</em></h2>
+      <div style="width:48px;height:4px;background:linear-gradient(90deg,var(--accent),var(--amber));margin:16px auto 0;display:block"></div>
+    </div>
+    <div class="process-steps">
+      <div class="pstep sr"><div class="pstep-circle"><span class="pstep-icon">💬</span></div><span class="pstep-num">01</span><div class="pstep-title">Consultation</div><p class="pstep-desc">We discuss your vision, requirements, timeline and budget to craft the perfect brief.</p></div>
+      <div class="pstep sr" style="transition-delay:.1s"><div class="pstep-circle"><span class="pstep-icon">✏️</span></div><span class="pstep-num">02</span><div class="pstep-title">Sketching</div><p class="pstep-desc">Initial sketches and concepts developed — your feedback shapes the direction.</p></div>
+      <div class="pstep sr" style="transition-delay:.2s"><div class="pstep-circle"><span class="pstep-icon">🎨</span></div><span class="pstep-num">03</span><div class="pstep-title">Creation</div><p class="pstep-desc">The artwork comes to life with layers of colour, detail and personality.</p></div>
+      <div class="pstep sr" style="transition-delay:.3s"><div class="pstep-circle"><span class="pstep-icon">📦</span></div><span class="pstep-num">04</span><div class="pstep-title">Delivery</div><p class="pstep-desc">Digital files delivered or physical artwork shipped anywhere in India with care.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ COLLABORATE ════════════════════ -->
+<section id="careers-section" class="section-pad">
+  <div class="container">
+    <span class="sec-label sr">Collaborate</span>
+    <h2 class="sec-title sr" style="margin-bottom:12px">Let's <em>Work</em> Together</h2>
+    <p class="sec-intro sr" style="margin-bottom:52px">Whether you need live art at your event, a custom portrait or a complete brand — I'm here for it.</p>
+    <div class="jobs-grid">
+      <div class="job-card sr"><span class="job-tag">Events</span><div class="job-title">Live Art at Your Event</div><ul class="job-list"><li>Weddings, birthdays, corporate parties</li><li>On-site caricature drawing for guests</li><li>Framed prints as instant souvenirs</li></ul><a href="#contact-section" class="job-link" onclick="navScroll(event,'contact-section')">Book for Event</a></div>
+      <div class="job-card sr" style="transition-delay:.1s"><span class="job-tag">Custom Art</span><div class="job-title">Custom Commission</div><ul class="job-list"><li>Watercolour family portraits</li><li>Pet portraits and caricatures</li><li>Digital gift art for loved ones</li></ul><a href="#contact-section" class="job-link" onclick="navScroll(event,'contact-section')">Commission Now</a></div>
+      <div class="job-card sr" style="transition-delay:.2s"><span class="job-tag">Business</span><div class="job-title">Brand & Web Design</div><ul class="job-list"><li>Brand mascots and illustrated logos</li><li>Complete website design</li><li>Social media illustrations</li></ul><a href="#contact-section" class="job-link" onclick="navScroll(event,'contact-section')">Get a Quote</a></div>
+      <div class="job-card sr" style="transition-delay:.3s"><span class="job-tag">Digital Illustration</span><div class="job-title">Digital Illustration</div><ul class="job-list"><li>Cartoons &amp; comic characters</li><li>Book cover page designs</li><li>Hotel interior cartoons</li></ul><a href="#contact-section" class="job-link" onclick="navScroll(event,'contact-section')">Enquire Now</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<section id="contact-section" class="section-pad">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info sr-left">
+        <span class="sec-label">Get In Touch</span>
+        <h2 class="sec-title">Let's Create<br>Something <em>Beautiful</em></h2>
+        <p>Have a project in mind, need a quote, or just want to say hello? I'd love to hear from you. Based in Karnataka, serving clients across India.</p>
+        <div class="c-items">
+          <a href="tel:" class="c-item" id="contactPhone">
+            <span class="c-item-icon">📞</span>
+            <div><div class="c-item-label">Phone / WhatsApp</div><div class="c-item-val" id="contactPhoneVal">+91 98765 43210</div></div>
+          </a>
+          <a href="/cdn-cgi/l/email-protection#cd" class="c-item" id="contactEmail">
+            <span class="c-item-icon">✉️</span>
+            <div><div class="c-item-label">Email</div><div class="c-item-val" id="contactEmailVal"><span class="__cf_email__" data-cfemail="600e0107010e011408200112144e030f0d">[email&#160;protected]</span></div></div>
+          </a>
+          <div class="c-item" style="cursor:default">
+            <span class="c-item-icon">📍</span>
+            <div><div class="c-item-label">Location</div><div class="c-item-val" id="contactLocation">Karnataka, India</div></div>
+          </div>
+        </div>
+        <div class="c-socials">
+          <a id="cs-youtube" href="#" target="_blank" class="csoc" style="display:none" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a id="cs-instagram" href="#" target="_blank" class="csoc" style="display:none" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+          <a id="cs-facebook" href="#" target="_blank" class="csoc" style="display:none" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+          <a id="cs-linkedin" href="#" target="_blank" class="csoc" style="display:none" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="contact-form-box sr-right">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:22px">Send a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name *</label><input type="text" id="cf-name" placeholder="Rajesh Kumar"></div>
+          <div class="form-group"><label>Email *</label><input type="email" id="cf-email" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="cf-phone" placeholder="+91 98765 43210"></div>
+        <div class="form-group"><label>Service Interested In</label>
+          <select id="cf-service">
+            <option value="">Select a service...</option>
+            <option>Live Caricature — Events</option>
+            <option>Digital Illustration</option>
+            <option>Watercolour Portrait</option>
+            <option>Wedding Art</option>
+            <option>Comic Strips</option>
+            <option>Brand Mascot / Logo</option>
+            <option>Web Design</option>
+            <option>Custom Commission</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message *</label><textarea id="cf-message" rows="4" placeholder="Tell me about your project..."></textarea></div>
+        <button class="form-submit" onclick="submitContactForm()">Send Message →</button>
+        <div class="form-msg" id="formMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="f-brand-name">Naga<span>N</span>ath G S</a>
+        <p class="f-brand-desc">Caricature artist, watercolour painter, cartoonist &amp; web designer from Karnataka, India. Every face tells a story — let me paint yours.</p>
+        <div class="f-socials">
+          <a id="footer-youtube" href="#" target="_blank" class="f-soc" style="display:none" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a id="footer-instagram" href="#" target="_blank" class="f-soc" style="display:none" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+          <a id="footer-facebook" href="#" target="_blank" class="f-soc" style="display:none" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+          <a id="footer-linkedin" href="#" target="_blank" class="f-soc" style="display:none" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Art Shop</div>
+        <ul>
+          <li><a href="store.html">Watercolour Originals</a></li>
+          <li><a href="store.html">Caricature Portraits</a></li>
+          <li><a href="store.html">Art Prints</a></li>
+          <li><a href="store.html">Custom Commission</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Services</div>
+        <ul>
+          <li><a href="#services-section" onclick="navScroll(event,'services-section')">Live Caricatures</a></li>
+          <li><a href="#services-section" onclick="navScroll(event,'services-section')">Watercolour Art</a></li>
+          <li><a href="#services-section" onclick="navScroll(event,'services-section')">Comic Strips</a></li>
+          <li><a href="#services-section" onclick="navScroll(event,'services-section')">Web Design</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Quick Links</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="#contact-section" onclick="navScroll(event,'contact-section')">Contact</a></li>
+          <li><a href="auth.html">Login</a></li>
+          <li><a href="dashboard.html">My Account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Naganath G S. All Rights Reserved. <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      <span class="footer-tagline">"Every face tells a story — let me paint yours"</span>
+      <a href="admin.html" style="font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.08);padding:5px 13px;transition:all .2s;text-decoration:none" onmouseover="this.style.color='#e8571f';this.style.borderColor='rgba(232,87,31,.4)'" onmouseout="this.style.color='rgba(255,255,255,.2)';this.style.borderColor='rgba(255,255,255,.08)'">⚙ Admin</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══════════════════════════════════════════
+   FIREBASE & CONFIG LOADING
+═══════════════════════════════════════════ */
+var _cfg = null;
+try { var _s = localStorage.getItem('ng_fb'); if (_s) { var _p = JSON.parse(_s); if (_p && _p.apiKey) _cfg = _p; } } catch(e) {}
+if (!_cfg && window.SITE_FB_CFG && SITE_FB_CFG.apiKey) _cfg = SITE_FB_CFG;
+var _siteData = null;
+try { var _sd = localStorage.getItem('ng_sitedata'); if (_sd) _siteData = JSON.parse(_sd); } catch(e) {}
+if (!_siteData && window._siteData) _siteData = window._siteData;
+
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS & NAV
+═══════════════════════════════════════════ */
+var _prog = document.getElementById('scroll-prog');
+var _scrollTop = document.getElementById('scrollTop');
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  _prog.style.width = (window.scrollY / h * 100) + '%';
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+  _scrollTop.classList.toggle('show', window.scrollY > 400);
+});
+
+function navScroll(e, id) {
+  e.preventDefault();
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  closeMob();
+}
+function toggleMob() { document.getElementById('mobMenu').classList.toggle('open'); }
+function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
+function mobScroll(id) { navScroll({ preventDefault: function(){} }, id); }
+window.addEventListener('scroll', function() { if (window.innerWidth < 769) closeMob(); });
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+(function() {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.sr,.sr-left,.sr-right').forEach(function(el) { obs.observe(el); });
+})();
+
+/* ═══════════════════════════════════════════
+   STAT COUNTER
+═══════════════════════════════════════════ */
+function countUp(el, target, suffix) {
+  var start = 0, dur = 1800, step = dur / target;
+  el.classList.add('counting');
+  var t = setInterval(function() {
+    start += Math.ceil(target / 60);
+    if (start >= target) { start = target; clearInterval(t); el.classList.remove('counting'); el.classList.add('done'); }
+    el.textContent = start.toLocaleString('en-IN') + (suffix || '');
+  }, step < 16 ? 16 : step);
+}
+var _statsRan = false;
+function runStats() {
+  var vals = _siteData && _siteData.stats ? _siteData.stats : [500,1200,12,50];
+  var suffixes = ['+','+','+','+'];
+  [0,1,2,3].forEach(function(i) {
+    var el = document.getElementById('stat'+i);
+    if (el) { el.textContent = '0'; countUp(el, vals[i] || 0, suffixes[i]); }
+  });
+}
+var _statsObs = new IntersectionObserver(function(entries) {
+  if (entries[0].isIntersecting && !_statsRan) {
+    _statsRan = true;
+    runStats();
+  }
+}, { threshold: 0.3 });
+var statsBar = document.getElementById('stats-bar');
+if (statsBar) _statsObs.observe(statsBar);
+
+/* ═══════════════════════════════════════════
+   SITE DATA LOADING (from localStorage / admin)
+═══════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', function() {
+  loadSiteDataFromFirestore(function(){
+    updateBadge();
+    startTypewriter();
+    /* Pass window globals set by onSnapshot — bypasses localStorage for Edge */
+    initAnnouncement(window._annData);
+    loadSiteData(window._siteData || null);
+    loadImages(window._imagesData || null);
+    loadStorePreview(window._storeData || null);
+    loadTestimonials(window._reviewsData || null);
+    loadSocials(window._socialsData || null);
+    loadVideo(window._videoData || null);
+    checkAuthState();
+  });
+});
+
+function loadSiteData(directData) {
+  if (directData) _siteData = directData;
+  if (!_siteData && window._siteData) _siteData = window._siteData;
+  if (!_siteData) return;
+  /* Re-run stats counter with fresh data from Firestore */
+  if (_statsRan && _siteData.stats) { _statsRan = false; runStats(); _statsRan = true; }
+  else if (!_statsRan && _siteData.stats) { runStats(); _statsRan = true; }
+  // Contact details
+  if (_siteData.phone) {
+    document.getElementById('topPhoneText').textContent = _siteData.phone;
+    document.getElementById('contactPhoneVal').textContent = _siteData.phone;
+    document.getElementById('topPhone').href = 'tel:' + _siteData.phone.replace(/\s/g,'');
+    document.getElementById('contactPhone').href = 'tel:' + _siteData.phone.replace(/\s/g,'');
+  }
+  if (_siteData.email) {
+    document.getElementById('topEmailText').textContent = _siteData.email;
+    document.getElementById('contactEmailVal').textContent = _siteData.email;
+    document.getElementById('topEmail').href = 'mailto:' + _siteData.email;
+    document.getElementById('contactEmail').href = 'mailto:' + _siteData.email;
+  }
+  if (_siteData.location) document.getElementById('contactLocation').textContent = _siteData.location;
+}
+
+function loadImages(directData) {
+  /* Accept data directly from onSnapshot (bypasses localStorage for Edge compatibility)
+     or fall back to localStorage if called without argument */
+  var imgs = directData || null;
+  if (!imgs) {
+    try { var s = localStorage.getItem('ng_images'); if (s) imgs = JSON.parse(s); } catch(e) {}
+  }
+  if (imgs) {
+    // Hero/artist photo
+    if (imgs.artistPhoto) setImgSlot('heroArtistPhoto','heroArtistImg',imgs.artistPhoto);
+    // About image
+    if (imgs.aboutImg) setImgSlot('aboutImgFrame','aboutImg',imgs.aboutImg);
+    // Service images
+    for (var i = 0; i < 8; i++) {
+      if (imgs['svc'+i]) {
+        var area = document.getElementById('svc-area-'+i);
+        var img = document.getElementById('svc-img-'+i);
+        if (area && img) { img.src = imgs['svc'+i]; img.style.display='block'; area.classList.add('has'); }
+      }
+    }
+  } // end if(imgs)
+
+  // Portfolio preview — from ng_portfolio_images
+  var portImgs = [];
+  if (directData && Array.isArray(directData)) { portImgs = directData; }
+  else { try { var ps = localStorage.getItem('ng_portfolio_images'); if (ps) portImgs = JSON.parse(ps); } catch(e) {} }
+  for (var j = 0; j < Math.min(5, portImgs.length); j++) {
+    var pi = document.getElementById('port-'+j);
+    var pimg = document.getElementById('port-img-'+j);
+    var portOvCat = pi ? pi.querySelector('.port-overlay-cat') : null;
+    var portOvTitle = pi ? pi.querySelector('.port-overlay-title') : null;
+    if (pi && pimg && portImgs[j].image) {
+      pimg.src = portImgs[j].image; pimg.removeAttribute('style'); pi.classList.add('has');
+      if (portOvCat) portOvCat.textContent = portImgs[j].category || '';
+      if (portOvTitle) portOvTitle.textContent = portImgs[j].title || '';
+    }
+  }
+}
+
+function loadStorePreview(directData) {
+  var storeImgs = [];
+  if (directData && Array.isArray(directData)) { storeImgs = directData; }
+  else { try { var ss = localStorage.getItem('ng_store_images'); if (ss) storeImgs = JSON.parse(ss); } catch(e) {} }
+  var grid = document.getElementById('storePreviewGrid');
+  if (!grid) return;
+
+  var defaults = [
+    {name:'Watercolour Portrait',  category:'Watercolour', price:2500, image:''},
+    {name:'Digital Caricature',    category:'Caricature',  price:1200, image:''},
+    {name:'Signed Art Print A3',   category:'Art Print',   price:800,  image:''},
+    {name:'Custom Family Portrait',category:'Commission',  price:4500, image:''}
+  ];
+  var items = storeImgs.length ? storeImgs.slice(0,4) : defaults;
+  var html = '';
+  items.forEach(function(item, k) {
+    var name      = (item.name  || 'Artwork').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    var cat       = (item.category || 'Art').replace(/&/g,'&amp;');
+    var desc      = (item.desc || item.description || '').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    var price     = item.price || 0;
+    var origPrice = item.originalPrice || 0;
+    var badge     = item.badge || '';
+    var outOfStock = item.status === 'out-of-stock';
+    var img       = (item.image || '').replace(/"/g,'&quot;');
+    var delay     = (k * 0.08).toFixed(2);
+    var imgCls    = img ? 'spc-img has' : 'spc-img';
+    html += '<div class="spc" style="transition-delay:'+delay+'s">'
+          +   '<div class="'+imgCls+'">'
+          +     '<img src="'+img+'" alt="'+name+'">'
+          +     '<div class="spc-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Shop Image</span></div>'
+          +     (badge ? '<div class="spc-badge '+badge+'">'+badge.replace(/-/g,' ')+'</div>' : '')
+          +   '</div>'
+          +   '<div class="spc-body">'
+          +     '<div class="spc-cat">'+cat+'</div>'
+          +     '<div class="spc-name">'+name+'</div>'
+          +     (desc ? '<div class="spc-desc-wrap"><div class="spc-desc">'+desc+'</div><div class="spc-desc-popup">'+desc+'</div></div>' : '')
+          +     '<div class="spc-foot">'
+          +       '<div>'
+          +         '<span class="spc-price">&#8377;'+price.toLocaleString('en-IN')+'</span>'
+          +         (origPrice && origPrice > price ? '<span class="spc-orig">&#8377;'+origPrice.toLocaleString('en-IN')+'</span>' : '')
+          +       '</div>'
+          +       (outOfStock
+          ?         '<span style="font-size:.6rem;font-weight:700;color:#ef4444;letter-spacing:.06em;text-transform:uppercase">Out of Stock</span>'
+          :         '<button class="spc-btn" data-name="'+name+'" data-price="'+price+'" data-img="'+img+'" onclick="addToCart(this.dataset.name,+this.dataset.price,this.dataset.img)">Add to Cart</button>')
+          +     '</div>'
+          +   '</div>'
+          + '</div>';
+  });
+  grid.innerHTML = html;
+  // Cards are already in view — make them visible immediately
+  grid.querySelectorAll('.spc').forEach(function(el){
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+}
+
+function setImgSlot(frameId, imgId, src) {
+  var frame = document.getElementById(frameId);
+  var img = document.getElementById(imgId);
+  if (frame && img) { img.src = src; img.style.display='block'; frame.classList.add('has'); }
+}
+
+function loadTestimonials(directData) {
+  var reviews = null;
+  if (directData) { reviews = directData; }
+  else { try { var s = localStorage.getItem('ng_reviews'); if (s) reviews = JSON.parse(s); } catch(e) {} }
+  if (!reviews || !reviews.length) {
+    // Default testimonials
+    reviews = [
+      { name:'Ananya Sharma', role:'Corporate Event, Bengaluru', text:'Naganath was absolutely fantastic at our office party! The caricatures were spot-on and everyone loved them. Will book again!', stars:5 },
+      { name:'Karthik Reddy', role:'Wedding, Hyderabad', text:'We had Naganath for our wedding reception and it was the best decision. Guests are still talking about their caricatures three months later.', stars:5 },
+      { name:'Priya Nair', role:'Birthday Gift', text:'Commissioned a watercolour portrait of my parents for their anniversary. The detail and emotion in the painting moved them to tears. Incredible work.', stars:5 },
+      { name:'Rohan Mehta', role:'Startup Branding', text:'Designed our brand mascot and website. Creative, professional and delivered exactly what we envisioned. Highly recommend for any creative project.', stars:5 },
+      { name:'Divya Kulkarni', role:'Art Print Customer', text:'Ordered two art prints and the quality is stunning. Fast shipping, carefully packaged. The colours are vibrant and true to the digital preview.', stars:5 },
+    ];
+  }
+  renderTestimonials(reviews);
+}
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderTestimonials(reviews) {
+  var track = document.getElementById('testiTrack');
+  if (!track) return;
+  // Only duplicate for infinite scroll animation when 2+ reviews exist
+  var list = reviews.length >= 2 ? reviews.concat(reviews) : reviews;
+  track.innerHTML = list.map(function(r) {
+    var stars = '★'.repeat(r.stars || 5) + '☆'.repeat(5-(r.stars||5));
+    var initials = (r.name||'A').split(' ').map(function(w){return w[0];}).join('').substr(0,2).toUpperCase();
+    return '<div class="tcard"><span class="tcard-q">"</span><p class="tcard-text">'+esc(r.text)+'</p><div class="tcard-author"><div class="tcard-av">'+initials+'</div><div><div class="tcard-name">'+esc(r.name)+'</div><div class="tcard-role">'+esc(r.role||'')+'</div><div class="tcard-stars">'+stars+'</div></div></div></div>';
+  }).join('');
+  // Disable scroll animation when only 1 review — no point scrolling
+  track.style.animation = reviews.length < 2 ? 'none' : '';
+}
+
+function loadSocials(directData) {
+  var socials = directData || window._socialsData || null;
+  if (!socials) { try { var s = localStorage.getItem('ng_socials'); if (s) socials = JSON.parse(s); } catch(e) {} }
+  if (!socials) return;
+  var platforms = ['youtube','instagram','facebook','linkedin'];
+  platforms.forEach(function(p) {
+    if (socials[p]) {
+      ['social-','cs-','footer-'].forEach(function(prefix) {
+        var el = document.getElementById(prefix+p);
+        if (el) { el.href = socials[p]; el.style.display='flex'; }
+      });
+    }
+  });
+}
+
+function loadVideo(directData) {
+  var vid = directData || window._videoData || null;
+  if (!vid) { try { var s = localStorage.getItem('ng_video'); if (s) vid = JSON.parse(s); } catch(e) {} }
+  if (vid && vid.url) {
+    document.getElementById('videoConfigNote').style.display = 'none';
+    // Extract YouTube ID
+    var ytid = extractYTId(vid.url);
+    if (ytid) {
+      document.getElementById('ytEmbed').src = 'https://www.youtube.com/embed/' + ytid;
+      document.getElementById('videoPlaceholder').setAttribute('data-ytid', ytid);
+    }
+  }
+}
+
+function extractYTId(url) {
+  var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function playYouTube() {
+  var ph = document.getElementById('videoPlaceholder');
+  var embed = document.getElementById('ytEmbed');
+  var ytid = ph.getAttribute('data-ytid');
+  if (ytid) {
+    embed.src = 'https://www.youtube.com/embed/' + ytid + '?autoplay=1';
+    embed.classList.add('active');
+    ph.classList.add('hidden');
+  }
+}
+
+/* ═══════════════════════════════════════════
+   AUTH CHECK
+═══════════════════════════════════════════ */
+var _authUser = null;
+function checkAuthState() {
+  if (!_cfg) return;
+  /* Use already-loaded v9 compat SDK — no dynamic loading needed */
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(_cfg);
+    firebase.auth().onAuthStateChanged(function(user) {
+      _authUser = user;
+      updateAuthUI(user);
+    });
+  } catch(e) { console.warn('Auth error:', e); }
+}
+
+function updateAuthUI(user) {
+  var btn = document.getElementById('navAuthBtn');
+  var mBtn = document.getElementById('mobAuthBtn');
+  if (user) {
+    btn.textContent = '👤 ' + (user.displayName || user.email.split('@')[0]);
+    btn.classList.add('logged-in');
+    btn.href = 'dashboard.html';
+    if (mBtn) { mBtn.textContent = '👤 My Dashboard'; mBtn.href = 'dashboard.html'; }
+  }
+}
+
+function checkLoginForCheckout() {
+  var lc = loadCart(); if (!lc.length) { showToast('Your cart is empty!'); return; }
+  if (_authUser) { ixAddrOpen(); return; }
+  // Check session
+  var sess = localStorage.getItem('ng_usersess');
+  if (sess) { ixAddrOpen(); return; }
+  // Show login prompt
+  document.getElementById('modalBg').classList.remove('open');
+  document.getElementById('loginPromptModal').classList.add('open');
+}
+
+/* ═══════════════════════════════════════════
+   CART
+═══════════════════════════════════════════ */
+/* ── UNIFIED CART (shared with store.html via ng_cart localStorage) ── */
+function loadCart() {
+  try {
+    var raw = JSON.parse(localStorage.getItem('ng_cart')||'[]');
+    // Deduplicate: same product = same name + price + image
+    var merged = [];
+    raw.forEach(function(c){
+      var ex = merged.find(function(x){
+        return x.name===c.name && x.price===c.price && (x.image||'')===(c.image||'');
+      });
+      if (ex) ex.qty = (ex.qty||1) + (c.qty||1);
+      else merged.push(c);
+    });
+    return merged;
+  } catch(e) { return []; }
+}
+function saveCart(cartArr) {
+  try { localStorage.setItem('ng_cart', JSON.stringify(cartArr)); } catch(e) {}
+}
+function addToCart(name, price, imgUrl) {
+  var cart = loadCart();
+  var numPrice = Number(price);
+  // Decode HTML entities from data-name attribute
+  var cleanName = name.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#039;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+  var imgSrc = imgUrl || '';
+  // Match existing cart item by name + price + image (all three)
+  var ex = cart.find(function(x){
+    return x.name===cleanName && x.price===numPrice && (x.image||'')===(imgSrc);
+  });
+  if (ex) { ex.qty++; }
+  else {
+    var pid = '', cat = '';
+    // If no image passed, look up from store images by name+price
+    if (!imgSrc) {
+      try {
+        var si = JSON.parse(localStorage.getItem('ng_store_images')||'[]');
+        var found = si.find(function(p){ return p.name===cleanName && Number(p.price)===numPrice; })
+                 || si.find(function(p){ return p.name===cleanName; });
+        if (found) { imgSrc = found.image||''; pid = String(found.id||''); cat = found.category||''; }
+      } catch(e) {}
+    } else {
+      // Get id/category from store images by matching image URL
+      try {
+        var si2 = JSON.parse(localStorage.getItem('ng_store_images')||'[]');
+        var f2 = si2.find(function(p){ return p.image===imgSrc; });
+        if (f2) { pid = String(f2.id||''); cat = f2.category||''; }
+      } catch(e) {}
+    }
+    cart.push({ id:pid, name:cleanName, price:numPrice, qty:1, image:imgSrc, category:cat });
+  }
+  saveCart(cart);
+  updateBadge();
+  showToast('🛒 Added: ' + cleanName);
+}
+function updateBadge() {
+  var cart = loadCart();
+  var count = cart.reduce(function(s,x){return s+(x.qty||1);},0);
+  var badge = document.getElementById('cartBadge');
+  if (badge) badge.textContent = count || 0;
+}
+function showToast(msg) {
+  var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(function(){t.classList.remove('show');}, 2800);
+}
+function openCart() { renderCart(); document.getElementById('modalBg').classList.add('open'); showView('vCart'); }
+function closeCart() { document.getElementById('modalBg').classList.remove('open'); }
+function showView(id) { ['vCart','vCheck','vSuccess'].forEach(function(v){document.getElementById(v).style.display=v===id?'block':'none';}); }
+function renderCart() {
+  var cart = loadCart();
+  var el = document.getElementById('cartItemsEl'), tr = document.getElementById('cartTotalRow');
+  if (!cart.length) { el.innerHTML='<p style="text-align:center;padding:22px 0;color:var(--soft);font-size:.9rem">Your cart is empty</p>'; tr.style.display='none'; return; }
+  var html='', total=0;
+  cart.forEach(function(item,i){
+    var imgHtml = item.image
+      ? '<img src="'+item.image+'" style="width:52px;height:52px;object-fit:cover;flex-shrink:0;border-radius:2px;background:var(--light)">'
+      : '<div style="width:52px;height:52px;background:var(--light);flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.2rem">&#127912;</div>';
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--light)">'
+      + imgHtml
+      + '<div style="flex:1"><div class="ci-name">'+item.name+'</div>'
+      + '<div class="ci-qty" style="margin-top:4px"><button onclick="chgQty('+i+',-1)">&#8722;</button>'+item.qty+'<button onclick="chgQty('+i+',1)">+</button></div></div>'
+      + '<span class="ci-price">₹'+(item.price*(item.qty||1)).toLocaleString('en-IN')+'</span></div>';
+    total += item.price * item.qty;
+  });
+  el.innerHTML = html;
+  document.getElementById('cartTotalEl').textContent = '₹' + total.toLocaleString('en-IN');
+  tr.style.display = 'block';
+}
+function chgQty(i, d) {
+  var cart = loadCart();
+  cart[i].qty = (cart[i].qty||1) + d;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  saveCart(cart);
+  updateBadge();
+  renderCart();
+}
+function startRazorpay() {
+  var _cart = loadCart();
+  if (!_cart.length) { showToast('Your cart is empty!'); return; }
+  var payCfg = window._payCfg || {};
+  if(!payCfg.keyId){ try { var _pp=localStorage.getItem('ng_payment'); if(_pp) payCfg=JSON.parse(_pp); } catch(e) {} }
+  if (!payCfg.keyId || payCfg.keyId === '' || payCfg.keyId.indexOf('rzp_') !== 0) {
+    showToast('❌ Payment not configured. Visit the store page to checkout.');
+    setTimeout(function(){ window.location.href='store.html'; }, 1500);
+    return;
+  }
+  var total = _cart.reduce(function(s,x){ return s + (x.price||0)*(x.qty||1); }, 0);
+  closeCart();
+  var s = document.createElement('script');
+  s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  s.onload = function(){
+    var options = {
+      key:         payCfg.keyId,
+      amount:      total * 100,
+      currency:    payCfg.currency || 'INR',
+      name:        payCfg.businessName || 'Naganath G S Art Studio',
+      description: 'Art Purchase — ' + _cart.length + ' item(s)',
+      prefill: {
+        name:  (_authUser && _authUser.displayName) || '',
+        email: (_authUser && _authUser.email) || ''
+      },
+      theme: { color: '#e8571f' },
+      modal: { ondismiss: function(){ showToast('Payment cancelled.'); }},
+      handler: function(response){
+        var orderId = 'NG-' + Date.now();
+        var _del = window._pendingAddress || {}; try{ var _dls=localStorage.getItem('ng_pending_address'); if(_dls) _del=JSON.parse(_dls); }catch(e){}
+        var orderData = {
+          orderId:         orderId,
+          customerEmail:   _authUser ? _authUser.email : '',
+          customerName:    _del.name || (_authUser ? (_authUser.displayName || _authUser.email) : 'Guest'),
+          customerPhone:   _del.phone || '',
+          deliveryAddress: _del,
+          items: _cart.map(function(c){ return { name:c.name, price:c.price, qty:c.qty, image:c.image||'', category:c.category||'' }; }),
+          amount: total,
+          currency: payCfg.currency || 'INR',
+          paymentId: response.razorpay_payment_id || '',
+          status: 'confirmed',
+          createdAt: new Date().toISOString()
+        };
+        try {
+          var allOrders = JSON.parse(localStorage.getItem('ng_orders')||'[]');
+          allOrders.unshift(orderData);
+          localStorage.setItem('ng_orders', JSON.stringify(allOrders.slice(0,50)));
+        } catch(e) {}
+        try{ localStorage.removeItem('ng_pending_address'); }catch(e){}
+        window._pendingAddress = null;
+        saveCart([]); updateBadge();
+        showBill(orderData, true);
+      }
+    };
+    new window.Razorpay(options).open();
+  };
+  s.onerror = function(){ showToast('Failed to load payment. Please try store.html'); };
+  document.head.appendChild(s);
+}
+function showCheckout() { startRazorpay(); }
+function selP(btn,m) {}
+function doPay() { startRazorpay(); }
+document.getElementById('modalBg').addEventListener('click', function(e){ if(e.target===this) closeCart(); });
+
+/* ═══════════════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════════════ */
+function submitContactForm() {
+  var name    = document.getElementById('cf-name').value.trim();
+  var email   = document.getElementById('cf-email').value.trim();
+  var phone   = document.getElementById('cf-phone').value.trim();
+  var service = document.getElementById('cf-service').value;
+  var msg     = document.getElementById('cf-message').value.trim();
+  var fmsg    = document.getElementById('formMsg');
+  if (!name||!email||!msg) { fmsg.className='form-msg err'; fmsg.style.display='block'; fmsg.textContent='❌ Please fill in Name, Email and Message.'; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fmsg.className='form-msg err'; fmsg.style.display='block'; fmsg.textContent='❌ Please enter a valid email address.'; return; }
+
+  // Save to localStorage for admin
+  var enquiries = [];
+  try { var es = localStorage.getItem('ng_enquiries'); if (es) enquiries = JSON.parse(es); } catch(e) {}
+  var enq = { id:Date.now(), name:name, email:email, phone:phone, service:service, message:msg, date:new Date().toISOString(), status:'new' };
+  enquiries.unshift(enq);
+  try { localStorage.setItem('ng_enquiries', JSON.stringify(enquiries.slice(0,100))); } catch(e) {}
+
+  // Save to Firebase
+  if (_cfg) saveEnquiryToFirebase(enq);
+
+  // Send email to ARTIST via EmailJS
+  try {
+    /* Use window._emailCfg (from Firestore) — works in all browsers */
+    var ejsCfg = window._emailCfg || {};
+    if(!ejsCfg.publicKey){ try{ ejsCfg=JSON.parse(localStorage.getItem('ng_email')||'{}'); }catch(e){} }
+    if (ejsCfg.publicKey && ejsCfg.serviceId && ejsCfg.templateId && ejsCfg.toEmail) {
+      function doSendContact() {
+        try {
+          emailjs.init(ejsCfg.publicKey);
+          emailjs.send(ejsCfg.serviceId, ejsCfg.templateId, {
+            from_name:  name,
+            from_email: email,
+            phone:      phone || 'Not provided',
+            service:    service || 'General Enquiry',
+            message:    msg,
+            to_email:   ejsCfg.toEmail,
+            reply_to:   email
+          }).then(function(){
+            console.log('✅ Contact form email sent to artist.');
+          }).catch(function(err){
+            console.error('❌ EmailJS contact error:', err);
+          });
+        } catch(e) { console.error('EmailJS error:', e); }
+      }
+      if (window.emailjs) { doSendContact(); }
+      else {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+        s.onload = doSendContact;
+        document.head.appendChild(s);
+      }
+    } else {
+      console.warn('EmailJS not configured — contact form email not sent. Configure in Admin → Email Config.');
+    }
+  } catch(e) {}
+
+  fmsg.className='form-msg ok'; fmsg.style.display='block'; fmsg.textContent='✅ Message sent! Naganath will get back to you soon.';
+  document.getElementById('cf-name').value=''; document.getElementById('cf-email').value=''; document.getElementById('cf-phone').value=''; document.getElementById('cf-service').value=''; document.getElementById('cf-message').value='';
+  setTimeout(function(){ fmsg.style.display='none'; }, 5000);
+}
+
+function saveEnquiryToFirebase(enq) {
+  try {
+    if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
+      firebase.firestore().collection('enquiries').add(enq).catch(function(){});
+    }
+  } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════ */
+window.addEventListener('scroll', function() {
+  var scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('scroll-prog').style.width = scrolled + '%';
+  // Scroll top button
+  var btn = document.getElementById('scrollTop');
+  if (btn) { if (window.scrollY > 400) btn.classList.add('show'); else btn.classList.remove('show'); }
+  // Nav scrolled class
+  var nav = document.querySelector('.mainnav');
+  if (nav) { if (window.scrollY > 60) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); }
+});
+</script>
+<script>
+/* ═══ TYPEWRITER ═══ */
+/* Type once and stop — no delete/loop */
+function typeOnce(elId, text, speed, startDelay, onDone) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  var i = 0;
+  function tick() {
+    el.textContent = text.substring(0, i + 1);
+    i++;
+    if (i < text.length) { setTimeout(tick, speed); }
+    else if (onDone) { onDone(); }
+  }
+  setTimeout(tick, startDelay);
+}
+
+/* Cycle phrases — type, pause, delete, repeat */
+function makeCycler(elId, phrases, speed, deleteSpeed, pauseTime, startDelay) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  var pi = 0, ci = 0, deleting = false, pause = false;
+  function tick() {
+    var phrase = phrases[pi];
+    if (pause) { pause = false; setTimeout(tick, pauseTime); return; }
+    if (!deleting) {
+      el.textContent = phrase.substring(0, ci + 1);
+      ci++;
+      if (ci === phrase.length) { deleting = true; pause = true; setTimeout(tick, 100); return; }
+      setTimeout(tick, speed);
+    } else {
+      el.textContent = phrase.substring(0, ci - 1);
+      ci--;
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, deleteSpeed);
+    }
+  }
+  setTimeout(tick, startDelay);
+}
+
+function startTypewriter() {
+  var phrases = [
+    'Caricaturist',
+    'Watercolour Painter',
+    'Cartoonist',
+    'Web Designer'
+  ];
+
+  // Hero tag above "A Full-Service Creative Artist & Designer"
+  // First type "I am Naganath G S" once, then start cycling the role phrases
+  typeOnce('typewriterHero', 'I am Naganath G S', 80, 400, function() {
+    setTimeout(function() {
+      makeCycler('typewriterHero', phrases, 80, 40, 1600, 0);
+    }, 1800);
+  });
+
+  // Artist photo card below hero title
+  makeCycler('typewriter', phrases, 80, 40, 1600, 800);
+}
+
+/* ── ANNOUNCEMENT POPUP ── */
+function initAnnouncement(directData) {
+  var ann = null;
+  if (directData) { ann = directData; } else { try { ann = JSON.parse(localStorage.getItem('ng_announcement') || 'null'); } catch(e) {} }
+  if (!ann || !ann.url) return;
+
+  var overlay = document.getElementById('annPopupOverlay');
+  var img     = document.getElementById('annPopupImg');
+  var vid     = document.getElementById('annPopupVideo');
+  var titleEl = document.getElementById('annPopupTitle');
+
+  if (ann.type === 'youtube') {
+    // Embed YouTube iframe
+    var ytBox = document.getElementById('annPopupBox');
+    var existing = ytBox.querySelector('iframe');
+    if (existing) existing.remove();
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + ann.ytId + '?autoplay=1&rel=0';
+    iframe.style.cssText = 'width:100%;height:380px;display:block;border:3px solid rgba(232,87,31,.4)';
+    iframe.frameBorder = '0'; iframe.allowFullscreen = true;
+    iframe.allow = 'autoplay; encrypted-media';
+    ytBox.insertBefore(iframe, ytBox.querySelector('#annPopupTitle'));
+    img.style.display='none'; vid.style.display='none';
+  } else if (ann.type === 'video') {
+    vid.src = ann.url; vid.style.display='block';
+    img.style.display='none';
+  } else {
+    img.src = ann.url; img.style.display='block';
+    vid.style.display='none';
+  }
+
+  if (ann.title) {
+    titleEl.textContent = ann.title;
+    titleEl.style.display = 'block';
+  }
+
+  overlay.style.display = 'flex';
+  // Close on overlay click
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeAnnPopup(); });
+}
+
+function closeAnnPopup() {
+  var overlay = document.getElementById('annPopupOverlay');
+  if (!overlay) return;
+  overlay.style.animation = 'annFadeIn .25s ease reverse forwards';
+  setTimeout(function(){ overlay.style.display='none'; }, 250);
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeAnnPopup();
+});
+
+</script>
+
+<!-- ── ANNOUNCEMENT POPUP ── -->
+<div id="annPopupOverlay" style="display:none">
+  <div id="annPopupBox">
+    <button id="annPopupClose" onclick="closeAnnPopup()" title="Close">✕</button>
+    <img id="annPopupImg" src="" alt="Announcement">
+    <video id="annPopupVideo" src="" autoplay muted loop playsinline></video>
+    <div id="annPopupTitle"></div>
+  </div>
+</div>
+
+<script>
+/* ═══ INVOICE ═══ */
+function showBill(order,showHomeBtn){
+  var o=order||{};
+  var si=[];try{si=JSON.parse(localStorage.getItem('ng_store_images')||'[]');}catch(e){}
+  var da=o.deliveryAddress||{};
+  document.getElementById('bOid').textContent=o.orderId||o.id||'—';
+  var stat=o.status||'confirmed';
+  var sp=document.getElementById('bStat');sp.textContent=stat.charAt(0).toUpperCase()+stat.slice(1);sp.className='bst '+stat;
+  document.getElementById('bName').textContent=da.name||o.customerName||'—';
+  document.getElementById('bPhone').textContent=da.phone||o.customerPhone||'';
+  document.getElementById('bEmail').textContent=o.customerEmail||'';
+  var dt=o.createdAt?new Date(o.createdAt).toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  document.getElementById('bDate').textContent=dt;
+  document.getElementById('bTxn').textContent=o.paymentId?'Txn: '+o.paymentId:'';
+  var ab=document.getElementById('bAddrBlock');
+  if(da.street||da.city){var ln=[da.street,[da.city,da.state].filter(Boolean).join(', ')+(da.pin?' — '+da.pin:''),da.landmark].filter(Boolean);document.getElementById('bAddr').innerHTML=ln.join('<br>');ab.style.display='block';}else{ab.style.display='none';}
+  var items=o.items||[];var merged=[];
+  items.forEach(function(it){var k=(it.name||'').toLowerCase()+'||'+(it.image||'');var ex=merged.find(function(m){return(m.name||'').toLowerCase()+'||'+(m.image||'')===k;});if(ex)ex.qty=(ex.qty||1)+(it.qty||1);else merged.push(Object.assign({},it,{qty:it.qty||1}));});
+  document.getElementById('bItems').innerHTML=merged.map(function(it){
+    var img=it.image||'';if(!img){var f=si.find(function(s){return String(s.id)===String(it.id)||s.name===it.name;});if(f)img=f.image||'';}
+    var ih=img?('<img class="bit-img" src="'+img+'" alt="'+it.name+'">'):('<div class="bit-ph">&#127912;</div>');
+    return '<div class="bit">'+ih+'<div class="bit-info"><div class="bit-name">'+it.name+'</div>'+(it.category?'<div class="bit-meta">'+it.category+'</div>':'')+'<div class="bit-meta">Qty: '+(it.qty||1)+' × ₹'+Number(it.price||0).toLocaleString('en-IN')+' each</div></div><div class="bit-price">₹'+Number((it.price||0)*(it.qty||1)).toLocaleString('en-IN')+'</div></div>';
+  }).join('');
+  document.getElementById('bTotal').textContent='₹'+Number(o.amount||0).toLocaleString('en-IN');
+  var hb=document.getElementById('bHomeBtn');if(hb)hb.style.display=showHomeBtn?'inline-block':'none';
+  var m=document.getElementById('billModal');m.classList.add('on');m.scrollTop=0;
+}
+function closeBill(){document.getElementById('billModal').classList.remove('on');}
+function doBillPrint(){window.print();}
+function doBillPDF(){var bar=document.querySelector('#billModal .bac');if(bar)bar.style.display='none';setTimeout(function(){window.print();setTimeout(function(){if(bar)bar.style.display='flex';},600);},150);}
+function showBillFromOrder(json){try{showBill(JSON.parse(json),false);}catch(e){console.error(e);}}
+</script>
+<!-- INVOICE MODAL -->
+<div id="billModal">
+  <div id="billBox">
+    <div class="bh">
+      <div><div class="bh-tag">Invoice / Bill</div><div class="bh-studio">Naga<span>N</span>ath G S Art Studio</div></div>
+      <div style="text-align:right"><div class="bh-tag">Order ID</div><div class="bh-oid" id="bOid"></div><div style="margin-top:6px"><span class="bst" id="bStat"></span></div></div>
+    </div>
+    <div class="bb">
+      <div class="bm">
+        <div><div class="bl">Bill To</div><div class="bv" id="bName"></div><div class="bs" id="bPhone"></div><div class="bs" id="bEmail"></div></div>
+        <div><div class="bl">Invoice Details</div><div class="bs" id="bDate"></div><div class="bs" id="bTxn"></div></div>
+      </div>
+      <div class="ba-block" id="bAddrBlock" style="display:none"><div class="bl">Delivery Address</div><div class="bs" id="bAddr" style="margin-top:5px"></div></div>
+      <div class="bit-label">Order Items</div>
+      <div id="bItems"></div>
+      <div class="bt-row"><span class="bt-label">Total Amount Paid</span><span class="bt-val" id="bTotal"></span></div>
+    </div>
+    <div class="bf">Thank you for your purchase! &#10084; &nbsp;&middot;&nbsp; Naganath G S Art Studio &nbsp;&middot;&nbsp; Karnataka, India</div>
+    <div class="bac">
+      <button class="bab bab-print" onclick="doBillPrint()">&#128424; Print</button>
+      <button class="bab bab-pdf" onclick="doBillPDF()">&#11015; Save PDF</button>
+      <button class="bab bab-home" id="bHomeBtn" style="display:none" onclick="window.location.href='index.html'">&#127968; Home</button>
+      <button class="bab bab-close" onclick="closeBill()">&#10005; Close</button>
+    </div>
+  </div>
+</div>
+<script>
+/* ── ADDRESS CONFIRMATION (index.html) ── */
+/* Cached profile — loaded from Firestore once per checkout session */
+var _ixProfile = {};
+
+function ixRenderModal(prof) {
+  /* Supplement name from Firebase Auth if profile is empty */
+  if (_authUser && _authUser.displayName && !prof.firstName && !prof.name) {
+    var p = (_authUser.displayName || '').split(' ');
+    prof.firstName = p[0] || ''; prof.lastName = p.slice(1).join(' ') || '';
+  }
+  _ixProfile = prof;
+  var name  = ((prof.firstName||'') + ' ' + (prof.lastName||'')).trim() || prof.name || '';
+  var phone = prof.phone || '';
+  var addr  = prof.address || '';
+  var hasName  = name.length >= 2;
+  var hasPhone = phone.replace(/[^0-9]/g,'').length >= 10;
+  var hasAddr  = addr.trim().length > 4;
+  if (hasName && hasPhone && hasAddr) {
+    document.getElementById('ixConfirmView').style.display = 'block';
+    document.getElementById('ixFormView').style.display    = 'none';
+    document.getElementById('ixProfName').textContent  = name;
+    document.getElementById('ixProfPhone').textContent = phone;
+    document.getElementById('ixProfAddr').textContent  = addr;
+  } else {
+    document.getElementById('ixFormName').value  = name;
+    document.getElementById('ixFormPhone').value = phone;
+    document.getElementById('ixConfirmView').style.display = 'none';
+    document.getElementById('ixFormView').style.display    = 'block';
+  }
+  document.getElementById('ixAddrModal').classList.add('show');
+}
+
+function ixAddrOpen() {
+  /* Show modal immediately */
+  document.getElementById('ixConfirmView').style.display = 'none';
+  document.getElementById('ixFormView').style.display    = 'none';
+  document.getElementById('ixAddrModal').classList.add('show');
+
+  /* Read profile from Firestore directly — works in ALL browsers (no localStorage needed) */
+  var _db = window._db || null;
+  try { if(!_db && firebase.apps.length) _db = firebase.firestore(); } catch(e) {}
+
+  if (_db && _authUser) {
+    _db.collection('customers').doc(_authUser.uid).get()
+      .then(function(snap) {
+        var prof = (snap.exists && snap.data()) ? snap.data() : {};
+        try { localStorage.setItem('ng_profile', JSON.stringify(prof)); } catch(e) {}
+        ixRenderModal(prof);
+      })
+      .catch(function() {
+        var prof = {};
+        try { prof = JSON.parse(localStorage.getItem('ng_profile') || '{}'); } catch(e) {}
+        ixRenderModal(prof);
+      });
+  } else {
+    var prof = {};
+    try { prof = JSON.parse(localStorage.getItem('ng_profile') || '{}'); } catch(e) {}
+    ixRenderModal(prof);
+  }
+}
+function ixAddrClose() { document.getElementById('ixAddrModal').classList.remove('show'); }
+function ixUseProfile() {
+  var prof = _ixProfile || {};
+  var name = ((prof.firstName||'') + ' ' + (prof.lastName||'')).trim() || prof.name || '';
+  try {
+    localStorage.setItem('ng_pending_address', JSON.stringify({
+      name:name, phone:prof.phone||'', street:prof.address||'', city:'', state:'', pin:'', landmark:''
+    }));
+  } catch(e) {}
+  window._pendingAddress = { name:name, phone:prof.phone||'', street:prof.address||'', city:'', state:'', pin:'', landmark:'' };
+  ixAddrClose(); startRazorpay();
+}
+function ixShowForm() {
+  var prof = _ixProfile || {};
+  document.getElementById('ixFormName').value  = ((prof.firstName||'') + ' ' + (prof.lastName||'')).trim() || prof.name || '';
+  document.getElementById('ixFormPhone').value = prof.phone || '';
+  ['ixFormStreet','ixFormCity','ixFormState','ixFormPin','ixFormLandmark'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('ixConfirmView').style.display = 'none';
+  document.getElementById('ixFormView').style.display    = 'block';
+}
+function ixConfirm() {
+  var ok = true;
+  function chk(id, eid, fn) {
+    var el=document.getElementById(id), er=document.getElementById(eid);
+    if (!fn(el.value.trim())) { el.classList.add('ix-err'); er.style.display='block'; ok=false; }
+    else { el.classList.remove('ix-err'); er.style.display='none'; }
+  }
+  chk('ixFormName',   'ixEName',   function(v){ return v.length>=2; });
+  chk('ixFormPhone',  'ixEPhone',  function(v){ return v.replace(/[^0-9]/g,'').length>=10; });
+  chk('ixFormStreet', 'ixEStreet', function(v){ return v.length>=5; });
+  chk('ixFormCity',   'ixECity',   function(v){ return v.length>=2; });
+  chk('ixFormPin',    'ixEPin',    function(v){ return /^[0-9]{6}$/.test(v); });
+  if (!ok) return;
+  var addr = {
+    name:    document.getElementById('ixFormName').value.trim(),
+    phone:   document.getElementById('ixFormPhone').value.trim(),
+    street:  document.getElementById('ixFormStreet').value.trim(),
+    city:    document.getElementById('ixFormCity').value.trim(),
+    state:   document.getElementById('ixFormState').value.trim(),
+    pin:     document.getElementById('ixFormPin').value.trim(),
+    landmark:document.getElementById('ixFormLandmark').value.trim()
+  };
+  try { localStorage.setItem('ng_pending_address', JSON.stringify(addr)); } catch(e) {}
+  window._pendingAddress = addr;
+  ixAddrClose(); startRazorpay();
+}</script>
+<div id="ixAddrModal">
+  <div class="ix-box">
+    <div class="ix-title">&#128230; Delivery Details</div>
+    <div id="ixConfirmView" style="display:none">
+      <div class="ix-sub">We found your saved profile. Deliver to this address?</div>
+      <div class="ix-profile-card">
+        <div class="pn" id="ixProfName"></div>
+        <div class="pd" id="ixProfPhone"></div>
+        <div class="pd" id="ixProfAddr"></div>
+      </div>
+      <button class="ix-btn-primary" onclick="ixUseProfile()">&#10003; Yes, Deliver Here</button>
+      <button class="ix-btn-outline" onclick="ixShowForm()">&#9998; Use Different Address</button>
+      <button class="ix-cancel" onclick="ixAddrClose()">Cancel</button>
+    </div>
+    <div id="ixFormView" style="display:none">
+      <div class="ix-sub">Enter your delivery address. * fields required.</div>
+      <div class="ix-2col">
+        <div class="ix-field"><label>Full Name *</label><input type="text" id="ixFormName" placeholder="Your full name"><div class="ix-err-txt" id="ixEName">Name required</div></div>
+        <div class="ix-field"><label>Phone *</label><input type="tel" id="ixFormPhone" placeholder="+91 98765 43210"><div class="ix-err-txt" id="ixEPhone">Min 10 digits</div></div>
+      </div>
+      <div class="ix-field"><label>Street Address *</label><input type="text" id="ixFormStreet" placeholder="Flat no., Street, Area"><div class="ix-err-txt" id="ixEStreet">Address required</div></div>
+      <div class="ix-2col">
+        <div class="ix-field"><label>City *</label><input type="text" id="ixFormCity" placeholder="City"><div class="ix-err-txt" id="ixECity">City required</div></div>
+        <div class="ix-field"><label>State</label><input type="text" id="ixFormState" placeholder="State"></div>
+      </div>
+      <div class="ix-2col">
+        <div class="ix-field"><label>PIN Code *</label><input type="text" id="ixFormPin" placeholder="560001" maxlength="6"><div class="ix-err-txt" id="ixEPin">6-digit PIN</div></div>
+        <div class="ix-field"><label>Landmark</label><input type="text" id="ixFormLandmark" placeholder="Near temple..."></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="ix-btn-primary" style="margin:0;flex:1" onclick="ixConfirm()">Continue to Payment &#8594;</button>
+        <button class="ix-btn-outline" style="margin:0;width:auto;padding:11px 16px" onclick="ixAddrClose()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

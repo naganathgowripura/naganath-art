@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Panel — Naganath G S Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dk:#0d0a06;--dk2:#1a1208;--dk3:#2a1e0f;--ac:#e8571f;--am:#f5a623;--jd:#2b9d5c;--sk:#1d7ec2;--ch:#d62839;--wh:#fff;--lt:rgba(255,255,255,.05);--br:rgba(255,255,255,.1)}
+body{font-family:"DM Sans",sans-serif;background:var(--dk2);color:var(--wh);min-height:100vh}
+a{text-decoration:none;color:inherit}
+input,textarea,select,button{font-family:"DM Sans",sans-serif}
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#000 0%,var(--dk3) 100%);display:flex;align-items:center;justify-content:center}
+.lcard{background:rgba(255,255,255,.05);border:1px solid var(--br);border-top:4px solid var(--ac);padding:48px 42px;width:380px;box-shadow:0 40px 80px rgba(0,0,0,.7)}
+.llogo{font-family:"Cormorant Garamond",serif;font-size:1.6rem;font-weight:900;margin-bottom:4px}
+.llogo span{color:var(--am);font-style:italic}
+.lsub{font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:28px}
+.llbl{display:block;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:7px}
+.linp{width:100%;padding:12px 14px;background:rgba(255,255,255,.07);border:1.5px solid var(--br);color:var(--wh);font-size:.95rem;outline:none;transition:border-color .2s;margin-bottom:16px}
+.linp:focus{border-color:var(--ac)}
+.lbtn{width:100%;padding:13px;background:var(--ac);color:var(--wh);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s}
+.lbtn:hover{background:#c44318}
+.lerr{color:#ff8080;font-size:.78rem;margin-top:10px;display:none}
+.lnote{font-size:.68rem;color:rgba(255,255,255,.2);margin-top:16px;text-align:center;line-height:1.8;border-top:1px solid rgba(255,255,255,.07);padding-top:14px}
+/* LAYOUT */
+#adminApp{display:none;min-height:100vh}
+.ahdr{background:var(--dk);border-bottom:1px solid rgba(255,255,255,.07);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100}
+.alogo{font-family:"Cormorant Garamond",serif;font-size:1.2rem;font-weight:900}
+.alogo span{color:var(--am);font-style:italic}
+.aright{display:flex;align-items:center;gap:10px}
+.aemail{font-size:.72rem;color:rgba(255,255,255,.36)}
+.abtn{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.42);cursor:pointer;transition:all .2s}
+.abtn:hover{background:var(--ch);border-color:var(--ch);color:var(--wh)}
+.aview{font-size:.65rem;color:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.1);padding:5px 12px;transition:color .2s}
+.aview:hover{color:var(--am)}
+.abody{display:flex;padding-top:60px;min-height:100vh}
+.aside{width:230px;background:var(--dk);border-right:1px solid rgba(255,255,255,.06);padding:16px 0;position:fixed;top:60px;bottom:0;overflow-y:auto}
+.asec{font-size:.56rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:12px 20px 5px}
+.alink{display:flex;align-items:center;gap:8px;font-size:.77rem;font-weight:500;color:rgba(255,255,255,.4);padding:9px 20px;cursor:pointer;transition:all .18s;border-left:3px solid transparent}
+.alink:hover,.alink.on{background:rgba(232,87,31,.09);color:var(--wh);border-left-color:var(--ac)}
+.alink .ic{font-size:.9rem;width:18px;text-align:center;flex-shrink:0}
+.amain{margin-left:230px;padding:26px 30px;flex:1;min-width:0}
+.ptitle{font-family:"Cormorant Garamond",serif;font-size:1.65rem;font-weight:900;margin-bottom:4px}
+.ptitle em{font-style:italic;color:var(--am)}
+.pdesc{font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:20px;line-height:1.6}
+.apage{display:none}.apage.on{display:block}
+/* CARDS */
+.card{background:rgba(255,255,255,.03);border:1px solid var(--br);padding:22px;margin-bottom:16px}
+.card h3{font-family:"Cormorant Garamond",serif;font-size:1.05rem;margin-bottom:12px;font-weight:700}
+/* NOTICE */
+.notice{font-size:.74rem;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-left:3px solid var(--am);padding:10px 14px;line-height:1.6;margin-bottom:14px;color:rgba(255,255,255,.7)}
+.notice a{color:var(--am)}
+.notice-warn{background:rgba(29,126,194,.08);border-color:rgba(29,126,194,.2);border-left-color:var(--sk)}
+/* FORM */
+.fg{margin-bottom:14px}
+.fg label,.llbl{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:6px}
+.finp,.fsel,.ftxt{width:100%;padding:9px 11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--wh);font-size:.84rem;outline:none;transition:border-color .2s}
+.finp:focus,.fsel:focus,.ftxt:focus{border-color:var(--ac);background:rgba(255,255,255,.08)}
+.finp::placeholder,.ftxt::placeholder{color:rgba(255,255,255,.2)}
+.fsel option{background:#1a1208;color:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.order-sel{width:100%;padding:9px 11px;background:#1a1208;border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.78rem;outline:none;cursor:pointer}
+.order-sel option{background:#1a1208;color:#fff}
+.order-sel:focus{border-color:var(--ac)}
+/* BUTTONS */
+.btn{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:9px 20px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s}
+.btn:hover{background:rgba(255,255,255,.08);color:var(--wh)}
+.btn-primary{background:var(--ac);border-color:var(--ac);color:var(--wh)}
+.btn-primary:hover{background:#c44318;border-color:#c44318}
+/* TABLES */
+.atable{width:100%;border-collapse:collapse;font-size:.78rem}
+.atable th{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:8px 12px;border-bottom:1px solid var(--br);text-align:left}
+.atable td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:rgba(255,255,255,.7);vertical-align:middle}
+.atable tr:hover td{background:rgba(255,255,255,.02)}
+/* BADGES */
+.badge{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
+.badge-new{background:rgba(43,157,92,.2);color:#2b9d5c}
+.badge-pending{background:rgba(245,166,35,.15);color:var(--am)}
+.badge-confirmed,.badge-processing{background:rgba(29,126,194,.15);color:var(--sk)}
+.badge-shipped{background:rgba(150,100,220,.15);color:#9664dc}
+.badge-completed{background:rgba(43,157,92,.15);color:#2b9d5c}
+.badge-cancelled{background:rgba(214,40,57,.15);color:var(--ch)}
+/* PILLS */
+.pill{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;display:inline-flex;align-items:center;gap:5px}
+.pill.ok{background:rgba(43,157,92,.12);color:#2b9d5c;border:1px solid rgba(43,157,92,.25)}
+.pill.no{background:rgba(214,40,57,.1);color:var(--ch);border:1px solid rgba(214,40,57,.2)}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+/* STAT BOXES */
+.sboxes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sbox{background:rgba(255,255,255,.03);border:1px solid var(--br);padding:18px}
+.sbox-n{display:block;font-family:"Cormorant Garamond",serif;font-size:1.9rem;font-weight:900;margin-bottom:3px}
+.sbox-l{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:44px 20px;color:rgba(255,255,255,.25)}
+.empty-state .ei{font-size:2.4rem;display:block;margin-bottom:10px}
+.empty-state p{font-size:.82rem;line-height:1.7}
+/* IMAGE SLOTS */
+.isect{font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.28);padding:16px 0 8px;border-top:1px solid rgba(255,255,255,.06);margin-top:4px}
+.isect:first-child{border-top:none;padding-top:4px}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:8px}
+.islot-wrap{display:flex;flex-direction:column;gap:6px}
+.islot{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12);aspect-ratio:1;position:relative;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .2s}
+.islot:hover{border-color:var(--ac);background:rgba(232,87,31,.05)}
+.islot input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.islot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.islot.has img{display:block}
+.islot.has .shint{display:none}
+.islot.has:hover .sovr{opacity:1}
+.shint{display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.shint svg{width:28px;height:28px;opacity:.3}
+.shint-t{font-size:.6rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;opacity:.4;text-align:center;padding:0 8px}
+.sovr{position:absolute;inset:0;background:rgba(0,0,0,.62);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:2;opacity:0;transition:opacity .2s}
+.sovr button{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border:none;cursor:pointer}
+.brep{background:var(--ac);color:var(--wh)}
+.bdel{background:rgba(255,255,255,.1);color:var(--wh)}
+.bdel:hover{background:var(--ch)}
+.slbl{font-size:.58rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;opacity:.35;text-align:center;padding:4px 4px 0}
+.islot-actions{display:flex;gap:6px}
+.islot-actions button{flex:1;padding:6px 4px;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.islot-upload{background:var(--ac);color:var(--wh)}
+.islot-upload:hover{background:#c44318}
+.islot-delete{background:rgba(214,40,57,.15);color:var(--ch);border:1px solid rgba(214,40,57,.25)!important}
+.islot-delete:hover{background:var(--ch);color:var(--wh)}
+.islot-edit{background:rgba(29,126,194,.15);color:#1d7ec2;border:1px solid rgba(29,126,194,.25)!important}
+.islot-edit:hover{background:#1d7ec2;color:var(--wh)}
+/* TOAST */
+#atoast{position:fixed;bottom:24px;right:28px;background:var(--dk3);border-left:3px solid var(--ac);padding:11px 18px;font-size:.78rem;font-weight:500;z-index:5000;transform:translateX(120%);transition:transform .3s;max-width:300px}
+#atoast.show{transform:translateX(0)}
+/* MODAL (image upload) */
+#imgModal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
+#imgModal.on{display:flex}
+.imodal-box{background:#1a1208;border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--ac);width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.imodal-head{padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between}
+.imodal-head h3{font-family:"Cormorant Garamond",serif;font-size:1.15rem;font-weight:700}
+.imodal-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:1.3rem;cursor:pointer;transition:color .2s;padding:4px 8px}
+.imodal-close:hover{color:var(--ac)}
+.imodal-body{padding:22px}
+.imodal-fg{margin-bottom:14px}
+.imodal-fg label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.imodal-fg input,.imodal-fg select{width:100%;padding:10px 13px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--wh);font-family:"DM Sans",sans-serif;font-size:.88rem;outline:none;transition:border-color .2s}
+.imodal-fg input:focus,.imodal-fg select:focus{border-color:var(--ac)}
+.imodal-fg input[type=file]{padding:8px;cursor:pointer}
+.imodal-fg select option{background:#1a1208;color:#fff}
+.imodal-preview{width:100%;height:160px;object-fit:cover;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:none;margin-bottom:14px}
+.imodal-preview.on{display:block}
+.imodal-foot{padding:14px 22px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;justify-content:flex-end}
+.imodal-foot .btn{font-size:.7rem;padding:9px 22px}
+/* REVIEWS */
+.rev-card{background:rgba(255,255,255,.03);border:1px solid var(--br);padding:16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.rev-name{font-weight:600;font-size:.88rem}
+.rev-role{font-size:.72rem;color:rgba(255,255,255,.38);margin-top:2px}
+.rev-text{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:6px;line-height:1.6;font-style:italic}
+.rev-stars{color:var(--am);font-size:.75rem;margin-top:4px}
+/* PRODUCTS */
+.prod-row{display:grid;grid-template-columns:52px 1fr auto auto;gap:12px;align-items:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--br);margin-bottom:8px}
+.prod-img{width:52px;height:52px;object-fit:cover;background:rgba(255,255,255,.05)}
+.prod-name{font-size:.85rem;font-weight:600}
+.prod-cat{font-size:.68rem;color:rgba(255,255,255,.35);margin-top:2px}
+.prod-price{font-family:"Cormorant Garamond",serif;font-size:1.15rem;color:var(--ac);flex-shrink:0;margin-right:10px}
+/* ENQUIRY */
+.eq-card{background:rgba(255,255,255,.03);border:1px solid var(--br);padding:16px;margin-bottom:10px}
+.eq-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.eq-name{font-weight:600;font-size:.88rem}
+.eq-date{font-size:.68rem;color:rgba(255,255,255,.3)}
+.eq-field{display:flex;gap:8px;margin-bottom:4px;font-size:.78rem}
+.eq-label{color:rgba(255,255,255,.35);min-width:60px;flex-shrink:0}
+.eq-value{color:rgba(255,255,255,.7)}
+/* MODAL overlay for enquiry */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:8000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-ov.on{display:flex}
+.modal-box{background:var(--dk3);border:1px solid var(--br);padding:28px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto}
+.modal-title{font-family:"Cormorant Garamond",serif;font-size:1.25rem;font-weight:700;margin-bottom:18px}
+/* ANNOUNCEMENT */
+.ann-type-radio{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+.ann-type-radio label{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.78rem;color:rgba(255,255,255,.6)}
+/* RESPONSIVE */
+@media(max-width:768px){.aside{width:180px}.amain{margin-left:180px;padding:16px}.sboxes{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}}
+@media(max-width:520px){.aside{display:none}.amain{margin-left:0}}
+</style>
+<style>
+/* ── INVOICE ── */
+#billModal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+#billModal.on{display:flex}
+#billBox{background:#fff;width:100%;max-width:620px;font-family:'DM Sans',sans-serif;color:#1a1208;margin:auto;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bh{background:#1a1208;color:#fff;padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.bh-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.bh-studio{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.bh-studio span{color:#f5a623}
+.bh-oid{font-size:.88rem;font-weight:700;color:#f5a623;margin-top:2px;word-break:break-all}
+.bb{padding:24px 28px}
+.bm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:2px solid #f0ebe4}
+.bl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:5px}
+.bv{font-size:.88rem;font-weight:600;color:#1a1208;line-height:1.5}
+.bs{font-size:.78rem;color:#8a7968;line-height:1.6}
+.ba-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #f0ebe4}
+.bit-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7968;margin-bottom:10px}
+.bit{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f9f5ef}
+.bit-img{width:54px;height:54px;object-fit:cover;flex-shrink:0;border-radius:2px;background:#f0ebe4}
+.bit-ph{width:54px;height:54px;flex-shrink:0;background:#f0ebe4;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.bit-info{flex:1;min-width:0}
+.bit-name{font-size:.9rem;font-weight:600;margin-bottom:2px}
+.bit-meta{font-size:.72rem;color:#8a7968}
+.bit-price{font-size:1rem;font-weight:700;color:#e8571f;white-space:nowrap}
+.bt-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:2px solid #1a1208}
+.bt-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.bt-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#e8571f}
+.bst{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.bst.confirmed,.bst.completed{background:#dcfce7;color:#166534}
+.bst.shipped{background:#dbeafe;color:#1e40af}
+.bst.processing{background:#fef3c7;color:#92400e}
+.bst.pending{background:#fef9c3;color:#854d0e}
+.bst.cancelled{background:#fee2e2;color:#991b1b}
+.bf{background:#f9f5ef;padding:14px 28px;font-size:.7rem;color:#8a7968;text-align:center;line-height:1.9;border-top:1px solid #e0d8cd}
+.bac{display:flex;gap:8px;padding:14px 28px;border-top:1px solid #e0d8cd;background:#fff;flex-wrap:wrap}
+.bab{flex:1;min-width:70px;padding:10px 8px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.bab-print{background:#1a1208;color:#fff}.bab-print:hover{background:#2d2218}
+.bab-pdf{background:#e8571f;color:#fff}.bab-pdf:hover{background:#c44318}
+.bab-home{background:#f5a623;color:#1a1208}.bab-home:hover{background:#e8941a}
+.bab-close{background:transparent;border:1.5px solid #e0d8cd;color:#8a7968}.bab-close:hover{border-color:#e8571f;color:#e8571f}
+@media print{body>*{display:none!important}#billModal{display:block!important;position:static!important;background:none!important;padding:0!important;overflow:visible!important}#billBox{box-shadow:none!important;max-width:100%!important}.bac{display:none!important}}
+</style>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+  var _aDb=null;
+  var _aMap={
+    'ng_store_images':'store_images',
+    'ng_portfolio_images':'portfolio_images',
+    'ng_images':'images',
+    'ng_reviews':'reviews',
+    'ng_sitedata':'sitedata',
+    'ng_video':'video',
+    'ng_socials':'socials',
+    'ng_announcement':'announcement',
+    'ng_email':'email_config',
+    'ng_payment':'payment_config'
+  };
+  function _fbReady(){
+    if(_aDb)return true;
+    try{
+      var cfg=JSON.parse(localStorage.getItem('ng_fb')||'null');
+      if(!cfg||!cfg.apiKey||cfg.apiKey==='YOUR_API_KEY')return false;
+      var app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
+      _aDb=firebase.firestore();
+      console.log('Admin Firestore ready');
+      return true;
+    }catch(e){console.warn('Admin Firestore init failed:',e);return false;}
+  }
+  function _fbSync(key,val){
+    if(!_fbReady()){console.warn('Firestore not ready - saved to localStorage only');return;}
+    var doc=_aMap[key];if(!doc)return;
+    _aDb.collection('site_config').doc(doc)
+      .set({value:val,updatedAt:new Date().toISOString()})
+      .then(function(){console.log('Synced to Firestore:',key);})
+      .catch(function(e){console.error('Sync error:',key,e.code,e.message);});
+  }
+  function _fbLoadAll(){
+    if(!_fbReady())return;
+    Object.keys(_aMap).forEach(function(key){
+      _aDb.collection('site_config').doc(_aMap[key]).get()
+        .then(function(snap){
+          if(snap.exists&&snap.data()&&snap.data().value!==undefined){
+            localStorage.setItem(key,JSON.stringify(snap.data().value));
+            if(key==='ng_store_images')renderStoreImages();
+            if(key==='ng_portfolio_images')renderPortfolioImages();
+            if(key==='ng_reviews')renderReviews();
+          }
+        }).catch(function(){});
+    });
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    if(_fbReady())_fbLoadAll();
+  });
+  </script>
+</head>
+<body>
+<div id="atoast"></div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="lcard">
+    <div class="llogo">Naga<span>N</span>ath G S</div>
+    <div class="lsub">Admin Panel · Naganath Art Studio</div>
+    <label class="llbl">Password</label>
+    <input type="password" class="linp" id="lPwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lbtn" onclick="doLogin()">Sign In →</button>
+    <div class="lerr" id="lErr">Incorrect password. Try again.</div>
+    <div class="lnote">Default password: <strong>admin123</strong><br>Change it in Settings after login.</div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp">
+  <!-- Header -->
+  <header class="ahdr">
+    <div class="alogo">Naga<span>N</span>ath G S Admin</div>
+    <div class="aright">
+      <span class="aemail" id="adminEmailDisplay"></span>
+      <a href="index.html" target="_blank" class="aview">View Site ↗</a>
+      <button class="abtn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="abody">
+    <!-- Sidebar -->
+    <nav class="aside">
+      <div class="asec">Dashboard</div>
+      <div class="alink on" onclick="goPage('dashboard',this)"><span class="ic">📊</span>Overview</div>
+      <div class="asec">Content</div>
+      <div class="alink" onclick="goPage('announcement',this)"><span class="ic">🎉</span>Special Announcement</div>
+      <div class="alink" onclick="goPage('images',this)"><span class="ic">🖼</span>Site Images</div>
+      <div class="alink" onclick="goPage('video',this)"><span class="ic">▶️</span>YouTube Video</div>
+      <div class="alink" onclick="goPage('stats',this)"><span class="ic">📈</span>Stats &amp; Numbers</div>
+      <div class="alink" onclick="goPage('reviews',this)"><span class="ic">⭐</span>Client Reviews</div>
+      <div class="alink" onclick="goPage('socials',this)"><span class="ic">🔗</span>Social Links</div>
+      <div class="alink" onclick="goPage('contact-info',this)"><span class="ic">📞</span>Contact Details</div>
+      <div class="asec">Store</div>      
+      <div class="alink" onclick="goPage('portfolio-images',this)"><span class="ic">🖼</span>Portfolio Images</div>
+      <div class="alink" onclick="goPage('store-images',this)"><span class="ic">🏪</span>Store Images</div>
+      <div class="alink" onclick="goPage('orders',this)"><span class="ic">📦</span>Orders</div>
+      <div class="asec">Enquiries</div>
+      <div class="alink" onclick="goPage('enquiries',this)"><span class="ic">💬</span>Contact Enquiries</div>
+      <div class="asec">Configuration</div>
+      <div class="alink" onclick="goPage('firebase',this)"><span class="ic">🔥</span>Firebase Config</div>
+      <div class="alink" onclick="goPage('imgbb',this)"><span class="ic">📷</span>ImgBB Config</div>
+      <div class="alink" onclick="goPage('payment',this)"><span class="ic">💳</span>Payment Gateway</div>
+      <div class="alink" onclick="goPage('email',this)"><span class="ic">✉️</span>Email (Gmail) Config</div>
+      <div class="alink" onclick="goPage('google-auth',this)"><span class="ic">🔑</span>Google OAuth</div>
+      <div class="alink" onclick="goPage('settings',this)"><span class="ic">⚙️</span>Settings</div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="amain">
+
+      <!-- DASHBOARD -->
+      <div class="apage on" id="page-dashboard">
+        <div class="ptitle">Admin <em>Dashboard</em></div>
+        <p class="pdesc">Welcome to Naganath G S Art Studio admin panel.</p>
+        <div class="sboxes">
+          <div class="sbox"><span class="sbox-n" id="db-orders" style="color:var(--ac)">0</span><span class="sbox-l">Total Orders</span></div>
+          <div class="sbox"><span class="sbox-n" id="db-products" style="color:var(--am)">0</span><span class="sbox-l">Store Products</span></div>
+          <div class="sbox"><span class="sbox-n" id="db-reviews" style="color:var(--jd)">0</span><span class="sbox-l">Client Reviews</span></div>
+          <div class="sbox"><span class="sbox-n" id="db-enquiries" style="color:var(--sk)">0</span><span class="sbox-l">Enquiries</span></div>
+        </div>
+        <div class="card"><h3>Firebase Status <span class="pill no" id="fbStatusPill"><span class="pill-dot"></span>Not Configured</span></h3><p style="font-size:.78rem;color:rgba(255,255,255,.38)">Configure Firebase in the Configuration section for full functionality.</p></div>
+      </div>
+
+      <!-- ANNOUNCEMENT -->
+      <div class="apage" id="page-announcement">
+        <div class="ptitle">Special <em>Announcement</em></div>
+        <p class="pdesc">Upload an image or video for a special occasion — festival wishes, event announcements, promotions. Appears as a popup when visitors open the website.</p>
+        <div class="card">
+          <h3>Current Announcement</h3>
+          <div id="announcementPreview" style="margin:14px 0;display:none">
+            <img id="annPreviewImg" src="" style="max-width:100%;max-height:280px;object-fit:contain;border:1px solid var(--br);display:none">
+            <video id="annPreviewVideo" src="" controls style="max-width:100%;max-height:280px;border:1px solid var(--br);display:none"></video>
+            <iframe id="annPreviewFrame" src="" style="width:100%;height:220px;border:1px solid var(--br);display:none" frameborder="0" allowfullscreen></iframe>
+            <div style="margin-top:10px;font-size:.78rem;color:rgba(255,255,255,.5)" id="annPreviewMeta"></div>
+          </div>
+          <div id="announcementEmpty" style="padding:20px 0;font-size:.82rem;color:rgba(255,255,255,.3)">No announcement set.</div>
+        </div>
+        <div class="card">
+          <h3>Upload New Announcement</h3>
+          <div class="notice">Supported: JPG, PNG, GIF, MP4, WebM or YouTube link. Max 5MB for files.</div>
+          <div class="fg"><label>Title / Caption (optional)</label><input type="text" class="finp" id="annTitle" placeholder="e.g. Happy Diwali from Naganath G S Art Studio!"></div>
+          <div class="fg">
+            <label>Announcement Type</label>
+            <div class="ann-type-radio">
+              <label><input type="radio" name="annType" value="file" checked onchange="toggleAnnType('file')"> &#128193; Image / Video File</label>
+              <label><input type="radio" name="annType" value="youtube" onchange="toggleAnnType('youtube')"> &#9654;&#65039; YouTube Video</label>
+            </div>
+          </div>
+          <div id="annFileSection">
+            <div class="fg"><label>Upload Image or Video</label><input type="file" class="finp" id="annFile" accept="image/*,video/mp4,video/webm" style="padding:8px;cursor:pointer" onchange="previewAnnouncement(this)"></div>
+            <div id="annUploadPreview" style="margin:12px 0;display:none">
+              <img id="annUploadImg" src="" style="max-width:100%;max-height:200px;object-fit:contain;border:1px solid var(--br);display:none">
+              <video id="annUploadVideo" src="" controls style="max-width:100%;max-height:200px;border:1px solid var(--br);display:none"></video>
+            </div>
+          </div>
+          <div id="annYoutubeSection" style="display:none">
+            <div class="fg"><label>YouTube URL</label><input type="text" class="finp" id="annYoutubeUrl" placeholder="https://www.youtube.com/watch?v=XXXXXXXXXXX" oninput="previewYoutube(this.value)"></div>
+            <div id="annYoutubePreview" style="display:none"><iframe id="annYoutubeFrame" src="" style="width:100%;height:200px;border:1px solid var(--br)" frameborder="0" allowfullscreen></iframe></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="saveAnnouncement()">&#128190; Save &amp; Activate</button>
+            <button class="btn" onclick="deleteAnnouncement()" style="background:var(--ch);border-color:var(--ch);color:var(--wh)">&#128465; Delete Announcement</button>
+          </div>
+          <p style="font-size:.68rem;color:rgba(255,255,255,.25);margin-top:10px">When deleted, image will be removed from ImgBB automatically if configured.</p>
+        </div>
+      </div>
+
+      <!-- SITE IMAGES -->
+      <div class="apage" id="page-images">
+        <div class="ptitle">Site <em>Images</em></div>
+        <p class="pdesc">Upload images for all sections. Use ImgBB for cloud storage.</p>
+        <div class="notice notice-warn"><strong>ImgBB:</strong> Configure ImgBB API key for cloud image storage.</div>
+        <div class="isect">Hero Section — Artist Photo</div>
+        <div class="igrid">
+          <div class="islot-wrap">
+            <div class="islot" id="sl-artistPhoto" onclick="trigUpload('artistPhoto')">
+              <input type="file" accept="image/*" id="fi-artistPhoto" onchange="handleImgUpload('artistPhoto',this)">
+              <img id="si-artistPhoto" src="" alt="">
+              <div class="shint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><div class="shint-t">Artist Photo</div></div>
+              <div class="sovr"><button class="brep" onclick="event.stopPropagation();trigUpload('artistPhoto')">Replace</button><button class="bdel" onclick="event.stopPropagation();delImg('artistPhoto')">Remove</button></div>
+              <div class="slbl">Artist Photo</div>
+            </div>
+            <div class="islot-actions">
+              <button class="islot-upload" onclick="trigUpload('artistPhoto')">&#128228; Upload</button>
+              <button class="islot-edit" onclick="trigUpload('artistPhoto')">&#9998; Edit</button>
+              <button class="islot-delete" onclick="delImg('artistPhoto')">&#128465; Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="isect">About Section</div>
+        <div class="igrid">
+          <div class="islot-wrap">
+            <div class="islot" id="sl-aboutImg" onclick="trigUpload('aboutImg')">
+              <input type="file" accept="image/*" id="fi-aboutImg" onchange="handleImgUpload('aboutImg',this)">
+              <img id="si-aboutImg" src="" alt="">
+              <div class="shint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div class="shint-t">About Image</div></div>
+              <div class="sovr"><button class="brep" onclick="event.stopPropagation();trigUpload('aboutImg')">Replace</button><button class="bdel" onclick="event.stopPropagation();delImg('aboutImg')">Remove</button></div>
+              <div class="slbl">About Section</div>
+            </div>
+            <div class="islot-actions">
+              <button class="islot-upload" onclick="trigUpload('aboutImg')">&#128228; Upload</button>
+              <button class="islot-edit" onclick="trigUpload('aboutImg')">&#9998; Edit</button>
+              <button class="islot-delete" onclick="delImg('aboutImg')">&#128465; Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="isect">Service Cards (8 images)</div>
+        <div class="igrid" id="svcCardsGrid"></div>
+        <button class="btn btn-primary" onclick="saveImages()">&#128190; Save All Images</button>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="apage" id="page-video">
+        <div class="ptitle">YouTube <em>Video</em></div>
+        <p class="pdesc">Add a YouTube video to the homepage to showcase your work.</p>
+        <div class="card">
+          <h3>Video Configuration</h3>
+          <div class="fg"><label>YouTube Video URL or ID</label><input type="text" class="finp" id="v-url" placeholder="https://www.youtube.com/watch?v=VIDEO_ID"></div>
+          <div class="fg"><label>Video Caption (optional)</label><input type="text" class="finp" id="v-caption" placeholder="Watch Naganath create a caricature live"></div>
+          <button class="btn btn-primary" onclick="saveVideo()">&#128190; Save Video</button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="apage" id="page-stats">
+        <div class="ptitle">Stats &amp; <em>Numbers</em></div>
+        <p class="pdesc">Update the stats displayed on the homepage.</p>
+        <div class="card">
+          <h3>Homepage Stats</h3>
+          <div class="frow">
+            <div class="fg"><label>Happy Clients</label><input type="number" class="finp" id="stat-0" placeholder="500+"></div>
+            <div class="fg"><label>Artworks Created</label><input type="number" class="finp" id="stat-1" placeholder="1200+"></div>
+            <div class="fg"><label>Years Experience</label><input type="number" class="finp" id="stat-2" placeholder="12"></div>
+            <div class="fg"><label>Events Covered</label><input type="number" class="finp" id="stat-3" placeholder="50+"></div>
+          </div>
+          <button class="btn btn-primary" onclick="saveStats()">&#128190; Save Stats</button>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="apage" id="page-reviews">
+        <div class="ptitle">Client <em>Reviews</em></div>
+        <p class="pdesc">Add and manage client testimonials shown on the homepage.</p>
+        <div class="card">
+          <h3>Add New Review</h3>
+          <div class="frow">
+            <div class="fg"><label>Client Name</label><input type="text" class="finp" id="rev-name" placeholder="Ananya Sharma"></div>
+            <div class="fg"><label>Role / Event</label><input type="text" class="finp" id="rev-role" placeholder="Corporate Event, Bengaluru"></div>
+          </div>
+          <div class="fg"><label>Review Text</label><textarea class="finp ftxt" id="rev-text" rows="3" placeholder="Write the client review here..."></textarea></div>
+          <div class="fg"><label>Star Rating</label>
+            <select class="fsel" id="rev-stars">
+              <option value="5">&#11088;&#11088;&#11088;&#11088;&#11088; 5 Stars</option>
+              <option value="4">&#11088;&#11088;&#11088;&#11088; 4 Stars</option>
+              <option value="3">&#11088;&#11088;&#11088; 3 Stars</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="addReview()">+ Add Review</button>
+        </div>
+        <div id="reviewsList" style="margin-top:16px"></div>
+      </div>
+
+      <!-- SOCIALS -->
+      <div class="apage" id="page-socials">
+        <div class="ptitle">Social <em>Links</em></div>
+        <p class="pdesc">Set your social media links. Leave blank to hide the icon.</p>
+        <div class="card">
+          <div class="fg"><label>YouTube URL</label><input type="text" class="finp" id="soc-youtube" placeholder="https://www.youtube.com/@naganath"></div>
+          <div class="fg"><label>Instagram URL</label><input type="text" class="finp" id="soc-instagram" placeholder="https://www.instagram.com/naganath"></div>
+          <div class="fg"><label>Facebook URL</label><input type="text" class="finp" id="soc-facebook" placeholder="https://www.facebook.com/naganath"></div>
+          <div class="fg"><label>LinkedIn URL</label><input type="text" class="finp" id="soc-linkedin" placeholder="https://www.linkedin.com/in/naganath"></div>
+          <div class="fg"><label>WhatsApp Number</label><input type="text" class="finp" id="soc-whatsapp" placeholder="+91 98765 43210"></div>
+          <button class="btn btn-primary" onclick="saveSocials()">&#128190; Save Social Links</button>
+        </div>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div class="apage" id="page-contact-info">
+        <div class="ptitle">Contact <em>Details</em></div>
+        <p class="pdesc">Update contact details shown on the homepage.</p>
+        <div class="card">
+          <div class="fg"><label>Phone Number</label><input type="tel" class="finp" id="ci-phone" placeholder="+91 98765 43210"></div>
+          <div class="fg"><label>Email Address</label><input type="email" class="finp" id="ci-email" placeholder="naganath@gmail.com"></div>
+          <div class="fg"><label>Location / Address</label><input type="text" class="finp" id="ci-location" placeholder="Karnataka, India"></div>
+          <button class="btn btn-primary" onclick="saveContactInfo()">&#128190; Save Contact Details</button>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="apage" id="page-products">
+        <div class="ptitle">Manage <em>Products</em></div>
+        <p class="pdesc">Add and manage products in the store.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <span style="font-size:.78rem;color:rgba(255,255,255,.4)" id="prodCount"></span>
+          <button class="btn btn-primary" onclick="openProductModal(-1)">+ Add Product</button>
+        </div>
+        <div id="productsList"></div>
+      </div>
+
+      <!-- PORTFOLIO IMAGES -->
+      <div class="apage" id="page-portfolio-images">
+        <div class="ptitle">Portfolio <em>Images</em></div>
+        <p class="pdesc">Upload portfolio images. These appear on the homepage preview and on portfolio.html.</p>
+        <div class="notice notice-warn">Images saved to <code>ng_portfolio_images</code>. Auto-appear on index.html and portfolio.html.</div>
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <h3 style="margin:0">Portfolio Gallery</h3>
+            <button class="btn btn-primary" onclick="addPortfolioImage()">+ Add Image</button>
+          </div>
+          <div id="portfolioImgList"></div>
+        </div>
+      </div>
+
+      <!-- STORE IMAGES -->
+      <div class="apage" id="page-store-images">
+        <div class="ptitle">Store <em>Images</em></div>
+        <p class="pdesc">Upload store product images. These appear on the homepage store preview and store.html.</p>
+        <div class="notice notice-warn">Images saved to <code>ng_store_images</code>. Auto-appear on index.html and store.html.</div>
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <h3 style="margin:0">Store Product Images</h3>
+            <button class="btn btn-primary" onclick="addStoreImage()">+ Add Image</button>
+          </div>
+          <div id="storeImgList"></div>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="apage" id="page-orders">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:4px">
+          <div class="ptitle" style="margin-bottom:0">Customer <em>Orders</em></div>
+          <button onclick="clearAllOrders()" style="font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;background:var(--ch);border:1px solid var(--ch);color:#fff;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">&#128465; Clear All Orders</button>
+        </div>
+        <p class="pdesc">View and manage store orders from customers.</p>
+        <div id="ordersList"><div class="empty-state"><span class="ei">&#128230;</span><p>No orders yet. Orders will appear here once customers start purchasing.</p></div></div>
+      </div>
+
+      <!-- ENQUIRIES -->
+      <div class="apage" id="page-enquiries">
+        <div class="ptitle">Contact <em>Enquiries</em></div>
+        <p class="pdesc">Messages submitted through the contact form.</p>
+        <div id="enquiriesList"></div>
+      </div>
+
+      <!-- FIREBASE -->
+      <div class="apage" id="page-firebase">
+        <div class="ptitle">Firebase <em>Configuration</em></div>
+        <p class="pdesc">Connect Firebase for user authentication, database and order management.</p>
+        <div class="notice"><strong>How:</strong> Go to <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> &#8594; Create Project &#8594; Add Web App &#8594; Copy config below.</div>
+        <div class="card" id="fbStatusCard">
+          <h3>Connection Status <span class="pill no" id="fbStatusPill2"><span class="pill-dot"></span>Not Configured</span></h3>
+          <div class="frow"><div class="fg"><label>API Key *</label><input type="text" class="finp" id="fb-apiKey" placeholder="AIzaSyXXXXXXXXXXXXXXXXXXX"></div><div class="fg"><label>Auth Domain *</label><input type="text" class="finp" id="fb-authDomain" placeholder="your-project.firebaseapp.com"></div></div>
+          <div class="frow"><div class="fg"><label>Project ID *</label><input type="text" class="finp" id="fb-projectId" placeholder="your-project-id"></div><div class="fg"><label>Storage Bucket</label><input type="text" class="finp" id="fb-storageBucket" placeholder="your-project.appspot.com"></div></div>
+          <div class="frow"><div class="fg"><label>Messaging Sender ID</label><input type="text" class="finp" id="fb-messagingSenderId" placeholder="123456789012"></div><div class="fg"><label>App ID *</label><input type="text" class="finp" id="fb-appId" placeholder="1:123456789012:web:XXXXXXXX"></div></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+            <button class="btn btn-primary" onclick="saveFirebase()">&#128190; Save Firebase Config</button>
+            <button class="btn" onclick="testFirebase()">&#128299; Test Connection</button>
+            <button class="btn" onclick="clearFirebase()" style="border-color:var(--ch);color:var(--ch)">&#128465; Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMGBB -->
+      <div class="apage" id="page-imgbb">
+        <div class="ptitle">ImgBB <em>Config</em></div>
+        <p class="pdesc">Configure ImgBB for cloud image hosting.</p>
+        <div class="notice">Get free API key at <a href="https://api.imgbb.com" target="_blank">api.imgbb.com</a> &#8594; Sign up &#8594; API &#8594; Get API Key</div>
+        <div class="card">
+          <h3>ImgBB Configuration <span class="pill no" id="imgbbPill"><span class="pill-dot"></span>Not Configured</span></h3>
+          <div class="fg"><label>ImgBB API Key</label><input type="text" class="finp" id="imgbb-key" placeholder="your_imgbb_api_key_here"></div>
+          <div class="fg"><label>Image Expiry (days, 0 = never expire)</label><input type="number" class="finp" id="imgbb-expiry" placeholder="0" value="0"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="saveImgBB()">&#128190; Save ImgBB Config</button>
+            <button class="btn" onclick="testImgBB()">&#128299; Test Upload</button>
+          </div>
+          <p style="font-size:.74rem;color:rgba(255,255,255,.28);margin-top:10px">Without ImgBB, images are stored locally in the browser (not persistent across devices).</p>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="apage" id="page-payment">
+        <div class="ptitle">Payment <em>Gateway</em></div>
+        <p class="pdesc">Configure Razorpay for processing store payments. COD is disabled.</p>
+        <div class="notice">Get API keys at <a href="https://razorpay.com" target="_blank">razorpay.com</a> &#8594; Settings &#8594; API Keys. Use <code>rzp_test_</code> for testing.</div>
+        <div class="card">
+          <h3>Razorpay Configuration</h3>
+          <div class="frow">
+            <div class="fg"><label>Key ID</label><input type="text" class="finp" id="pay-keyId" placeholder="rzp_test_XXXXXXXXXX"></div>
+            <div class="fg"><label>Key Secret</label><input type="password" class="finp" id="pay-secret" placeholder="Your Razorpay Secret"></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label>Currency</label><input type="text" class="finp" id="pay-currency" placeholder="INR" value="INR"></div>
+            <div class="fg"><label>Business Name</label><input type="text" class="finp" id="pay-businessName" placeholder="Naganath G S Art Studio"></div>
+          </div>
+          <button class="btn btn-primary" onclick="savePayment()">&#128190; Save Payment Config</button>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.28);margin-top:10px">&#9888;&#65039; Cash on Delivery (COD) is disabled. Supported: UPI, Cards, Netbanking, Wallets.</p>
+        </div>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="apage" id="page-email">
+        <div class="ptitle">Email (Gmail) <em>Config</em></div>
+        <p class="pdesc">Receive contact form enquiries directly to your Gmail using EmailJS.</p>
+        <div class="notice"><strong>EmailJS Setup:</strong> Go to <a href="https://www.emailjs.com" target="_blank">emailjs.com</a> &#8594; Sign Up &#8594; Add Gmail Service &#8594; Create Email Template &#8594; Copy IDs below.</div>
+        <div class="card">
+          <h3>EmailJS Configuration</h3>
+          <div class="fg"><label>EmailJS Public Key</label><input type="text" class="finp" id="ejs-pubkey" placeholder="your_public_key_from_emailjs"></div>
+          <div class="fg"><label>Service ID (Gmail Service)</label><input type="text" class="finp" id="ejs-serviceid" placeholder="service_xxxxxxx"></div>
+          <div class="fg"><label>Template ID (Contact Form Template)</label><input type="text" class="finp" id="ejs-templateid" placeholder="template_xxxxxxx"></div>
+          <div class="fg"><label>Template ID (Payment Confirmation Email)</label><input type="text" class="finp" id="ejs-paytemplateid" placeholder="template_xxxxxxx"></div>
+          <div class="fg"><label>Your Gmail (to receive enquiries)</label><input type="email" class="finp" id="ejs-toemail" placeholder="naganath@gmail.com"></div>
+          <button class="btn btn-primary" onclick="saveEmail()">&#128190; Save Email Config</button>
+          <div class="notice notice-warn" style="margin-top:14px"><strong>Contact Form Variables:</strong> {{from_name}}, {{from_email}}, {{phone}}, {{service}}, {{message}}, {{to_email}}</div>
+          <div class="notice notice-warn" style="margin-top:8px"><strong>Payment Confirmation Variables:</strong> {{customer_name}}, {{customer_email}}, {{order_id}}, {{payment_id}}, {{items_list}}, {{total_amount}}, {{currency}}, {{order_date}}</div>
+        </div>
+      </div>
+
+      <!-- GOOGLE AUTH -->
+      <div class="apage" id="page-google-auth">
+        <div class="ptitle">Google <em>OAuth</em></div>
+        <p class="pdesc">Google login is handled by Firebase Authentication. Enable Google sign-in in your Firebase console.</p>
+        <div class="notice"><strong>Steps:</strong> Firebase Console &#8594; Authentication &#8594; Sign-in method &#8594; Google &#8594; Enable &#8594; Save. No additional config needed here.</div>
+        <div class="card">
+          <h3>Google OAuth Client ID (Optional)</h3>
+          <div class="fg"><label>Google OAuth Client ID (optional, for additional validation)</label><input type="text" class="finp" id="gauth-clientId" placeholder="XXXXXXXXXX-XXXXXXXXXX.apps.googleusercontent.com"></div>
+          <button class="btn btn-primary" onclick="saveGoogleAuth()">&#128190; Save</button>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="apage" id="page-settings">
+        <div class="ptitle">Admin <em>Settings</em></div>
+        <p class="pdesc">Manage admin password, export or reset data.</p>
+        <div class="card">
+          <h3>Change Admin Password</h3>
+          <div class="fg"><label>Current Password</label><input type="password" class="finp" id="set-curpwd" placeholder="Current password"></div>
+          <div class="fg"><label>New Password</label><input type="password" class="finp" id="set-newpwd" placeholder="New password (min 6 chars)"></div>
+          <div class="fg"><label>Confirm New Password</label><input type="password" class="finp" id="set-confpwd" placeholder="Repeat new password"></div>
+          <button class="btn btn-primary" onclick="changePassword()">&#128274; Change Password</button>
+        </div>
+        <div class="card">
+          <h3>Data Management</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="exportData()">&#128228; Export All Data</button>
+            <button class="btn" onclick="resetData()" style="border-color:var(--ch);color:var(--ch)">&#128465; Reset All Data</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ENQUIRY DETAIL MODAL -->
+<div class="modal-ov" id="enqModal">
+  <div class="modal-box">
+    <div class="modal-title">Enquiry Details</div>
+    <div id="enqModalContent"></div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn btn-primary" onclick="markReplied()">&#10003; Mark as Replied</button>
+      <button class="btn" onclick="closeModal('enqModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-ov" id="prodModal">
+  <div class="modal-box" style="max-width:560px">
+    <div class="modal-title" id="prodModalTitle">Add Product</div>
+    <div class="frow">
+      <div class="fg"><label>Product Name</label><input type="text" class="finp" id="pm-name" placeholder="e.g. Watercolour Portrait"></div>
+      <div class="fg"><label>Category</label>
+        <select class="fsel" id="pm-cat">
+          <option value="caricature">Caricature</option>
+          <option value="watercolour">Watercolour</option>
+          <option value="cartoon">Cartoon</option>
+          <option value="portrait">Portrait</option>
+          <option value="print">Print</option>
+          <option value="custom">Custom</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Actual Price (&#8377;)</label><input type="number" class="finp" id="pm-origprice" placeholder="3000" min="0"></div>
+      <div class="fg"><label>Discounted Price (&#8377;)</label><input type="number" class="finp" id="pm-price" placeholder="2500" min="0"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Badge</label>
+        <select class="fsel" id="pm-badge">
+          <option value="">No Badge</option>
+          <option value="best-seller">&#11088; Best Seller</option>
+          <option value="popular">&#128293; Popular Art</option>
+          <option value="hurryup">&#9203; Hurry Up!</option>
+          <option value="new">&#10024; New Arrival</option>
+          <option value="sale">&#127991; On Sale</option>
+          <option value="ltd">&#128142; Limited Edition</option>
+        </select>
+      </div>
+      <div class="fg"><label>Status</label>
+        <select class="fsel" id="pm-status">
+          <option value="active">&#10003; Available</option>
+          <option value="out-of-stock">&#10007; Out of Stock</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label>Description</label><textarea class="finp ftxt" id="pm-desc" rows="3" placeholder="Brief description of this artwork..."></textarea></div>
+    <div class="fg"><label>Image URL</label><input type="text" class="finp" id="pm-img" placeholder="https://..."></div>
+    <div class="fg"><label>Or Upload Image</label><input type="file" class="finp" id="pm-imgfile" accept="image/*" style="padding:8px" onchange="previewProdImg(this)"></div>
+    <img id="pm-preview" src="" style="max-width:100%;max-height:120px;object-fit:contain;border:1px solid var(--br);display:none;margin-bottom:10px">
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn btn-primary" onclick="saveProduct()">&#128190; Save Product</button>
+      <button class="btn" onclick="closeModal('prodModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE UPLOAD MODAL -->
+<div id="imgModal">
+  <div class="imodal-box">
+    <div class="imodal-head">
+      <h3 id="imgModalTitle">Add Image</h3>
+      <button class="imodal-close" onclick="closeImgModal()">&#10005;</button>
+    </div>
+    <div class="imodal-body">
+      <img id="imgModalPreview" class="imodal-preview" src="" alt="Preview" style="display:none">
+      <div class="imodal-fg">
+        <label>Title / Product Name</label>
+        <input type="text" id="imgModalName" placeholder="e.g. Watercolour Portrait">
+      </div>
+      <div class="imodal-fg">
+        <label>Category <span id="imgModalCatHint" style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(255,255,255,.25);font-size:.65rem"></span></label>
+        <select id="imgModalCat">
+          <option value="">-- Select --</option>
+          <option value="caricature">Caricature</option>
+          <option value="watercolour">Watercolour</option>
+          <option value="cartoon">Cartoon</option>
+          <option value="portrait">Portrait</option>
+          <option value="print">Print</option>
+          <option value="custom">Custom</option>
+          <option value="book-cover">Book Cover Page Designs</option>
+          <option value="hotel-interior">Hotel Interior Cartoons</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="imodal-fg" id="imgModalPriceRow" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label>Actual Price (&#8377;)</label><input type="number" id="imgModalOrigPrice" placeholder="3000" min="0"></div>
+          <div><label>Discounted Price (&#8377;)</label><input type="number" id="imgModalPrice" placeholder="2500" min="0"></div>
+        </div>
+        <div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:4px">Leave Actual Price empty if no discount.</div>
+      </div>
+      <div class="imodal-fg" id="imgModalStoreExtra" style="display:none">
+        <label>Badge / Tag</label>
+        <select id="imgModalBadge">
+          <option value="">-- No Badge --</option>
+          <option value="best-seller">&#11088; Best Seller</option>
+          <option value="popular">&#128293; Popular Art</option>
+          <option value="hurryup">&#9203; Hurry Up! Closing Soon</option>
+          <option value="new">&#10024; New Arrival</option>
+          <option value="sale">&#127991; On Sale</option>
+          <option value="ltd">&#128142; Limited Edition</option>
+        </select>
+      </div>
+      <div class="imodal-fg" id="imgModalStockRow" style="display:none">
+        <label>Stock Status</label>
+        <select id="imgModalStatus">
+          <option value="active">&#10003; Available</option>
+          <option value="out-of-stock">&#10007; Out of Stock</option>
+        </select>
+      </div>
+      <div class="imodal-fg">
+        <label>Description</label>
+        <textarea id="imgModalDesc" placeholder="Brief description..." style="width:100%;padding:10px 13px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--wh);font-size:.85rem;outline:none;resize:vertical;min-height:70px;transition:border-color .2s" onfocus="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></textarea>
+      </div>
+      <div class="imodal-fg">
+        <label>Upload Image File</label>
+        <input type="file" id="imgModalFile" accept="image/*" onchange="imgModalFileChange()">
+      </div>
+      <div class="imodal-fg">
+        <label>Or Paste Image URL</label>
+        <input type="text" id="imgModalUrl" placeholder="https://i.ibb.co/...">
+      </div>
+    </div>
+    <div class="imodal-foot">
+      <button class="btn" onclick="closeImgModal()" style="background:transparent;border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.5)">Cancel</button>
+      <button class="btn btn-primary" onclick="saveImgModal()">Save</button>
+    </div>
+  </div>
+</div>
+<script>
+/* ─── LOGIN ─── */
+var ADMIN_PASS_KEY='ng_admin_pass';
+var _adminPass=localStorage.getItem(ADMIN_PASS_KEY)||'admin123';
+function doLogin(){
+  var p=document.getElementById('lPwd').value;
+  if(p===_adminPass){document.getElementById('loginScreen').style.display='none';document.getElementById('adminApp').style.display='block';loadAllData();refreshDashboard();}
+  else{var e=document.getElementById('lErr');e.style.display='block';setTimeout(function(){e.style.display='none';},3000);}
+}
+function doLogout(){document.getElementById('adminApp').style.display='none';document.getElementById('loginScreen').style.display='flex';document.getElementById('lPwd').value='';}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none')doLogin();});
+
+/* ─── NAVIGATION ─── */
+function goPage(id,el){
+  document.querySelectorAll('.apage').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.alink').forEach(function(l){l.classList.remove('on');});
+  var pg=document.getElementById('page-'+id);
+  if(pg)pg.classList.add('on');
+  if(el)el.classList.add('on');
+  if(id==='reviews')renderReviews();
+  if(id==='products')renderProducts();
+  if(id==='enquiries')renderEnquiries();
+  if(id==='orders'){renderOrders();}
+  if(id==='images'){buildSvcCards();loadImagePreviews();}
+  if(id==='portfolio-images')renderPortfolioImages();
+  if(id==='store-images')renderStoreImages();
+  if(id==='announcement')loadAnnouncementPage();
+}
+
+/* ─── TOAST ─── */
+function toast(msg,col){var t=document.getElementById('atoast');t.textContent=msg;if(col)t.style.borderLeftColor=col;else t.style.borderLeftColor='var(--ac)';t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},3000);}
+
+/* ─── HELPERS ─── */
+function getLS(key,def){try{var s=localStorage.getItem(key);return s?JSON.parse(s):def;}catch(e){return def;}}
+function getLS_str(key,def){return localStorage.getItem(key)||def;}
+function getVal(id){var el=document.getElementById(id);return el?(el.value||''):''; }
+function setVal(id,v){var el=document.getElementById(id);if(el)el.value=v||'';}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function formatDate(d){try{return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}catch(e){return d||'—';}}
+function showModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+function updatePill(id,ok){var el=document.getElementById(id);if(!el)return;el.className='pill '+(ok?'ok':'no');el.innerHTML='<span class="pill-dot"></span>'+(ok?'Connected':'Not Configured');}
+
+/* ─── LOAD ALL ─── */
+function loadAllData(){
+  buildSvcCards();
+  loadFirebaseForm();loadImgBBForm();loadPaymentForm();loadEmailForm();
+  loadStatsForm();loadSocialsForm();loadContactInfoForm();loadVideoForm();
+  loadGoogleAuthForm();loadImagePreviews();
+  refreshDashboard();
+}
+function refreshDashboard(){
+  var enqs=getLS('ng_enquiries',[]).length;
+  var prods=getLS('ng_products',[]).length;
+  var revs=getLS('ng_reviews',[]).length;
+  var ords=getLS('ng_orders',[]).length;
+  var si=getLS('ng_store_images',[]).length;
+  var set=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
+  set('db-orders',ords);set('db-products',prods||si);set('db-reviews',revs);set('db-enquiries',enqs);
+  var fbCfg=getLS('ng_fb',{});
+  var hasFb=fbCfg&&fbCfg.apiKey&&fbCfg.apiKey!=='YOUR_API_KEY';
+  updatePill('fbStatusPill',hasFb);
+}
+
+/* ─── SERVICE CARDS ─── */
+function buildSvcCards(){
+  var svcLabels=['Live Caricatures','Digital Illustration','Watercolour Portraits','Wedding Art','Comic Strips','Brand Mascots','Web Design','Event Coverage'];
+  var container=document.getElementById('svcCardsGrid');
+  if(!container)return;
+  container.innerHTML='';
+  svcLabels.forEach(function(l,i){
+    var key='svc'+i;
+    var fi=document.createElement('input');
+    fi.type='file';fi.accept='image/*';fi.id='fi-'+key;
+    fi.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
+    fi.addEventListener('change',function(){handleImgUpload(key,fi);});
+    var img=document.createElement('img');img.id='si-'+key;img.src='';img.alt='';
+    var hint=document.createElement('div');hint.className='shint';
+    hint.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div class="shint-t">'+l+'</div>';
+    var sovr=document.createElement('div');sovr.className='sovr';
+    var brep=document.createElement('button');brep.className='brep';brep.textContent='Replace';
+    brep.onclick=function(e){e.stopPropagation();fi.click();};
+    var bdel=document.createElement('button');bdel.className='bdel';bdel.textContent='Remove';
+    bdel.onclick=function(e){e.stopPropagation();delImg(key);};
+    sovr.appendChild(brep);sovr.appendChild(bdel);
+    var lbl=document.createElement('div');lbl.className='slbl';lbl.textContent=l;
+    var slot=document.createElement('div');slot.className='islot';slot.id='sl-'+key;
+    slot.onclick=function(){fi.click();};
+    slot.appendChild(fi);slot.appendChild(img);slot.appendChild(hint);slot.appendChild(sovr);slot.appendChild(lbl);
+    var btnUp=document.createElement('button');btnUp.className='islot-upload';btnUp.textContent='📤 Upload';btnUp.onclick=function(){fi.click();};
+    var btnEd=document.createElement('button');btnEd.className='islot-edit';btnEd.textContent='✏ Edit';btnEd.onclick=function(){fi.click();};
+    var btnDl=document.createElement('button');btnDl.className='islot-delete';btnDl.textContent='🗑 Delete';btnDl.onclick=function(){delImg(key);};
+    var acts=document.createElement('div');acts.className='islot-actions';
+    acts.appendChild(btnUp);acts.appendChild(btnEd);acts.appendChild(btnDl);
+    var wrap=document.createElement('div');wrap.className='islot-wrap';
+    wrap.appendChild(slot);wrap.appendChild(acts);
+    container.appendChild(wrap);
+  });
+}
+
+/* ─── IMAGES ─── */
+function trigUpload(key){var el=document.getElementById('fi-'+key);if(el)el.click();}
+function handleImgUpload(key,inp){
+  if(!inp.files[0])return;
+  var imgbbKey=getLS_str('ng_imgbb_key','');
+  if(imgbbKey){uploadToImgBB(key,inp.files[0],imgbbKey);return;}
+  var r=new FileReader();
+  r.onload=function(e){setImgSlot(key,e.target.result);saveImages();};
+  r.readAsDataURL(inp.files[0]);
+}
+function uploadToImgBB(key,file,apiKey){
+  toast('⏳ Uploading to ImgBB...');
+  var fd=new FormData();fd.append('image',file);
+  var expiry=getLS_str('ng_imgbb_expiry','0');
+  if(expiry&&expiry!=='0')fd.append('expiration',parseInt(expiry)*86400);
+  fetch('https://api.imgbb.com/1/upload?key='+apiKey,{method:'POST',body:fd})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.success){setImgSlot(key,d.data.url);saveImages();toast('✅ Image uploaded!','var(--jd)');}
+      else{toast('❌ ImgBB error: '+(d.error&&d.error.message||'Unknown'),'var(--ch)');}
+    }).catch(function(){toast('❌ Upload failed. Check ImgBB key.','var(--ch)');});
+}
+function setImgSlot(key,src){
+  var sl=document.getElementById('sl-'+key);var si=document.getElementById('si-'+key);
+  if(sl&&si){si.src=src;si.removeAttribute('style');sl.classList.add('has');}
+  var imgs=getLS('ng_images',{});imgs[key]=src;
+  localStorage.setItem('ng_images',JSON.stringify(imgs));
+}
+function delImg(key){
+  var sl=document.getElementById('sl-'+key);var si=document.getElementById('si-'+key);var fi=document.getElementById('fi-'+key);
+  if(sl)sl.classList.remove('has');
+  if(si){si.src='';si.removeAttribute('style');}
+  if(fi){try{fi.value='';}catch(e){}}
+  var imgs=getLS('ng_images',{});delete imgs[key];
+  localStorage.setItem('ng_images',JSON.stringify(imgs));
+  toast('🗑 Image removed');
+}
+function loadImagePreviews(){
+  var imgs=getLS('ng_images',{});
+  Object.keys(imgs).forEach(function(key){
+    var si=document.getElementById('si-'+key);var sl=document.getElementById('sl-'+key);
+    if(si&&sl){si.src=imgs[key];si.removeAttribute('style');sl.classList.add('has');}
+  });
+}
+function saveImages(){
+  var imgs = getLS('ng_images', {});
+  localStorage.setItem('ng_images', JSON.stringify(imgs));
+  _fbSync('ng_images', imgs);  /* Sync to Firestore so ALL devices get the images */
+  toast('✅ Images saved!', 'var(--jd)');
+}
+
+/* ─── VIDEO ─── */
+function loadVideoForm(){var vid=getLS('ng_video',{});setVal('v-url',vid.url||'');setVal('v-caption',vid.caption||'');}
+function saveVideo(){var v={url:getVal('v-url'),caption:getVal('v-caption')};localStorage.setItem('ng_video',JSON.stringify(v));_fbSync('ng_video',v);toast('✅ Video config saved!','var(--jd)');}
+
+/* ─── STATS ─── */
+function loadStatsForm(){var sd=getLS('ng_sitedata',{});var vals=sd.stats||[500,1200,12,50];[0,1,2,3].forEach(function(i){setVal('stat-'+i,vals[i]||'');});}
+function saveStats(){var vals=[0,1,2,3].map(function(i){return parseInt(getVal('stat-'+i))||0;});var sd=getLS('ng_sitedata',{});sd.stats=vals;localStorage.setItem('ng_sitedata',JSON.stringify(sd));_fbSync('ng_sitedata',sd);toast('✅ Stats updated!','var(--jd)');}
+
+/* ─── REVIEWS ─── */
+function addReview(){
+  var name=getVal('rev-name').trim();var role=getVal('rev-role').trim();var text=getVal('rev-text').trim();var stars=parseInt(getVal('rev-stars'))||5;
+  if(!name||!text){toast('❌ Name and review text are required.','var(--ch)');return;}
+  var revs=getLS('ng_reviews',[]);
+  revs.push({id:Date.now(),name:name,role:role,text:text,stars:stars});
+  localStorage.setItem('ng_reviews',JSON.stringify(revs));
+  setVal('rev-name','');setVal('rev-role','');setVal('rev-text','');
+  renderReviews();toast('✅ Review added!','var(--jd)');refreshDashboard();
+}
+function renderReviews(){
+  var revs=getLS('ng_reviews',[]);var el=document.getElementById('reviewsList');if(!el)return;
+  if(!revs.length){el.innerHTML='<div class="empty-state"><span class="ei">⭐</span><p>No reviews yet. Add your first one above.</p></div>';return;}
+  el.innerHTML=revs.map(function(r,i){
+    var stars='★'.repeat(r.stars||5)+'☆'.repeat(5-(r.stars||5));
+    return '<div class="rev-card"><div><div class="rev-name">'+esc(r.name)+'</div><div class="rev-role">'+esc(r.role||'')+'</div><div class="rev-stars">'+stars+'</div><div class="rev-text">'+esc(r.text)+'</div></div><button onclick="deleteReview('+i+')" class="btn" style="background:var(--ch);border-color:var(--ch);color:#fff;padding:6px 12px;font-size:.6rem;flex-shrink:0">Delete</button></div>';
+  }).join('');
+}
+function deleteReview(i){if(!confirm('Delete this review?'))return;var revs=getLS('ng_reviews',[]);revs.splice(i,1);localStorage.setItem('ng_reviews',JSON.stringify(revs));renderReviews();toast('🗑 Review deleted');refreshDashboard();}
+
+/* ─── SOCIALS ─── */
+function loadSocialsForm(){var s=getLS('ng_socials',{});setVal('soc-youtube',s.youtube||'');setVal('soc-instagram',s.instagram||'');setVal('soc-facebook',s.facebook||'');setVal('soc-linkedin',s.linkedin||'');setVal('soc-whatsapp',s.whatsapp||'');}
+function saveSocials(){var s={youtube:getVal('soc-youtube'),instagram:getVal('soc-instagram'),facebook:getVal('soc-facebook'),linkedin:getVal('soc-linkedin'),whatsapp:getVal('soc-whatsapp')};localStorage.setItem('ng_socials',JSON.stringify(s));_fbSync('ng_socials',s);toast('✅ Social links saved!','var(--jd)');}
+
+/* ─── CONTACT INFO ─── */
+function loadContactInfoForm(){var sd=getLS('ng_sitedata',{});setVal('ci-phone',sd.phone||'');setVal('ci-email',sd.email||'');setVal('ci-location',sd.location||'');}
+function saveContactInfo(){var sd=getLS('ng_sitedata',{});sd.phone=getVal('ci-phone');sd.email=getVal('ci-email');sd.location=getVal('ci-location');localStorage.setItem('ng_sitedata',JSON.stringify(sd));_fbSync('ng_sitedata',sd);toast('✅ Contact details saved!','var(--jd)');}
+
+/* ─── PRODUCTS ─── */
+var _editProdIdx=-1;
+function renderProducts(){
+  var prods=getLS('ng_products',[]);var el=document.getElementById('productsList');if(!el)return;
+  var cnt=document.getElementById('prodCount');if(cnt)cnt.textContent=prods.length+' product(s)';
+  if(!prods.length){el.innerHTML='<div class="empty-state"><span class="ei">🛒</span><p>No products yet. Add your first artwork!</p></div>';return;}
+  el.innerHTML=prods.map(function(p,i){
+    return '<div class="prod-row"><img class="prod-img" src="'+(p.image||'')+'" onerror="this.style.background=\'rgba(255,255,255,.05)\'"><div><div class="prod-name">'+esc(p.name||'')+'</div><div class="prod-cat">'+esc(p.category||'')+(p.badge?' · '+esc(p.badge):'')+(p.status==='out-of-stock'?' &nbsp;·&nbsp; <span style="color:var(--ch)">Out of Stock</span>':'')+'</div></div><div class="prod-price">₹'+(p.price||0).toLocaleString('en-IN')+'</div><div style="display:flex;gap:6px"><button class="btn btn-primary" style="padding:5px 12px;font-size:.6rem" onclick="openProductModal('+i+')">Edit</button><button class="btn" style="padding:5px 12px;font-size:.6rem;background:var(--ch);border-color:var(--ch);color:#fff" onclick="deleteProduct('+i+')">Del</button></div></div>';
+  }).join('');
+}
+function openProductModal(i){
+  _editProdIdx=i;
+  var prods=getLS('ng_products',[]);
+  var p=i>=0?prods[i]:{};
+  document.getElementById('prodModalTitle').textContent=i>=0?'Edit Product':'Add Product';
+  setVal('pm-name',p.name||'');setVal('pm-cat',p.category||'caricature');
+  setVal('pm-origprice',p.originalPrice||'');setVal('pm-price',p.price||'');
+  setVal('pm-badge',p.badge||'');setVal('pm-status',p.status||'active');
+  setVal('pm-desc',p.desc||'');setVal('pm-img',p.image||'');
+  var prev=document.getElementById('pm-preview');if(prev){prev.src=p.image||'';prev.style.display=p.image?'block':'none';}
+  showModal('prodModal');
+}
+function previewProdImg(input){
+  if(!input.files[0])return;
+  var r=new FileReader();r.onload=function(e){var p=document.getElementById('pm-preview');p.src=e.target.result;p.style.display='block';setVal('pm-img',e.target.result);};r.readAsDataURL(input.files[0]);
+}
+function saveProduct(){
+  var name=getVal('pm-name').trim();if(!name){toast('❌ Product name required','var(--ch)');return;}
+  var prods=getLS('ng_products',[]);
+  var imgFile=document.getElementById('pm-imgfile');
+  var imgbbKey=getLS_str('ng_imgbb_key','');
+  function doSaveProd(imgSrc){
+    var p={id:_editProdIdx>=0?(prods[_editProdIdx].id||Date.now()):Date.now(),name:name,category:getVal('pm-cat'),price:parseInt(getVal('pm-price'))||0,originalPrice:parseInt(getVal('pm-origprice'))||0,badge:getVal('pm-badge'),status:getVal('pm-status'),desc:getVal('pm-desc'),image:imgSrc||getVal('pm-img'),createdAt:new Date().toISOString()};
+    if(_editProdIdx>=0)prods[_editProdIdx]=p;else prods.push(p);
+    localStorage.setItem('ng_products',JSON.stringify(prods));
+    closeModal('prodModal');renderProducts();toast('✅ Product saved!','var(--jd)');refreshDashboard();
+  }
+  if(imgFile&&imgFile.files[0]&&imgbbKey){
+    toast('⏳ Uploading image...');
+    var fd=new FormData();fd.append('image',imgFile.files[0]);
+    fetch('https://api.imgbb.com/1/upload?key='+imgbbKey,{method:'POST',body:fd})
+      .then(function(r){return r.json();})
+      .then(function(d){if(d.success)doSaveProd(d.data.url);else doSaveProd('');})
+      .catch(function(){doSaveProd('');});
+  } else {doSaveProd('');}
+}
+function deleteProduct(i){if(!confirm('Delete this product?'))return;var prods=getLS('ng_products',[]);prods.splice(i,1);localStorage.setItem('ng_products',JSON.stringify(prods));renderProducts();toast('🗑 Product deleted');refreshDashboard();}
+
+/* ─── ENQUIRIES ─── */
+var _curEnqIdx=-1;
+function renderEnquiries(){
+  var enqs=getLS('ng_enquiries',[]);var el=document.getElementById('enquiriesList');if(!el)return;
+  if(!enqs.length){el.innerHTML='<div class="empty-state"><span class="ei">💬</span><p>No enquiries yet.</p></div>';return;}
+  el.innerHTML=enqs.map(function(e,i){
+    return '<div class="eq-card"><div class="eq-head"><div><div class="eq-name">'+esc(e.name||'')+'</div><div style="font-size:.72rem;color:rgba(255,255,255,.38)">'+esc(e.email||'')+(e.phone?' · '+esc(e.phone):'')+'</div></div><div style="display:flex;align-items:center;gap:8px"><span class="badge '+(e.status==='replied'?'badge-completed':'badge-pending')+'">'+(e.status||'new')+'</span><span class="eq-date">'+formatDate(e.date)+'</span><button class="btn btn-primary" style="padding:4px 12px;font-size:.6rem" onclick="viewEnquiry('+i+')">View</button></div></div><div class="eq-value" style="font-size:.78rem;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.5">'+esc((e.message||'').substr(0,120))+(e.message&&e.message.length>120?'...':'')+'</div></div>';
+  }).join('');
+}
+function viewEnquiry(i){
+  _curEnqIdx=i;
+  var enqs=getLS('ng_enquiries',[]);var e=enqs[i];if(!e)return;
+  var html='<div class="eq-field"><div class="eq-label">Name</div><div class="eq-value">'+esc(e.name)+'</div></div><div class="eq-field"><div class="eq-label">Email</div><div class="eq-value">'+esc(e.email)+'</div></div><div class="eq-field"><div class="eq-label">Phone</div><div class="eq-value">'+esc(e.phone||'—')+'</div></div><div class="eq-field"><div class="eq-label">Service</div><div class="eq-value">'+esc(e.service||'—')+'</div></div><div class="eq-field"><div class="eq-label">Date</div><div class="eq-value">'+formatDate(e.date)+'</div></div><div style="margin-top:12px;font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.7;background:rgba(255,255,255,.04);padding:12px;border-left:3px solid var(--ac)">'+esc(e.message||'')+'</div>';
+  document.getElementById('enqModalContent').innerHTML=html;
+  showModal('enqModal');
+}
+function markReplied(){
+  if(_curEnqIdx<0)return;
+  var enqs=getLS('ng_enquiries',[]);
+  if(enqs[_curEnqIdx])enqs[_curEnqIdx].status='replied';
+  localStorage.setItem('ng_enquiries',JSON.stringify(enqs));
+  closeModal('enqModal');renderEnquiries();toast('✅ Marked as replied','var(--jd)');
+}
+
+/* ─── ORDERS ─── */
+function renderOrders(){
+  var ords=getLS('ng_orders',[]);
+  var el=document.getElementById('ordersList');if(!el)return;
+  if(!ords.length){el.innerHTML='<div class="empty-state"><span class="ei">📦</span><p>No orders yet. Orders will appear here once customers make a purchase.</p></div>';return;}
+  el.innerHTML='';
+  ords.forEach(function(o,idx){
+    var ordId=o.orderId||o.id||('ORD-'+idx);
+    var date=o.createdAt?new Date(o.createdAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';
+    var card=document.createElement('div');
+    card.style.cssText='border:1px solid var(--br);padding:16px;margin-bottom:12px;background:rgba(255,255,255,.03)';
+
+    // Header
+    var hdr=document.createElement('div');
+    hdr.style.cssText='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px';
+    [['Order ID',String(ordId),'var(--am)'],['Customer',o.customerName||o.customerEmail||'Guest','rgba(255,255,255,.8)'],['Amount','₹'+Number(o.amount||0).toLocaleString('en-IN'),'var(--jd)'],['Date',date,'rgba(255,255,255,.5)']].forEach(function(d){
+      var box=document.createElement('div');
+      box.innerHTML='<span style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block">'+d[0]+'</span><span style="font-size:.85rem;font-weight:700;color:'+d[2]+'">'+esc(d[1])+'</span>';
+      hdr.appendChild(box);
+    });
+    card.appendChild(hdr);
+
+    // Items with thumbnails
+    var itEl=document.createElement('div');
+    itEl.style.cssText='margin-bottom:12px;border-top:1px solid rgba(255,255,255,.06);padding-top:8px';
+    if(o.items&&o.items.length){
+      var storeImgs=getLS('ng_store_images',[]);
+      var mergedItems=[];
+      o.items.forEach(function(it){var key=(it.name||"").trim().toLowerCase()+"||"+(it.image||"").trim();var ex=mergedItems.find(function(m){return (m.name||"").trim().toLowerCase()+"||"+(m.image||"").trim()===key;});if(ex){ex.qty=(ex.qty||1)+(it.qty||1);}else{mergedItems.push(Object.assign({},it,{qty:it.qty||1}));}});
+      var itemsHTML='';
+      mergedItems.forEach(function(it){
+        // Find image: use saved image first, then look up from store images by id or name
+        var imgSrc=it.image||'';
+        if(!imgSrc){
+          var found=storeImgs.find(function(s){return String(s.id)===String(it.id)||s.name===it.name;});
+          if(found)imgSrc=found.image||'';
+        }
+        itemsHTML+='<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
+          +(imgSrc?'<img src="'+imgSrc+'" style="width:48px;height:48px;object-fit:cover;background:rgba(255,255,255,.08);flex-shrink:0;border-radius:2px">'
+          :'<div style="width:48px;height:48px;background:rgba(255,255,255,.08);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border-radius:2px">&#127912;</div>')
+          +'<div style="flex:1"><div style="font-size:.82rem;font-weight:600;color:rgba(255,255,255,.85)">'+esc(it.name||'Artwork')+'</div>'
+          +'<div style="font-size:.7rem;color:rgba(255,255,255,.4)">Qty: '+Number(it.qty||1)+' &nbsp;·&nbsp; &#8377;'+Number(it.price||0).toLocaleString('en-IN')+' each'+(it.category?' &nbsp;·&nbsp; '+esc(it.category):'')+'</div></div>'
+          +'<div style="font-size:.85rem;font-weight:700;color:var(--jd)">&#8377;'+Number((it.price||0)*(it.qty||1)).toLocaleString('en-IN')+'</div></div>';
+      });
+      itEl.innerHTML=itemsHTML;
+    } else {
+      itEl.innerHTML='<div style="font-size:.78rem;color:rgba(255,255,255,.5)">'+esc(o.productName||'Artwork Order')+'</div>';
+    }
+    card.appendChild(itEl);
+
+    // Controls
+    var ctrl=document.createElement('div');
+    ctrl.style.cssText='display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end';
+
+    // Status
+    var statusDiv=document.createElement('div');
+    var statusLbl=document.createElement('label');
+    statusLbl.style.cssText='font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:4px';
+    statusLbl.textContent='Status';
+    var sel=document.createElement('select');
+    sel.className='order-sel';
+    [['pending','⏳ Pending'],['confirmed','✅ Confirmed'],['processing','🔧 Processing'],['shipped','🚚 Shipped'],['completed','🎉 Completed'],['cancelled','❌ Cancelled']].forEach(function(st){
+      var opt=document.createElement('option');opt.value=st[0];opt.textContent=st[1];
+      opt.style.background='#1a1208';opt.style.color='#fff';
+      if((o.status||'confirmed')===st[0])opt.selected=true;
+      sel.appendChild(opt);
+    });
+    sel.onchange=(function(i){return function(){updateOrderStatus(i,this.value);};})(idx);
+    statusDiv.appendChild(statusLbl);statusDiv.appendChild(sel);
+    ctrl.appendChild(statusDiv);
+
+    // Tracking
+    var trackDiv=document.createElement('div');
+    var trackLbl=document.createElement('label');
+    trackLbl.style.cssText='font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:4px';
+    trackLbl.textContent='Courier Tracking No.';
+    var inp=document.createElement('input');
+    inp.type='text';inp.value=o.trackingNo||'';inp.placeholder='e.g. DTDC123456789IN';
+    inp.className='finp';inp.style.fontSize='.78rem';
+    inp.onchange=(function(i){return function(){updateTracking(i,this.value);};})(idx);
+    trackDiv.appendChild(trackLbl);trackDiv.appendChild(inp);
+    ctrl.appendChild(trackDiv);
+
+    // Save btn
+    var saveBtn=document.createElement('button');
+    saveBtn.className='btn btn-primary';saveBtn.style.cssText='padding:7px 16px;font-size:.68rem';
+    saveBtn.textContent='Save';
+    saveBtn.onclick=(function(i){return function(){saveOrderUpdate(i);};})(idx);
+    ctrl.appendChild(saveBtn);
+    card.appendChild(ctrl);
+
+    if(o.paymentId){var pid=document.createElement('div');pid.style.cssText='font-size:.65rem;color:rgba(255,255,255,.25);margin-top:8px';pid.textContent='Payment ID: '+o.paymentId;card.appendChild(pid);}
+    var bb=document.createElement('button');
+    bb.style.cssText='margin-top:10px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;background:var(--am);color:var(--dk);border:none;cursor:pointer;display:block';
+    bb.textContent='⬇ Download / Print Bill';
+    bb.onclick=(function(ord){return function(){showBill(ord,false);};})(o);
+    card.appendChild(bb);
+    el.appendChild(card);
+  });
+}
+function updateOrderStatus(idx,status){var ords=getLS('ng_orders',[]);if(ords[idx])ords[idx].status=status;localStorage.setItem('ng_orders',JSON.stringify(ords));}
+function updateTracking(idx,trackingNo){var ords=getLS('ng_orders',[]);if(ords[idx])ords[idx].trackingNo=trackingNo;localStorage.setItem('ng_orders',JSON.stringify(ords));}
+function saveOrderUpdate(idx){toast('✅ Order updated!','var(--jd)');renderOrders();}
+function clearAllOrders(){
+  if(!confirm('Clear ALL orders? This cannot be undone.'))return;
+  localStorage.removeItem('ng_orders');
+  renderOrders();
+  refreshDashboard();
+  toast('🗑 All orders cleared','var(--ch)');
+}
+
+/* ─── PORTFOLIO IMAGES ─── */
+function getPortfolioImages(){return JSON.parse(localStorage.getItem('ng_portfolio_images')||'[]');}
+function savePortfolioImages(arr){localStorage.setItem('ng_portfolio_images',JSON.stringify(arr));_fbSync('ng_portfolio_images',arr);}
+function addPortfolioImage(){openImgModal('portfolio',-1);}
+function deletePortfolioImage(i){if(!confirm('Delete this portfolio image?'))return;var arr=getPortfolioImages();arr.splice(i,1);savePortfolioImages(arr);renderPortfolioImages();toast('🗑 Image deleted');}
+function renderPortfolioImages(){
+  var arr=getPortfolioImages();var el=document.getElementById('portfolioImgList');if(!el)return;
+  if(!arr.length){el.innerHTML='<p style="color:rgba(255,255,255,.35);font-size:.82rem;padding:20px 0">No portfolio images yet. Click "+ Add Image" to get started.</p>';return;}
+  var html='';
+  arr.forEach(function(item,i){
+    html+='<div style="display:grid;grid-template-columns:80px 1fr auto;gap:12px;align-items:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);margin-bottom:8px">'
+      +'<img src="'+(item.image||'')+'" style="width:80px;height:60px;object-fit:cover;background:rgba(255,255,255,.05)">'
+      +'<div><div style="font-size:.82rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:4px">'+esc(item.title||'Untitled')+'</div>'
+      +'<div style="font-size:.7rem;color:rgba(255,255,255,.35)">'+esc(item.category||'')+'</div></div>'
+      +'<div style="display:flex;flex-direction:column;gap:6px">'
+      +'<button class="btn btn-primary" style="font-size:.6rem;padding:4px 10px" data-mode="portfolio" data-idx="'+i+'" onclick="openImgModal(this.dataset.mode,+this.dataset.idx)">Edit</button>'
+      +'<button class="btn" style="font-size:.6rem;padding:4px 10px;background:var(--ch);border-color:var(--ch)" onclick="deletePortfolioImage('+i+')">Delete</button>'
+      +'</div></div>';
+  });
+  el.innerHTML=html;
+}
+
+/* ─── STORE IMAGES ─── */
+function getStoreImages(){return JSON.parse(localStorage.getItem('ng_store_images')||'[]');}
+function saveStoreImages(arr){localStorage.setItem('ng_store_images',JSON.stringify(arr));_fbSync('ng_store_images',arr);}
+function addStoreImage(){openImgModal('store',-1);}
+function deleteStoreImage(i){if(!confirm('Delete this store image?'))return;var arr=getStoreImages();arr.splice(i,1);saveStoreImages(arr);renderStoreImages();toast('🗑 Image deleted');}
+function renderStoreImages(){
+  var arr=getStoreImages();var el=document.getElementById('storeImgList');if(!el)return;
+  if(!arr.length){el.innerHTML='<p style="color:rgba(255,255,255,.35);font-size:.82rem;padding:20px 0">No store images yet. Click "+ Add Image" to get started.</p>';return;}
+  var html='';
+  arr.forEach(function(item,i){
+    html+='<div style="display:grid;grid-template-columns:80px 1fr auto;gap:12px;align-items:center;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);margin-bottom:8px">'
+      +'<img src="'+(item.image||'')+'" style="width:80px;height:60px;object-fit:cover;background:rgba(255,255,255,.05)">'
+      +'<div><div style="font-size:.82rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">'+esc(item.name||'Untitled')+'</div>'
+      +'<div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:2px">'+(item.originalPrice?'<s style="opacity:.5">&#8377;'+Number(item.originalPrice).toLocaleString('en-IN')+'</s> ':'')+'&#8377;'+Number(item.price||0).toLocaleString('en-IN')+' &middot; '+esc(item.category||'')+'</div>'
+      +(item.badge?'<div style="font-size:.58rem;background:rgba(232,87,31,.2);color:var(--ac);padding:2px 6px;display:inline-block">'+esc(item.badge)+'</div> ':'')
+      +(item.status==='out-of-stock'?'<div style="font-size:.58rem;color:var(--ch);font-weight:700">OUT OF STOCK</div>':'')
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:6px">'
+      +'<button class="btn btn-primary" style="font-size:.6rem;padding:4px 10px" data-mode="store" data-idx="'+i+'" onclick="openImgModal(this.dataset.mode,+this.dataset.idx)">Edit</button>'
+      +'<button class="btn" style="font-size:.6rem;padding:4px 10px;background:var(--ch);border-color:var(--ch)" onclick="deleteStoreImage('+i+')">Delete</button>'
+      +'</div></div>';
+  });
+  el.innerHTML=html;
+}
+
+/* ─── IMAGE MODAL ─── */
+var _imgModalMode='portfolio',_imgModalIndex=-1;
+function openImgModal(mode,index){
+  _imgModalMode=mode;_imgModalIndex=(index===undefined)?-1:index;
+  var isStore=(mode==='store');var isEdit=(_imgModalIndex>=0);
+  document.getElementById('imgModalPriceRow').style.display=isStore?'block':'none';
+  document.getElementById('imgModalStoreExtra').style.display=isStore?'block':'none';
+  document.getElementById('imgModalStockRow').style.display=isStore?'block':'none';
+  document.getElementById('imgModalTitle').textContent=(isEdit?'Edit':'Add')+(isStore?' Store Product':' Portfolio Image');
+  document.getElementById('imgModalCatHint').textContent=isStore?'caricature / watercolour / cartoon / print / custom':'caricature / watercolour / cartoon / portrait / book-cover / hotel-interior / other';
+  document.getElementById('imgModalName').value='';
+  document.getElementById('imgModalUrl').value='';
+  document.getElementById('imgModalDesc').value='';
+  document.getElementById('imgModalOrigPrice').value='';
+  document.getElementById('imgModalPrice').value='';
+  document.getElementById('imgModalBadge').value='';
+  document.getElementById('imgModalStatus').value='active';
+  document.getElementById('imgModalFile').value='';
+  var prev=document.getElementById('imgModalPreview');prev.src='';prev.style.display='none';
+  if(isEdit){
+    var arr=isStore?getStoreImages():getPortfolioImages();
+    var item=arr[_imgModalIndex]||{};
+    document.getElementById('imgModalName').value=item.title||item.name||'';
+    document.getElementById('imgModalDesc').value=item.desc||item.description||'';
+    document.getElementById('imgModalOrigPrice').value=item.originalPrice||'';
+    document.getElementById('imgModalPrice').value=item.price||'';
+    document.getElementById('imgModalBadge').value=item.badge||'';
+    document.getElementById('imgModalStatus').value=item.status||'active';
+    if(item.category)document.getElementById('imgModalCat').value=item.category;
+    if(item.image){prev.src=item.image;prev.style.display='block';}
+  }
+  document.getElementById('imgModal').classList.add('on');
+}
+function closeImgModal(){document.getElementById('imgModal').classList.remove('on');}
+function imgModalFileChange(){
+  var fi=document.getElementById('imgModalFile');if(!fi.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){var prev=document.getElementById('imgModalPreview');prev.src=e.target.result;prev.style.display='block';document.getElementById('imgModalUrl').value='';};
+  reader.readAsDataURL(fi.files[0]);
+}
+function saveImgModal(){
+  var isStore=(_imgModalMode==='store');
+  var name=document.getElementById('imgModalName').value.trim();
+  var cat=document.getElementById('imgModalCat').value.trim();
+  var price=parseInt(document.getElementById('imgModalPrice').value)||0;
+  var origPrice=parseInt(document.getElementById('imgModalOrigPrice').value)||0;
+  var badge=document.getElementById('imgModalBadge').value;
+  var status=document.getElementById('imgModalStatus').value||'active';
+  var url=document.getElementById('imgModalUrl').value.trim();
+  var desc=document.getElementById('imgModalDesc').value.trim();
+  var fi=document.getElementById('imgModalFile');
+  var prev=document.getElementById('imgModalPreview').src;
+  if(!name){toast('❌ Please enter a name/title','var(--ch)');return;}
+  var imgSrc=url||(prev&&prev!==window.location.href?prev:'');
+  function doSave(finalSrc){
+    var arr=isStore?getStoreImages():getPortfolioImages();
+    var entry=isStore
+      ?{id:Date.now(),name:name,category:cat,price:price,originalPrice:origPrice,badge:badge,status:status,image:finalSrc,desc:desc}
+      :{id:Date.now(),title:name,category:cat,image:finalSrc,desc:desc};
+    if(_imgModalIndex>=0){entry.id=arr[_imgModalIndex].id||Date.now();arr[_imgModalIndex]=entry;}
+    else arr.push(entry);
+    if(isStore){saveStoreImages(arr);renderStoreImages();}
+    else{savePortfolioImages(arr);renderPortfolioImages();}
+    closeImgModal();toast('✅ Image saved!','var(--jd)');
+  }
+  if(fi.files[0]){
+    var imgbbKey=getLS_str('ng_imgbb_key','');
+    if(imgbbKey){
+      toast('⏳ Uploading to ImgBB...');
+      var fd=new FormData();fd.append('image',fi.files[0]);
+      fetch('https://api.imgbb.com/1/upload?key='+imgbbKey,{method:'POST',body:fd})
+        .then(function(r){return r.json();})
+        .then(function(d){if(d.success)doSave(d.data.url);else{toast('❌ ImgBB error, saving locally','var(--ch)');doSave(imgSrc);}})
+        .catch(function(){doSave(imgSrc);});
+    } else {var reader=new FileReader();reader.onload=function(e){doSave(e.target.result);};reader.readAsDataURL(fi.files[0]);}
+  } else {doSave(imgSrc);}
+}
+document.addEventListener('click',function(e){var modal=document.getElementById('imgModal');if(modal&&e.target===modal)closeImgModal();});
+
+/* ─── FIREBASE ─── */
+function loadFirebaseForm(){var cfg=getLS('ng_fb',{});if(cfg.apiKey){setVal('fb-apiKey',cfg.apiKey||'');setVal('fb-authDomain',cfg.authDomain||'');setVal('fb-projectId',cfg.projectId||'');setVal('fb-storageBucket',cfg.storageBucket||'');setVal('fb-messagingSenderId',cfg.messagingSenderId||'');setVal('fb-appId',cfg.appId||'');if(cfg.apiKey!=='YOUR_API_KEY'){updatePill('fbStatusPill',true);updatePill('fbStatusPill2',true);}}}
+function saveFirebase(){var cfg={apiKey:getVal('fb-apiKey'),authDomain:getVal('fb-authDomain'),projectId:getVal('fb-projectId'),storageBucket:getVal('fb-storageBucket'),messagingSenderId:getVal('fb-messagingSenderId'),appId:getVal('fb-appId')};if(!cfg.apiKey||cfg.apiKey==='YOUR_API_KEY'){toast('❌ Please enter valid Firebase API Key','var(--ch)');return;}localStorage.setItem('ng_fb',JSON.stringify(cfg));updatePill('fbStatusPill',true);updatePill('fbStatusPill2',true);toast('✅ Firebase config saved! Reload pages to apply.','var(--jd)');}
+function testFirebase(){var cfg=getLS('ng_fb',null);if(!cfg||!cfg.apiKey||cfg.apiKey==='YOUR_API_KEY'){toast('❌ No valid config found','var(--ch)');return;}toast('🔌 Testing... (check browser console)');}
+function clearFirebase(){if(!confirm('Clear Firebase config?'))return;localStorage.removeItem('ng_fb');['fb-apiKey','fb-authDomain','fb-projectId','fb-storageBucket','fb-messagingSenderId','fb-appId'].forEach(function(id){setVal(id,'');});updatePill('fbStatusPill',false);updatePill('fbStatusPill2',false);toast('🗑 Firebase config cleared');}
+
+/* ─── IMGBB ─── */
+function loadImgBBForm(){var key=getLS_str('ng_imgbb_key','');var exp=getLS_str('ng_imgbb_expiry','0');setVal('imgbb-key',key);setVal('imgbb-expiry',exp);updatePill('imgbbPill',!!key);}
+function saveImgBB(){var k=getVal('imgbb-key');if(!k){toast('❌ Please enter ImgBB API key','var(--ch)');return;}localStorage.setItem('ng_imgbb_key',k);localStorage.setItem('ng_imgbb_expiry',getVal('imgbb-expiry')||'0');updatePill('imgbbPill',true);toast('✅ ImgBB config saved!','var(--jd)');}
+function testImgBB(){toast('Create a 1x1 test upload... check browser console for results');}
+
+/* ─── PAYMENT ─── */
+function loadPaymentForm(){var cfg=getLS('ng_payment',{});setVal('pay-keyId',cfg.keyId||'');setVal('pay-secret',cfg.secret||'');setVal('pay-currency',cfg.currency||'INR');setVal('pay-businessName',cfg.businessName||'Naganath G S Art Studio');}
+function savePayment(){var cfg={keyId:getVal('pay-keyId'),secret:getVal('pay-secret'),currency:getVal('pay-currency')||'INR',businessName:getVal('pay-businessName')||'Naganath G S Art Studio'};localStorage.setItem('ng_payment',JSON.stringify(cfg));_fbSync('ng_payment',cfg);toast('✅ Payment config saved!','var(--jd)');}
+
+/* ─── EMAIL ─── */
+function loadEmailForm(){var cfg=getLS('ng_email',{});setVal('ejs-pubkey',cfg.publicKey||'');setVal('ejs-serviceid',cfg.serviceId||'');setVal('ejs-templateid',cfg.templateId||'');setVal('ejs-paytemplateid',cfg.payTemplateId||'');setVal('ejs-toemail',cfg.toEmail||'');}
+function saveEmail(){var cfg={publicKey:getVal('ejs-pubkey'),serviceId:getVal('ejs-serviceid'),templateId:getVal('ejs-templateid'),payTemplateId:getVal('ejs-paytemplateid'),toEmail:getVal('ejs-toemail')};localStorage.setItem('ng_email',JSON.stringify(cfg));_fbSync('ng_email',cfg);toast('✅ Email config saved!','var(--jd)');}
+
+/* ─── GOOGLE AUTH ─── */
+function loadGoogleAuthForm(){var cfg=getLS('ng_gauth',{});setVal('gauth-clientId',cfg.clientId||'');}
+function saveGoogleAuth(){var cfg={clientId:getVal('gauth-clientId')};localStorage.setItem('ng_gauth',JSON.stringify(cfg));toast('✅ Google Auth config saved!','var(--jd)');}
+
+/* ─── SETTINGS ─── */
+function changePassword(){var cur=getVal('set-curpwd');var nw=getVal('set-newpwd');var cf=getVal('set-confpwd');if(cur!==_adminPass){toast('❌ Current password incorrect','var(--ch)');return;}if(nw.length<6){toast('❌ New password must be at least 6 characters','var(--ch)');return;}if(nw!==cf){toast('❌ Passwords do not match','var(--ch)');return;}localStorage.setItem(ADMIN_PASS_KEY,nw);_adminPass=nw;setVal('set-curpwd','');setVal('set-newpwd','');setVal('set-confpwd','');toast('✅ Password changed successfully!','var(--jd)');}
+function exportData(){var data={};['ng_fb','ng_sitedata','ng_images','ng_reviews','ng_socials','ng_products','ng_enquiries','ng_payment','ng_email','ng_video','ng_store_images','ng_portfolio_images','ng_announcement'].forEach(function(k){try{data[k]=JSON.parse(localStorage.getItem(k)||'null');}catch(e){}});var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='naganath_site_data.json';a.click();URL.revokeObjectURL(url);toast('📤 Data exported!','var(--jd)');}
+function resetData(){if(!confirm('Reset ALL site data? This cannot be undone!'))return;['ng_fb','ng_sitedata','ng_images','ng_reviews','ng_socials','ng_products','ng_enquiries','ng_payment','ng_email','ng_video','ng_imgbb_key','ng_store_images','ng_portfolio_images','ng_announcement','ng_orders'].forEach(function(k){localStorage.removeItem(k);});loadAllData();refreshDashboard();toast('🗑 All data reset','var(--ch)');}
+
+/* ─── ANNOUNCEMENT ─── */
+function toggleAnnType(type){document.getElementById('annFileSection').style.display=type==='file'?'block':'none';document.getElementById('annYoutubeSection').style.display=type==='youtube'?'block':'none';}
+function extractYoutubeId(url){var m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
+function previewYoutube(url){var id=extractYoutubeId(url);var wrap=document.getElementById('annYoutubePreview');var frame=document.getElementById('annYoutubeFrame');if(id){frame.src='https://www.youtube.com/embed/'+id;wrap.style.display='block';}else{frame.src='';wrap.style.display='none';}}
+function previewAnnouncement(input){var file=input.files[0];if(!file)return;var wrap=document.getElementById('annUploadPreview');var img=document.getElementById('annUploadImg');var vid=document.getElementById('annUploadVideo');var isVideo=file.type.indexOf('video')===0;var url=URL.createObjectURL(file);wrap.style.display='block';if(isVideo){vid.src=url;vid.style.display='block';img.style.display='none';}else{img.src=url;img.style.display='block';vid.style.display='none';}}
+function loadAnnouncementPage(){
+  var ann=getLS('ng_announcement',null);var prev=document.getElementById('announcementPreview');var empty=document.getElementById('announcementEmpty');if(!prev||!empty)return;
+  if(!ann||!ann.url){prev.style.display='none';empty.style.display='block';return;}
+  prev.style.display='block';empty.style.display='none';
+  var img=document.getElementById('annPreviewImg');var vid=document.getElementById('annPreviewVideo');var frame=document.getElementById('annPreviewFrame');var meta=document.getElementById('annPreviewMeta');
+  img.style.display='none';vid.style.display='none';frame.style.display='none';
+  if(ann.type==='youtube'){frame.src='https://www.youtube.com/embed/'+ann.ytId;frame.style.display='block';}
+  else if(ann.type==='video'){vid.src=ann.url;vid.style.display='block';}
+  else{img.src=ann.url;img.style.display='block';}
+  meta.textContent=(ann.title?'"'+ann.title+'" · ':'')+(ann.type==='youtube'?'YouTube · ':'')+' Saved on '+(ann.date||'');
+}
+function saveAnnouncement(){
+  var title=document.getElementById('annTitle').value.trim();
+  var annType=document.querySelector('input[name="annType"]:checked').value;
+  var date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  if(annType==='youtube'){var ytUrl=document.getElementById('annYoutubeUrl').value.trim();var ytId=extractYoutubeId(ytUrl);if(!ytId){toast('❌ Please enter a valid YouTube URL.','var(--ch)');return;}var ann={type:'youtube',ytId:ytId,url:ytUrl,title:title,date:date};localStorage.setItem('ng_announcement',JSON.stringify(ann));_fbSync('ng_announcement',ann);toast('✅ YouTube announcement saved!','var(--jd)');loadAnnouncementPage();return;}
+  var file=document.getElementById('annFile').files[0];if(!file){toast('❌ Please select an image or video file.','var(--ch)');return;}
+  var isVideo=file.type.indexOf('video')===0;var imgbbKey=getLS_str('ng_imgbb_key','');
+  function doSave(url){var ann={url:url,title:title,type:isVideo?'video':'image',date:date};localStorage.setItem('ng_announcement',JSON.stringify(ann));_fbSync('ng_announcement',ann);toast('✅ Announcement saved!','var(--jd)');loadAnnouncementPage();}
+  if(imgbbKey&&!isVideo){
+    toast('⏳ Uploading to ImgBB...');var fd=new FormData();fd.append('image',file);
+    fetch('https://api.imgbb.com/1/upload?key='+imgbbKey,{method:'POST',body:fd})
+      .then(function(r){return r.json();})
+      .then(function(d){if(d.success){doSave(d.data.url);var ann=getLS('ng_announcement',{});ann.deleteUrl=d.data.delete_url||'';ann.imgbbId=d.data.id||'';localStorage.setItem('ng_announcement',JSON.stringify(ann));}else{var r2=new FileReader();r2.onload=function(e){doSave(e.target.result);};r2.readAsDataURL(file);}})
+      .catch(function(){var r2=new FileReader();r2.onload=function(e){doSave(e.target.result);};r2.readAsDataURL(file);});
+  } else {var reader=new FileReader();reader.onload=function(e){doSave(e.target.result);};reader.readAsDataURL(file);}
+}
+function deleteAnnouncement(){
+  if(!confirm('Delete this announcement?'))return;
+  var ann=getLS('ng_announcement',null);
+  if(ann&&ann.deleteUrl){fetch(ann.deleteUrl).catch(function(){});}
+  localStorage.removeItem('ng_announcement');
+  document.getElementById('annFile').value='';document.getElementById('annTitle').value='';
+  document.getElementById('annUploadPreview').style.display='none';
+  toast('🗑 Announcement deleted.','var(--jd)');loadAnnouncementPage();
+}
+</script>
+<script>
+/* ═══ INVOICE ═══ */
+function showBill(order,showHomeBtn){
+  var o=order||{};
+  var si=[];try{si=JSON.parse(localStorage.getItem('ng_store_images')||'[]');}catch(e){}
+  var da=o.deliveryAddress||{};
+  document.getElementById('bOid').textContent=o.orderId||o.id||'—';
+  var stat=o.status||'confirmed';
+  var sp=document.getElementById('bStat');sp.textContent=stat.charAt(0).toUpperCase()+stat.slice(1);sp.className='bst '+stat;
+  document.getElementById('bName').textContent=da.name||o.customerName||'—';
+  document.getElementById('bPhone').textContent=da.phone||o.customerPhone||'';
+  document.getElementById('bEmail').textContent=o.customerEmail||'';
+  var dt=o.createdAt?new Date(o.createdAt).toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  document.getElementById('bDate').textContent=dt;
+  document.getElementById('bTxn').textContent=o.paymentId?'Txn: '+o.paymentId:'';
+  var ab=document.getElementById('bAddrBlock');
+  if(da.street||da.city){var ln=[da.street,[da.city,da.state].filter(Boolean).join(', ')+(da.pin?' — '+da.pin:''),da.landmark].filter(Boolean);document.getElementById('bAddr').innerHTML=ln.join('<br>');ab.style.display='block';}else{ab.style.display='none';}
+  var items=o.items||[];var merged=[];
+  items.forEach(function(it){var k=(it.name||'').toLowerCase()+'||'+(it.image||'');var ex=merged.find(function(m){return(m.name||'').toLowerCase()+'||'+(m.image||'')===k;});if(ex)ex.qty=(ex.qty||1)+(it.qty||1);else merged.push(Object.assign({},it,{qty:it.qty||1}));});
+  document.getElementById('bItems').innerHTML=merged.map(function(it){
+    var img=it.image||'';if(!img){var f=si.find(function(s){return String(s.id)===String(it.id)||s.name===it.name;});if(f)img=f.image||'';}
+    var ih=img?('<img class="bit-img" src="'+img+'" alt="'+it.name+'">'):('<div class="bit-ph">&#127912;</div>');
+    return '<div class="bit">'+ih+'<div class="bit-info"><div class="bit-name">'+it.name+'</div>'+(it.category?'<div class="bit-meta">'+it.category+'</div>':'')+'<div class="bit-meta">Qty: '+(it.qty||1)+' × ₹'+Number(it.price||0).toLocaleString('en-IN')+' each</div></div><div class="bit-price">₹'+Number((it.price||0)*(it.qty||1)).toLocaleString('en-IN')+'</div></div>';
+  }).join('');
+  document.getElementById('bTotal').textContent='₹'+Number(o.amount||0).toLocaleString('en-IN');
+  var hb=document.getElementById('bHomeBtn');if(hb)hb.style.display=showHomeBtn?'inline-block':'none';
+  var m=document.getElementById('billModal');m.classList.add('on');m.scrollTop=0;
+}
+function closeBill(){document.getElementById('billModal').classList.remove('on');}
+function doBillPrint(){window.print();}
+function doBillPDF(){var bar=document.querySelector('#billModal .bac');if(bar)bar.style.display='none';setTimeout(function(){window.print();setTimeout(function(){if(bar)bar.style.display='flex';},600);},150);}
+function showBillFromOrder(json){try{showBill(JSON.parse(json),false);}catch(e){console.error(e);}}
+</script>
+<!-- INVOICE MODAL -->
+<div id="billModal">
+  <div id="billBox">
+    <div class="bh">
+      <div><div class="bh-tag">Invoice / Bill</div><div class="bh-studio">Naga<span>N</span>ath G S Art Studio</div></div>
+      <div style="text-align:right"><div class="bh-tag">Order ID</div><div class="bh-oid" id="bOid"></div><div style="margin-top:6px"><span class="bst" id="bStat"></span></div></div>
+    </div>
+    <div class="bb">
+      <div class="bm">
+        <div><div class="bl">Bill To</div><div class="bv" id="bName"></div><div class="bs" id="bPhone"></div><div class="bs" id="bEmail"></div></div>
+        <div><div class="bl">Invoice Details</div><div class="bs" id="bDate"></div><div class="bs" id="bTxn"></div></div>
+      </div>
+      <div class="ba-block" id="bAddrBlock" style="display:none"><div class="bl">Delivery Address</div><div class="bs" id="bAddr" style="margin-top:5px"></div></div>
+      <div class="bit-label">Order Items</div>
+      <div id="bItems"></div>
+      <div class="bt-row"><span class="bt-label">Total Amount Paid</span><span class="bt-val" id="bTotal"></span></div>
+    </div>
+    <div class="bf">Thank you for your purchase! &#10084; &nbsp;&middot;&nbsp; Naganath G S Art Studio &nbsp;&middot;&nbsp; Karnataka, India</div>
+    <div class="bac">
+      <button class="bab bab-print" onclick="doBillPrint()">&#128424; Print</button>
+      <button class="bab bab-pdf" onclick="doBillPDF()">&#11015; Save PDF</button>
+      <button class="bab bab-home" id="bHomeBtn" style="display:none" onclick="window.location.href='index.html'">&#127968; Home</button>
+      <button class="bab bab-close" onclick="closeBill()">&#10005; Close</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

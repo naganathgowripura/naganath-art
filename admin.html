@@ -238,10 +238,23 @@ input,textarea,select,button{font-family:"DM Sans",sans-serif}
     'ng_email':'email_config',
     'ng_payment':'payment_config'
   };
+  /* Hardcoded site Firebase config — same project used by index/store/portfolio */
+  var SITE_FB_CFG = {
+    apiKey:            "AIzaSyAGj0TwlqEvKzGSBo8RUqD4UKY-4aCH36s",
+    authDomain:        "naganathgs.firebaseapp.com",
+    projectId:         "naganathgs",
+    storageBucket:     "naganathgs.firebasestorage.app",
+    messagingSenderId: "775331975442",
+    appId:             "1:775331975442:web:878df8b7d8e249a2b0e3cb"
+  };
   function _fbReady(){
     if(_aDb)return true;
     try{
-      var cfg=JSON.parse(localStorage.getItem('ng_fb')||'null');
+      /* 1. Prefer manually-saved config from admin settings (ng_fb in localStorage) */
+      var cfg=null;
+      try{ var _ls=localStorage.getItem('ng_fb'); if(_ls){ var _lp=JSON.parse(_ls); if(_lp&&_lp.apiKey&&_lp.apiKey!=='YOUR_API_KEY') cfg=_lp; } }catch(e){}
+      /* 2. Fall back to hardcoded SITE_FB_CFG — works on any browser / machine */
+      if(!cfg) cfg=SITE_FB_CFG;
       if(!cfg||!cfg.apiKey||cfg.apiKey==='YOUR_API_KEY')return false;
       var app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
       _aDb=firebase.firestore();

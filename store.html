@@ -732,19 +732,21 @@ function startCheckout(){
     return;
   }
   toggleCart();
+  /* Store resolved config globally so launchRazorpay (called after address popup) can use it */
+  window._resolvedPayCfg = payCfg;
   acOpen(function(){ launchRazorpay(); });
 }
 function launchRazorpay(){
   var total=cart.reduce(function(s,c){return s+(c.price||0)*(c.qty||1);},0);
   var del={}; try{del=JSON.parse(localStorage.getItem('ng_pending_address')||'{}');}catch(e){}
-  // Load Razorpay
-  var s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';
-  s.onload=function(){
+  /* BUG FIX: use window._resolvedPayCfg (set by startCheckout) — PAY_CFG global is always empty */
+  var activeCfg = window._resolvedPayCfg || window._payCfg || {};
+  function _openRzp(){
     var options={
-      key:PAY_CFG.keyId,
+      key:activeCfg.keyId,
       amount:total*100, // paise
-      currency:PAY_CFG.currency||'INR',
-      name:PAY_CFG.businessName||'Naganath G S Art Studio',
+      currency:activeCfg.currency||'INR',
+      name:activeCfg.businessName||'Naganath G S Art Studio',
       description:'Art Purchase — '+cart.length+' item(s)',
       image:'',
       prefill:{
@@ -758,8 +760,12 @@ function launchRazorpay(){
       }
     };
     var rzp=new window.Razorpay(options);rzp.open();
-  };
-  s.onerror=function(){showToast('Failed to load payment gateway. Please try again.');};
+  }
+  /* If Razorpay script already loaded (e.g. user opens checkout twice), use it directly */
+  if(window.Razorpay){ _openRzp(); return; }
+  var s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';
+  s.onload=function(){ _openRzp(); };
+  s.onerror=function(){showToast('Failed to load payment gateway. Please check your internet connection and try again.');};
   document.head.appendChild(s);
 }
 
@@ -767,7 +773,7 @@ function handlePaymentSuccess(response,total){
   var orderId='NG-'+Date.now();
   var orderDate=new Date().toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
   var itemsList=cart.map(function(c){return c.name+' x'+c.qty+' — ₹'+(c.price*c.qty).toLocaleString('en-IN');}).join('\n');
-  var currency=PAY_CFG.currency||'INR';
+  var currency=(window._resolvedPayCfg||window._payCfg||{}).currency||'INR';
   var paymentId=response.razorpay_payment_id||'';
 
   // Save order to Firebase

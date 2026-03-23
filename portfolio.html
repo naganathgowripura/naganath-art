@@ -70,42 +70,29 @@ img{display:block;max-width:100%}
 
 /* ── GRID ── */
 .gallery-section{padding:48px;max-width:1400px;margin:0 auto}
-
-/* CSS Grid — same pattern as index.html portfolio section */
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   grid-auto-rows:280px;
   gap:3px;
 }
-
-/* Span pattern cycles every 9 items:
-   [0] 2×2  [1] 1×1  [2] 1×1
-             [3] 1×1  [4] 1×1  (fills col-2/3 of row 3-4)
-   [5] 1×2  [6] 1×2  [7] 1×1
-   [8] 2×1  ... repeat */
+/* Span classes — mirrors index.html portfolio section exactly */
+.gallery-item.span-2c-2r{grid-column:span 2;grid-row:span 2}
+.gallery-item.span-1c-2r{grid-column:span 1;grid-row:span 2}
+.gallery-item.span-2c-1r{grid-column:span 2;grid-row:span 1}
+.gallery-item.span-1c-1r{grid-column:span 1;grid-row:span 1}
 .gallery-item{
   position:relative;overflow:hidden;cursor:pointer;
   background:var(--dark);
   animation:fadeUp .5s ease both;
 }
-/* First of each group of 9 = big featured 2col×2row */
-.gallery-item.span-2c-2r{ grid-column:span 2; grid-row:span 2; }
-/* Tall items — 1col×2row */
-.gallery-item.span-1c-2r{ grid-column:span 1; grid-row:span 2; }
-/* Wide items — 2col×1row */
-.gallery-item.span-2c-1r{ grid-column:span 2; grid-row:span 1; }
-/* Default — 1×1 */
-.gallery-item.span-1c-1r{ grid-column:span 1; grid-row:span 1; }
-
 .gallery-item img{
   width:100%;height:100%;object-fit:cover;
   position:absolute;inset:0;
-  transition:transform .55s ease;
   display:block;
+  transition:transform .55s ease;
 }
 .gallery-item:hover img{transform:scale(1.07)}
-
 .gallery-overlay{
   position:absolute;inset:0;
   background:rgba(16,12,6,.82);
@@ -117,45 +104,21 @@ img{display:block;max-width:100%}
 .gallery-info{transform:translateY(8px);transition:transform .35s ease;width:100%}
 .gallery-item:hover .gallery-info{transform:translateY(0)}
 .gal-cat{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.gal-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:6px}
-.gal-desc{
-  font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.6;margin-top:4px;
-  word-break:break-word;
-}
+.gal-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px}
+.gal-desc{font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.6;margin-top:4px;word-break:break-word}
 .gal-zoom{
   position:absolute;top:12px;right:12px;width:32px;height:32px;
   background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .3s;font-size:.85rem;color:#fff;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  opacity:0;transition:opacity .3s;font-size:.85rem;
 }
 .gallery-item:hover .gal-zoom{opacity:1}
-
-/* Placeholder hint when no image */
-.gallery-hint{
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;color:rgba(255,255,255,.2);pointer-events:none;
-}
-.gallery-hint svg{width:32px;height:32px;opacity:.4}
-.gallery-hint span{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── EMPTY ── */
 .empty-state{text-align:center;padding:80px 24px;color:var(--soft);grid-column:1/-1}
 .empty-state h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--text);margin-bottom:8px}
 .empty-state p{font-size:.85rem;line-height:1.7}
-
-@media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:220px}}
-@media(max-width:768px){
-  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
-  .gallery-item.span-2c-2r{grid-column:span 2;grid-row:span 1}
-  .gallery-item.span-2c-1r{grid-column:span 2}
-  .gallery-item.span-1c-2r{grid-row:span 1}
-}
-@media(max-width:480px){
-  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:260px}
-  .gallery-item.span-2c-2r,.gallery-item.span-2c-1r,.gallery-item.span-1c-2r{grid-column:span 1;grid-row:span 1}
-}
 
 /* ── LIGHTBOX ── */
 .lightbox{
@@ -215,8 +178,9 @@ img{display:block;max-width:100%}
 }
 .scroll-top.show{opacity:1;transform:translateY(0)}
 
-@media(max-width:768px){.pnav{padding:0 20px}.hero{padding:60px 24px 48px}.gallery-section{padding:28px 20px}.filters{padding:16px 20px}}
-@media(max-width:480px){.pnav-links{display:none}}
+@media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:220px}}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}.gallery-item.span-2c-2r{grid-column:span 2;grid-row:span 1}.gallery-item.span-1c-2r{grid-row:span 1}.pnav{padding:0 20px}.hero{padding:60px 24px 48px}.gallery-section{padding:28px 20px}.filters{padding:16px 20px}}
+@media(max-width:480px){.gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.gallery-item.span-2c-2r,.gallery-item.span-2c-1r{grid-column:span 2;grid-row:span 1}.gallery-item.span-1c-2r{grid-row:span 1}.pnav-links{display:none}}
 </style>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -247,7 +211,8 @@ img{display:block;max-width:100%}
       docs.forEach(function(doc){
         db.collection('site_config').doc(doc).onSnapshot(function(snap){
           if(snap.exists && snap.data() && snap.data().value !== undefined){
-            localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            var val = snap.data().value; /* FIX: declare val so all handlers can use it */
+            try{ localStorage.setItem(map[doc], JSON.stringify(val)); }catch(e){}
             var key = map[doc];
             if(key === 'ng_store_images'){
               if(typeof renderStoreFromFirestore === 'function') renderStoreFromFirestore();
@@ -255,6 +220,7 @@ img{display:block;max-width:100%}
               else if(typeof loadStorePreview === 'function') loadStorePreview();
             }
             if(key === 'ng_portfolio_images'){
+              /* FIX: pass val directly — renders immediately when Firestore responds */
               if(typeof loadGallery === 'function') loadGallery(val);
             }
             if(key === 'ng_images'        && typeof loadImages       === 'function') loadImages();
@@ -269,8 +235,12 @@ img{display:block;max-width:100%}
           /* Permission error fallback: one-time .get() */
           db.collection('site_config').doc(doc).get()
             .then(function(snap){
-              if(snap.exists && snap.data() && snap.data().value !== undefined)
-                localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+              if(snap.exists && snap.data() && snap.data().value !== undefined){
+                var val = snap.data().value;
+                try{ localStorage.setItem(map[doc], JSON.stringify(val)); }catch(e){}
+                /* FIX: trigger render in fallback path too — was silently discarding data */
+                if(map[doc] === 'ng_portfolio_images' && typeof loadGallery === 'function') loadGallery(val);
+              }
             }).catch(function(){}).finally(function(){
               if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
             });
@@ -411,7 +381,6 @@ function renderGallery(){
     grid.innerHTML='<div class="empty-state"><h3>No artworks in this category yet</h3><p>Check back soon — more work coming!</p></div>';
     return;
   }
-  /* Span pattern repeating every 9 — mirrors index.html portfolio grid layout */
   var spanMap=['span-2c-2r','span-1c-1r','span-1c-1r','span-1c-1r','span-1c-1r','span-1c-2r','span-1c-2r','span-1c-1r','span-2c-1r'];
   grid.innerHTML=filteredItems.map(function(item,i){
     var spanClass=spanMap[i%spanMap.length];
@@ -427,7 +396,6 @@ function renderGallery(){
       +'</div>';
   }).join('');
 }
-
 function openLightbox(idx){
   lbIndex=idx;
   showLbItem();

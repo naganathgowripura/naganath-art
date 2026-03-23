@@ -208,7 +208,8 @@ img{display:block;max-width:100%}
       docs.forEach(function(doc){
         db.collection('site_config').doc(doc).onSnapshot(function(snap){
           if(snap.exists && snap.data() && snap.data().value !== undefined){
-            localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+            var val = snap.data().value; /* FIX: declare val so all handlers below can use it */
+            try{ localStorage.setItem(map[doc], JSON.stringify(val)); }catch(e){}
             var key = map[doc];
             if(key === 'ng_store_images'){
               if(typeof renderStoreFromFirestore === 'function') renderStoreFromFirestore();
@@ -216,7 +217,7 @@ img{display:block;max-width:100%}
               else if(typeof loadStorePreview === 'function') loadStorePreview();
             }
             if(key === 'ng_portfolio_images'){
-              if(typeof loadGallery === 'function') loadGallery(val);
+              if(typeof loadGallery === 'function') loadGallery(val); /* FIX: val now defined */
             }
             if(key === 'ng_images'        && typeof loadImages       === 'function') loadImages();
             if(key === 'ng_reviews'       && typeof loadTestimonials === 'function') loadTestimonials();
@@ -230,8 +231,12 @@ img{display:block;max-width:100%}
           /* Permission error fallback: one-time .get() */
           db.collection('site_config').doc(doc).get()
             .then(function(snap){
-              if(snap.exists && snap.data() && snap.data().value !== undefined)
-                localStorage.setItem(map[doc], JSON.stringify(snap.data().value));
+              if(snap.exists && snap.data() && snap.data().value !== undefined){
+                var val = snap.data().value;
+                try{ localStorage.setItem(map[doc], JSON.stringify(val)); }catch(e){}
+                /* FIX: also trigger render in fallback path — was silently discarding data */
+                if(map[doc] === 'ng_portfolio_images' && typeof loadGallery === 'function') loadGallery(val);
+              }
             }).catch(function(){}).finally(function(){
               if(!cbFired){ done++; if(done >= total){ cbFired = true; if(cb) cb(); } }
             });
@@ -318,7 +323,7 @@ window.SITE_FB_CFG = {
 <!-- FOOTER -->
 <footer class="pfooter">
   <div class="pf-logo">Naga<span>N</span>ath G S</div>
-  <div class="pf-copy">© 2025 Naganath G S Art Studio</div>
+  <div class="pf-copy">© 2026 Naganath G S Art Studio</div>
 </footer>
 
 <!-- Scroll top -->
